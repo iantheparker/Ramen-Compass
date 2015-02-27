@@ -7,12 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A11B2901A9981A00048B6B4 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A11B28F1A9981A00048B6B4 /* Realm.framework */; };
+		2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */; };
+		2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A11B2931A9981CD0048B6B4 /* libc++.dylib */; };
+		2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BEE1A95CA420069C0B1 /* MapKit.framework */; };
+		2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */; };
 		2AB7CB1A1A95B8DE003EE308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB191A95B8DE003EE308 /* AppDelegate.swift */; };
-		2AB7CB1C1A95B8DE003EE308 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB1B1A95B8DE003EE308 /* ViewController.swift */; };
+		2AB7CB1C1A95B8DE003EE308 /* CompassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB1B1A95B8DE003EE308 /* CompassViewController.swift */; };
 		2AB7CB1F1A95B8DE003EE308 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB7CB1D1A95B8DE003EE308 /* Main.storyboard */; };
 		2AB7CB211A95B8DE003EE308 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AB7CB201A95B8DE003EE308 /* Images.xcassets */; };
 		2AB7CB241A95B8DE003EE308 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AB7CB221A95B8DE003EE308 /* LaunchScreen.xib */; };
 		2AB7CB301A95B8DE003EE308 /* Ramen_CompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB2F1A95B8DE003EE308 /* Ramen_CompassTests.swift */; };
+		2AB90D591A961B6B005B51EC /* HouschkaAltHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AB90D561A961B6B005B51EC /* HouschkaAltHeavy.ttf */; };
+		2AB90D5A1A961B6B005B51EC /* HouschkaAltLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AB90D571A961B6B005B51EC /* HouschkaAltLight.ttf */; };
+		2AB90D5B1A961B6B005B51EC /* HouschkaAltMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AB90D581A961B6B005B51EC /* HouschkaAltMedium.ttf */; };
+		2AB90D5E1A963DA3005B51EC /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */; };
+		2ABB0ECB1A9FF77100A9F8B3 /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */; };
+		2ABD67371A96FB8600C7B795 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67361A96FB8600C7B795 /* MapViewController.swift */; };
+		2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67381A97044200C7B795 /* RamenAnnotation.swift */; };
+		2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67421A9727E600C7B795 /* Ramen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +39,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A11B28F1A9981A00048B6B4 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../Downloads/realm-cocoa-0.90.5/ios/Realm.framework"; sourceTree = "<group>"; };
+		2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLMSupport.swift; path = "Ramen Compass/RLMSupport.swift"; sourceTree = "<group>"; };
+		2A11B2931A9981CD0048B6B4 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		2A787BEE1A95CA420069C0B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2AB7CB141A95B8DE003EE308 /* Ramen Compass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ramen Compass.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB7CB181A95B8DE003EE308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB7CB191A95B8DE003EE308 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2AB7CB1B1A95B8DE003EE308 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2AB7CB1B1A95B8DE003EE308 /* CompassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassViewController.swift; sourceTree = "<group>"; };
 		2AB7CB1E1A95B8DE003EE308 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AB7CB201A95B8DE003EE308 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2AB7CB231A95B8DE003EE308 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2AB7CB291A95B8DE003EE308 /* Ramen CompassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Ramen CompassTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB7CB2E1A95B8DE003EE308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB7CB2F1A95B8DE003EE308 /* Ramen_CompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ramen_CompassTests.swift; sourceTree = "<group>"; };
+		2AB90D561A961B6B005B51EC /* HouschkaAltHeavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HouschkaAltHeavy.ttf; sourceTree = "<group>"; };
+		2AB90D571A961B6B005B51EC /* HouschkaAltLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HouschkaAltLight.ttf; sourceTree = "<group>"; };
+		2AB90D581A961B6B005B51EC /* HouschkaAltMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HouschkaAltMedium.ttf; sourceTree = "<group>"; };
+		2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
+		2ABD67361A96FB8600C7B795 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2ABD67381A97044200C7B795 /* RamenAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamenAnnotation.swift; sourceTree = "<group>"; };
+		2ABD67421A9727E600C7B795 /* Ramen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ramen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +69,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */,
+				2A11B2901A9981A00048B6B4 /* Realm.framework in Frameworks */,
+				2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */,
+				2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +86,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A787BF21A95E67B0069C0B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A11B2931A9981CD0048B6B4 /* libc++.dylib */,
+				2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */,
+				2A11B28F1A9981A00048B6B4 /* Realm.framework */,
+				2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */,
+				2A787BEE1A95CA420069C0B1 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2AB7CB0B1A95B8DE003EE308 = {
 			isa = PBXGroup;
 			children = (
 				2AB7CB161A95B8DE003EE308 /* Ramen Compass */,
 				2AB7CB2C1A95B8DE003EE308 /* Ramen CompassTests */,
 				2AB7CB151A95B8DE003EE308 /* Products */,
+				2A787BF21A95E67B0069C0B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,10 +121,16 @@
 			isa = PBXGroup;
 			children = (
 				2AB7CB191A95B8DE003EE308 /* AppDelegate.swift */,
-				2AB7CB1B1A95B8DE003EE308 /* ViewController.swift */,
+				2AB7CB1B1A95B8DE003EE308 /* CompassViewController.swift */,
+				2ABD67421A9727E600C7B795 /* Ramen.swift */,
 				2AB7CB1D1A95B8DE003EE308 /* Main.storyboard */,
+				2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */,
+				2ABD67361A96FB8600C7B795 /* MapViewController.swift */,
+				2ABD67381A97044200C7B795 /* RamenAnnotation.swift */,
 				2AB7CB201A95B8DE003EE308 /* Images.xcassets */,
 				2AB7CB221A95B8DE003EE308 /* LaunchScreen.xib */,
+				2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */,
+				2AB90D5C1A961B75005B51EC /* Fonts */,
 				2AB7CB171A95B8DE003EE308 /* Supporting Files */,
 			);
 			path = "Ramen Compass";
@@ -110,6 +159,16 @@
 				2AB7CB2E1A95B8DE003EE308 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AB90D5C1A961B75005B51EC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2AB90D561A961B6B005B51EC /* HouschkaAltHeavy.ttf */,
+				2AB90D571A961B6B005B51EC /* HouschkaAltLight.ttf */,
+				2AB90D581A961B6B005B51EC /* HouschkaAltMedium.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +251,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AB90D591A961B6B005B51EC /* HouschkaAltHeavy.ttf in Resources */,
 				2AB7CB1F1A95B8DE003EE308 /* Main.storyboard in Resources */,
 				2AB7CB241A95B8DE003EE308 /* LaunchScreen.xib in Resources */,
+				2AB90D5B1A961B6B005B51EC /* HouschkaAltMedium.ttf in Resources */,
+				2AB90D5A1A961B6B005B51EC /* HouschkaAltLight.ttf in Resources */,
 				2AB7CB211A95B8DE003EE308 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,8 +274,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB7CB1C1A95B8DE003EE308 /* ViewController.swift in Sources */,
+				2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */,
+				2AB90D5E1A963DA3005B51EC /* SwiftyJSON.swift in Sources */,
+				2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */,
+				2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */,
+				2AB7CB1C1A95B8DE003EE308 /* CompassViewController.swift in Sources */,
 				2AB7CB1A1A95B8DE003EE308 /* AppDelegate.swift in Sources */,
+				2ABB0ECB1A9FF77100A9F8B3 /* VenueViewController.swift in Sources */,
+				2ABD67371A96FB8600C7B795 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +404,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"/Users/ianparker/Downloads/realm-cocoa-0.90.5/ios",
+				);
 				INFOPLIST_FILE = "Ramen Compass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -346,6 +421,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"/Users/ianparker/Downloads/realm-cocoa-0.90.5/ios",
+				);
 				INFOPLIST_FILE = "Ramen Compass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -405,6 +487,7 @@
 				2AB7CB351A95B8DE003EE308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2AB7CB361A95B8DE003EE308 /* Build configuration list for PBXNativeTarget "Ramen CompassTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +496,7 @@
 				2AB7CB381A95B8DE003EE308 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

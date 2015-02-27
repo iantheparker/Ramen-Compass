@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gbl-GR-EcX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HouschkaAltHeavy.ttf">
+            <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
+        </mutableArray>
+        <mutableArray key="HouschkaAltLight.ttf">
+            <string>HouschkaAltLight</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Ramen Compass-->
+        <scene sceneID="p2L-nq-JHv">
+            <objects>
+                <navigationController title="Ramen Compass" id="Gbl-GR-EcX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="4RY-61-2Z7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="YWn-fh-MuF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZZO-iR-xXi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1078" y="397"/>
+        </scene>
+        <!--Compass-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Compass" id="vXZ-lx-hvc" customClass="CompassViewController" customModule="Ramen_Compass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,11 +45,154 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk">
+                                <rect key="frame" x="36" y="150" width="300" height="300"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="8zA-lQ-3dA">
+                                        <rect key="frame" x="22" y="18" width="256" height="265"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chopsticks" translatesAutoresizingMaskIntoConstraints="NO" id="Byd-g5-v1t">
+                                        <rect key="frame" x="28" y="18" width="250" height="265"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.75686274509999996" green="0.1843137255" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="2Hu-LD-ggo" appends="YES" id="LL9-2J-DhG"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="VENUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-ZL-WGr">
+                                <rect key="frame" x="5" y="444" width="363" height="56"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0 km" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NA-2v-CHo">
+                                <rect key="frame" x="126" y="480" width="121" height="21"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltLight" family="HouschkaAltLight" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpD-cZ-0fS">
+                                <rect key="frame" x="155" y="570" width="63" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="15"/>
+                                <state key="normal" title="MAP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mapButtonPressed" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ghE-sq-3X7"/>
+                                    <segue destination="PMc-ZR-mhw" kind="show" identifier="map" id="QZs-ca-I5P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tT2-cP-0tf">
+                                <rect key="frame" x="290" y="464" width="46" height="30"/>
+                                <state key="normal" title="page">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="v1O-iI-pYs" kind="show" identifier="RamenDetail" id="Onq-3B-keS"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="jpD-cZ-0fS" secondAttribute="bottom" constant="-3" id="yVi-U3-H1V"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9wv-KA-mxb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="wf6-L1-teJ">
+                            <connections>
+                                <action selector="refreshLocation" destination="vXZ-lx-hvc" id="itb-ke-Etk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bowlView" destination="Ice-Cb-jvk" id="YNW-JJ-UpY"/>
+                        <outlet property="chopsticksImage" destination="Byd-g5-v1t" id="WdJ-Mh-2Dx"/>
+                        <outlet property="distanceLabel" destination="8NA-2v-CHo" id="FSb-8g-NzW"/>
+                        <outlet property="mapButton" destination="jpD-cZ-0fS" id="E02-Mx-V3b"/>
+                        <outlet property="venueName" destination="8cr-ZL-WGr" id="cth-Xo-B1H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="2Hu-LD-ggo">
+                    <connections>
+                        <action selector="panBowl:" destination="vXZ-lx-hvc" id="t9l-hy-mFc"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="D2d-Uo-tZG"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="-292" y="397"/>
+        </scene>
+        <!--Venue View Controller-->
+        <scene sceneID="c8t-w8-xun">
+            <objects>
+                <viewController id="v1O-iI-pYs" customClass="VenueViewController" customModule="Ramen_Compass" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PG0-BB-jcY"/>
+                        <viewControllerLayoutGuide type="bottom" id="kEs-HE-3ho"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ea9-Ih-4Qo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Os-54-LBF">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="6Os-54-LBF" id="2fV-5I-FiT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQa-8M-VYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="397" y="397"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="nev-vS-XL3">
+            <objects>
+                <viewController storyboardIdentifier="map" id="PMc-ZR-mhw" customClass="MapViewController" customModule="Ramen_Compass" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PYF-tE-1e5"/>
+                        <viewControllerLayoutGuide type="bottom" id="BsC-8Q-Fo3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5st-OY-Ni9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f68-WF-iyY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <connections>
+                                    <outlet property="delegate" destination="PMc-ZR-mhw" id="676-3K-9Nt"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f68-WF-iyY" firstAttribute="leading" secondItem="5st-OY-Ni9" secondAttribute="leadingMargin" constant="-16" id="C8m-Rr-e6P"/>
+                            <constraint firstItem="BsC-8Q-Fo3" firstAttribute="top" secondItem="f68-WF-iyY" secondAttribute="bottom" id="V58-d8-zrL"/>
+                            <constraint firstItem="f68-WF-iyY" firstAttribute="top" secondItem="5st-OY-Ni9" secondAttribute="topMargin" id="ppS-0k-0Tp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f68-WF-iyY" secondAttribute="trailing" constant="-16" id="rZU-5M-jc1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="f68-WF-iyY" id="H9J-gb-IKj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="keV-Eg-oZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-292" y="1091"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bowl" width="229" height="229"/>
+        <image name="chopsticks" width="59" height="460"/>
+    </resources>
 </document>
