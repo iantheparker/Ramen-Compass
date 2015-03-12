@@ -26,6 +26,8 @@
 		2ABD67371A96FB8600C7B795 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67361A96FB8600C7B795 /* MapViewController.swift */; };
 		2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67381A97044200C7B795 /* RamenAnnotation.swift */; };
 		2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67421A9727E600C7B795 /* Ramen.swift */; };
+		2AC10F7B1AB15C440056F8EE /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AC10F7A1AB15C440056F8EE /* ApiKeys.plist */; };
+		2AC10F7D1AB15D600056F8EE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		2ABD67361A96FB8600C7B795 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2ABD67381A97044200C7B795 /* RamenAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamenAnnotation.swift; sourceTree = "<group>"; };
 		2ABD67421A9727E600C7B795 /* Ramen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ramen.swift; sourceTree = "<group>"; };
+		2AC10F7A1AB15C440056F8EE /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
+		2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 				2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */,
 				2AB90D5C1A961B75005B51EC /* Fonts */,
 				2AB7CB171A95B8DE003EE308 /* Supporting Files */,
+				2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */,
 			);
 			path = "Ramen Compass";
 			sourceTree = "<group>";
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				2AB7CB181A95B8DE003EE308 /* Info.plist */,
+				2AC10F7A1AB15C440056F8EE /* ApiKeys.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AC10F7B1AB15C440056F8EE /* ApiKeys.plist in Resources */,
 				2AB90D591A961B6B005B51EC /* HouschkaAltHeavy.ttf in Resources */,
 				2AB7CB1F1A95B8DE003EE308 /* Main.storyboard in Resources */,
 				2AB7CB241A95B8DE003EE308 /* LaunchScreen.xib in Resources */,
@@ -276,6 +283,7 @@
 			files = (
 				2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */,
 				2AB90D5E1A963DA3005B51EC /* SwiftyJSON.swift in Sources */,
+				2AC10F7D1AB15D600056F8EE /* ApiKeys.swift in Sources */,
 				2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */,
 				2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */,
 				2AB7CB1C1A95B8DE003EE308 /* CompassViewController.swift in Sources */,

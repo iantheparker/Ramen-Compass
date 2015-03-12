@@ -140,12 +140,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Os-54-LBF">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Os-54-LBF">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="6Os-54-LBF" secondAttribute="trailing" constant="-16" id="3zg-QB-QWg"/>
+                            <constraint firstItem="kEs-HE-3ho" firstAttribute="top" secondItem="6Os-54-LBF" secondAttribute="bottom" id="SsZ-UT-oyS"/>
+                            <constraint firstItem="6Os-54-LBF" firstAttribute="top" secondItem="ea9-Ih-4Qo" secondAttribute="topMargin" id="Yoo-hW-b4i"/>
+                            <constraint firstItem="6Os-54-LBF" firstAttribute="leading" secondItem="ea9-Ih-4Qo" secondAttribute="leadingMargin" constant="-16" id="ri1-Ov-UBA"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="webView" destination="6Os-54-LBF" id="2fV-5I-FiT"/>

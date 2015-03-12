@@ -12,8 +12,8 @@ import Realm
 
 class CompassViewController: UIViewController, CLLocationManagerDelegate {
     
-    let clientId = "ZVPHYBOBCHWMGFI0ISOCOUIWCQO3QA5AO4YB0R3XKXDKZNXR"
-    let clientSecret = "KXCBONSBJ1JRVG5DSM5HE3IOL0SZMBUBFLUPNPSSH1ZMKNED"
+    let clientId = valueForAPIKey(keyname:  "clientId")
+    let clientSecret = valueForAPIKey(keyname:  "clientSecret")
     
     let locationManager = CLLocationManager()
     var locationFixAchieved : Bool = false
@@ -43,7 +43,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     
     func updateDisplayedRamen(){
         //need to make sure
-        var selectedRamen = Venue.allObjects().objectAtIndex(0) as Venue
+        selectedRamen = Venue.allObjects().objectAtIndex(0) as Venue
         println(selectedRamen.description)
         
         venueName.text = selectedRamen.name.uppercaseString
@@ -182,8 +182,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         }
         else if (segue.identifier == "RamenDetail") {
             let controller = segue.destinationViewController as VenueViewController
-            //controller.fsqpage = selectedRamen.id
-            println("conad \(selectedRamen)")
+            controller.fsqpage = selectedRamen.id
+            //println("conad \(self.selectedRamen.id)")
         }
     }
     

@@ -21,7 +21,7 @@ class VenueViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         let requesturl = NSURL(string: "https://foursquare.com/v/foursquare-hq/\(fsqpage)")
-        println(requesturl)
+        //println(requesturl)
         let request = NSURLRequest(URL: requesturl!)
         webView?.loadRequest(request)
         

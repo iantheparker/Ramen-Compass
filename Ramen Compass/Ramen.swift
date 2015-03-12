@@ -9,21 +9,6 @@
 import Foundation
 import Realm
 
-//class Ramen: RLMObject {
-//    
-//    dynamic var distance = 0.0
-//    dynamic var pageUrl = ""
-//    
-//    override class func primaryKey() -> String! {
-//        return "venueId"
-//    }
-//    
-//    func ignoredProperties() -> NSArray {
-//        let propertiesToIgnore = [distance]
-//        return propertiesToIgnore
-//    }
-//}
-
 class Location: RLMObject {
     dynamic var lat = 0.0  // latitude
     dynamic var lng = 0.0  // longitude
