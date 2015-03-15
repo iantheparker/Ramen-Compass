@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */; };
 		2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A11B2931A9981CD0048B6B4 /* libc++.dylib */; };
+		2A6FAC1D1AB56F2900C77EAB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6FAC1C1AB56F2900C77EAB /* Realm.framework */; };
 		2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BEE1A95CA420069C0B1 /* MapKit.framework */; };
 		2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */; };
 		2AB7CB1A1A95B8DE003EE308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB191A95B8DE003EE308 /* AppDelegate.swift */; };
@@ -27,7 +28,6 @@
 		2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67421A9727E600C7B795 /* Ramen.swift */; };
 		2AC10F7B1AB15C440056F8EE /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AC10F7A1AB15C440056F8EE /* ApiKeys.plist */; };
 		2AC10F7D1AB15D600056F8EE /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */; };
-		2AD15A3C1AB16A5B009A3E61 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD15A3B1AB16A5B009A3E61 /* Realm.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLMSupport.swift; path = "Ramen Compass/RLMSupport.swift"; sourceTree = "<group>"; };
 		2A11B2931A9981CD0048B6B4 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		2A6FAC1C1AB56F2900C77EAB /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Ramen Compass/Realm.framework"; sourceTree = "<group>"; };
 		2A787BEE1A95CA420069C0B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2AB7CB141A95B8DE003EE308 /* Ramen Compass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ramen Compass.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +66,6 @@
 		2ABD67421A9727E600C7B795 /* Ramen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ramen.swift; sourceTree = "<group>"; };
 		2AC10F7A1AB15C440056F8EE /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
-		2AD15A3B1AB16A5B009A3E61 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Ramen Compass/Realm.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AD15A3C1AB16A5B009A3E61 /* Realm.framework in Frameworks */,
+				2A6FAC1D1AB56F2900C77EAB /* Realm.framework in Frameworks */,
 				2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */,
 				2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */,
 				2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */,
@@ -93,7 +93,7 @@
 		2A787BF21A95E67B0069C0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2AD15A3B1AB16A5B009A3E61 /* Realm.framework */,
+				2A6FAC1C1AB56F2900C77EAB /* Realm.framework */,
 				2A11B2931A9981CD0048B6B4 /* libc++.dylib */,
 				2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */,
 				2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */,
@@ -417,9 +417,6 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Ramen",
 					Compass,
-					"/Users/ianparker/Downloads/realm-cocoa-0.90.5/ios",
-					"$(PROJECT_DIR)/Ramen",
-					Compass,
 				);
 				INFOPLIST_FILE = "Ramen Compass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -434,9 +431,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Ramen",
-					Compass,
-					"/Users/ianparker/Downloads/realm-cocoa-0.90.5/ios",
 					"$(PROJECT_DIR)/Ramen",
 					Compass,
 				);
