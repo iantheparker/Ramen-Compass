@@ -84,6 +84,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func searchVenues(coord: CLLocation) {
+        //update this line here also move it to a foursquare class?
         let url = NSURL(string: "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&intent=browse&radius=2000")
         let request = NSURLRequest(URL:url!)
 
@@ -102,13 +103,38 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func getListVenues(coord: CLLocation) {
+        //200 ramen list id
+        let ramenListId = "4e5fada1483b8637b3d0372c"
+        let llTolerance = 0.5
+        let url = NSURL(string: "https://api.foursquare.com/v2/lists/\(ramenListId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215")
+        let request = NSURLRequest(URL:url!)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
+            if data != nil {
+                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
+                //println(json)
+                //list{listItems{items({
+                if let venues = (((json["response"] as? NSDictionary)? ["list"])? ["listItems"])? ["items"] as? [NSDictionary] {
+                    self.setUpRealm(venues)
+                }
+            }
+            if error != nil {
+                let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
+                alert.show()
+            }
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
+    
     func setUpRealm(venues: [NSDictionary]) {
         let realm = RLMRealm.defaultRealm()
         realm.beginWriteTransaction()
-        realm.deleteAllObjects()
+        //realm.deleteAllObjects() --warning ---this can break
         // Save one Venue object (and dependents) for each element of the array
         for venue in venues {
-            Venue.createOrUpdateInDefaultRealmWithObject(venue)
+            Venue.createOrUpdateInDefaultRealmWithObject(venue["venue"])
+            //println((venue["venue"])? ["name"] as? String)
         }
         realm.commitWriteTransaction()
     }
@@ -117,7 +143,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         switch status {
-        case .Authorized, .AuthorizedWhenInUse:
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             println("Authorized")
             locationManager.startUpdatingLocation()
         case .NotDetermined:
@@ -148,7 +174,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         println(currentLocation)
         if (locationFixAchieved == false) {
             locationFixAchieved = true
-            searchVenues(currentLocation)
+            //searchVenues(currentLocation)
+            getListVenues(currentLocation)
         }
     }
     
