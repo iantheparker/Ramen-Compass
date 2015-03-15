@@ -84,6 +84,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func searchVenues(coord: CLLocation) {
+        //update this line here also move it to a foursquare class?
         let url = NSURL(string: "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&intent=browse&radius=2000")
         let request = NSURLRequest(URL:url!)
 
