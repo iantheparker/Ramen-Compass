@@ -75,7 +75,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
-    func centerToUsersLocation() {
+    @IBAction func centerToUsersLocation() {
         var mapCenter = mapView.userLocation.coordinate
         println("real mapCenter: \(mapCenter.latitude), \(mapCenter.longitude)")
         var zoomRegion : MKCoordinateRegion!
@@ -102,6 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.userTrackingMode = MKUserTrackingMode.FollowWithHeading
         populateMap()
 
         //modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
