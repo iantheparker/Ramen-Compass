@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */; };
+		2A0185E11AB6AD060093C539 /* RLMSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0185E01AB6AD060093C539 /* RLMSupport.swift */; };
 		2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A11B2931A9981CD0048B6B4 /* libc++.dylib */; };
-		2A6FAC1D1AB56F2900C77EAB /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A6FAC1C1AB56F2900C77EAB /* Realm.framework */; };
 		2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BEE1A95CA420069C0B1 /* MapKit.framework */; };
 		2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */; };
 		2AB7CB1A1A95B8DE003EE308 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB7CB191A95B8DE003EE308 /* AppDelegate.swift */; };
@@ -22,7 +21,7 @@
 		2AB90D5A1A961B6B005B51EC /* HouschkaAltLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AB90D571A961B6B005B51EC /* HouschkaAltLight.ttf */; };
 		2AB90D5B1A961B6B005B51EC /* HouschkaAltMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2AB90D581A961B6B005B51EC /* HouschkaAltMedium.ttf */; };
 		2AB90D5E1A963DA3005B51EC /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */; };
-		2ABB0ECB1A9FF77100A9F8B3 /* VenueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */; };
+		2ABA73B71AC2780E002D39D6 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ABA73B61AC2780E002D39D6 /* Realm.framework */; };
 		2ABD67371A96FB8600C7B795 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67361A96FB8600C7B795 /* MapViewController.swift */; };
 		2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67381A97044200C7B795 /* RamenAnnotation.swift */; };
 		2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABD67421A9727E600C7B795 /* Ramen.swift */; };
@@ -41,9 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RLMSupport.swift; path = "Ramen Compass/RLMSupport.swift"; sourceTree = "<group>"; };
+		2A0185E01AB6AD060093C539 /* RLMSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLMSupport.swift; sourceTree = "<group>"; };
 		2A11B2931A9981CD0048B6B4 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
-		2A6FAC1C1AB56F2900C77EAB /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Ramen Compass/Realm.framework"; sourceTree = "<group>"; };
 		2A787BEE1A95CA420069C0B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2AB7CB141A95B8DE003EE308 /* Ramen Compass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ramen Compass.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +58,7 @@
 		2AB90D571A961B6B005B51EC /* HouschkaAltLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HouschkaAltLight.ttf; sourceTree = "<group>"; };
 		2AB90D581A961B6B005B51EC /* HouschkaAltMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HouschkaAltMedium.ttf; sourceTree = "<group>"; };
 		2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueViewController.swift; sourceTree = "<group>"; };
+		2ABA73B61AC2780E002D39D6 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "Ramen Compass/Realm.framework"; sourceTree = "<group>"; };
 		2ABD67361A96FB8600C7B795 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2ABD67381A97044200C7B795 /* RamenAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RamenAnnotation.swift; sourceTree = "<group>"; };
 		2ABD67421A9727E600C7B795 /* Ramen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ramen.swift; sourceTree = "<group>"; };
@@ -73,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A6FAC1D1AB56F2900C77EAB /* Realm.framework in Frameworks */,
+				2ABA73B71AC2780E002D39D6 /* Realm.framework in Frameworks */,
 				2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */,
 				2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */,
 				2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */,
@@ -93,9 +91,8 @@
 		2A787BF21A95E67B0069C0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2A6FAC1C1AB56F2900C77EAB /* Realm.framework */,
+				2ABA73B61AC2780E002D39D6 /* Realm.framework */,
 				2A11B2931A9981CD0048B6B4 /* libc++.dylib */,
-				2A11B2911A9981BD0048B6B4 /* RLMSupport.swift */,
 				2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */,
 				2A787BEE1A95CA420069C0B1 /* MapKit.framework */,
 			);
@@ -128,13 +125,13 @@
 				2AB7CB1B1A95B8DE003EE308 /* CompassViewController.swift */,
 				2ABD67421A9727E600C7B795 /* Ramen.swift */,
 				2AB7CB1D1A95B8DE003EE308 /* Main.storyboard */,
-				2ABB0ECA1A9FF77100A9F8B3 /* VenueViewController.swift */,
 				2ABD67361A96FB8600C7B795 /* MapViewController.swift */,
 				2ABD67381A97044200C7B795 /* RamenAnnotation.swift */,
 				2AB7CB201A95B8DE003EE308 /* Images.xcassets */,
 				2AB7CB221A95B8DE003EE308 /* LaunchScreen.xib */,
-				2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */,
 				2AC10F7C1AB15D600056F8EE /* ApiKeys.swift */,
+				2AB90D5D1A963DA3005B51EC /* SwiftyJSON.swift */,
+				2A0185E01AB6AD060093C539 /* RLMSupport.swift */,
 				2AB90D5C1A961B75005B51EC /* Fonts */,
 				2AB7CB171A95B8DE003EE308 /* Supporting Files */,
 			);
@@ -282,13 +279,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ABD67391A97044200C7B795 /* RamenAnnotation.swift in Sources */,
+				2A0185E11AB6AD060093C539 /* RLMSupport.swift in Sources */,
 				2AB90D5E1A963DA3005B51EC /* SwiftyJSON.swift in Sources */,
 				2AC10F7D1AB15D600056F8EE /* ApiKeys.swift in Sources */,
-				2A11B2921A9981BD0048B6B4 /* RLMSupport.swift in Sources */,
 				2ABD67431A9727E600C7B795 /* Ramen.swift in Sources */,
 				2AB7CB1C1A95B8DE003EE308 /* CompassViewController.swift in Sources */,
 				2AB7CB1A1A95B8DE003EE308 /* AppDelegate.swift in Sources */,
-				2ABB0ECB1A9FF77100A9F8B3 /* VenueViewController.swift in Sources */,
 				2ABD67371A96FB8600C7B795 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +413,22 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Ramen",
 					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
 				);
 				INFOPLIST_FILE = "Ramen Compass/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -431,6 +443,22 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
+					"$(PROJECT_DIR)/Ramen",
+					Compass,
 					"$(PROJECT_DIR)/Ramen",
 					Compass,
 				);
