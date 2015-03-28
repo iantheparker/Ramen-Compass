@@ -93,7 +93,6 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         var locationArray = locations as NSArray
         currentLocation = locationArray.lastObject as CLLocation
         println("my current location \(currentLocation)")
-        venueName.text = "\(currentLocation)"
         if (locationFixAchieved == false) {
             locationFixAchieved = true
             CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
@@ -135,7 +134,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         println("radians = \(radians), Updated heading to \(newHeading)")
         var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
         var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
-        
+        /*
         UIView.animateWithDuration(0.2,
             delay: 0.0,
             options: .CurveEaseInOut,
@@ -143,7 +142,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
                 self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
             },
             completion: { finished in
-        })
+        })*/
         
     }
     
@@ -290,6 +289,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: - Chopstick Rotation and Animation Methods
     
     @IBAction func panBowl(sender: UIPanGestureRecognizer) {
+        //FIXME: need to offset origin of chopstick spin to center of bowl
         println("bowlpan = \(sender.translationInView(bowlView)) in vcview \(sender.translationInView(self.view))")
         var angle = atan2f(Float(sender.translationInView(self.view).x), Float(sender.translationInView(self.view).y))
         
