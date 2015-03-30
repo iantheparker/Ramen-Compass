@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0620"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2AB7CB131A95B8DE003EE308"
-               BuildableName = "Ramen Compass.app"
-               BlueprintName = "Ramen Compass"
-               ReferencedContainer = "container:Ramen Compass.xcodeproj">
+               BuildableName = "RamenCompass.app"
+               BlueprintName = "RamenCompass"
+               ReferencedContainer = "container:RamenCompass.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2AB7CB281A95B8DE003EE308"
-               BuildableName = "Ramen CompassTests.xctest"
-               BlueprintName = "Ramen CompassTests"
-               ReferencedContainer = "container:Ramen Compass.xcodeproj">
+               BuildableName = "RamenCompassTests.xctest"
+               BlueprintName = "RamenCompassTests"
+               ReferencedContainer = "container:RamenCompass.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2AB7CB281A95B8DE003EE308"
-               BuildableName = "Ramen CompassTests.xctest"
-               BlueprintName = "Ramen CompassTests"
-               ReferencedContainer = "container:Ramen Compass.xcodeproj">
+               BuildableName = "RamenCompassTests.xctest"
+               BlueprintName = "RamenCompassTests"
+               ReferencedContainer = "container:RamenCompass.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB7CB131A95B8DE003EE308"
-            BuildableName = "Ramen Compass.app"
-            BlueprintName = "Ramen Compass"
-            ReferencedContainer = "container:Ramen Compass.xcodeproj">
+            BuildableName = "RamenCompass.app"
+            BlueprintName = "RamenCompass"
+            ReferencedContainer = "container:RamenCompass.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,13 +72,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB7CB131A95B8DE003EE308"
-            BuildableName = "Ramen Compass.app"
-            BlueprintName = "Ramen Compass"
-            ReferencedContainer = "container:Ramen Compass.xcodeproj">
+            BuildableName = "RamenCompass.app"
+            BlueprintName = "RamenCompass"
+            ReferencedContainer = "container:RamenCompass.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,13 +95,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2AB7CB131A95B8DE003EE308"
-            BuildableName = "Ramen Compass.app"
-            BlueprintName = "Ramen Compass"
-            ReferencedContainer = "container:Ramen Compass.xcodeproj">
+            BuildableName = "RamenCompass.app"
+            BlueprintName = "RamenCompass"
+            ReferencedContainer = "container:RamenCompass.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

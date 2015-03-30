@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Realm
 
-class CompassViewController: UIViewController, CLLocationManagerDelegate {
+class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
     let clientId = valueForAPIKey(keyname:  "clientId")
     let clientSecret = valueForAPIKey(keyname:  "clientSecret")
@@ -28,9 +28,17 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var venueName: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var scrollView : UIScrollView!
+    @IBOutlet weak var contentView : UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.delegate = self
+        scrollView.contentSize = CGSizeMake(self.view.bounds.width, UIScreen.mainScreen().bounds.height*2)
+        println(scrollView.contentSize)
+        println(self.view.bounds)
+        println(contentView.bounds)
         
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
@@ -134,7 +142,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         println("radians = \(radians), Updated heading to \(newHeading)")
         var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
         var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
-        /*
+        
         UIView.animateWithDuration(0.2,
             delay: 0.0,
             options: .CurveEaseInOut,
@@ -142,7 +150,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
                 self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
             },
             completion: { finished in
-        })*/
+        })
         
     }
     
@@ -253,6 +261,12 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
         let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
         distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
         locationManager.startUpdatingHeading()
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        //self.navigationController?.navigationBar.center = CGPointMake(self.scrollView.center.x, self.scrollView.contentOffset.y)
+        //println(self.navigationController?.navigationBar.bounds)
+
     }
     
     //MARK: - Button Actions

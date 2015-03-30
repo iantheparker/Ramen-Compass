@@ -10,19 +10,23 @@
             <string>HouschkaAltHeavy</string>
             <string>HouschkaAltHeavy</string>
             <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
         </mutableArray>
         <mutableArray key="HouschkaAltLight.ttf">
             <string>HouschkaAltLight</string>
         </mutableArray>
         <mutableArray key="HouschkaAltMedium.ttf">
             <string>HouschkaAltMedium</string>
+            <string>HouschkaAltMedium</string>
+            <string>HouschkaAltMedium</string>
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Ramen Compass-->
+        <!--RamenCompass-->
         <scene sceneID="p2L-nq-JHv">
             <objects>
-                <navigationController title="Ramen Compass" id="Gbl-GR-EcX" sceneMemberID="viewController">
+                <navigationController title="RamenCompass" id="Gbl-GR-EcX" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="4RY-61-2Z7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -42,22 +46,22 @@
         <!--Compass-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="Compass" id="vXZ-lx-hvc" customClass="CompassViewController" customModule="Ramen_Compass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Compass" id="vXZ-lx-hvc" customClass="CompassViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Naj-Oz-YIH">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="698"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="1200" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Naj-Oz-YIH">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-sQ-ExC" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="766"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-sQ-ExC" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                                         <subviews>
-                                            <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk" userLabel="Compass View">
+                                            <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk" userLabel="Ramen + Chopsticks">
                                                 <rect key="frame" x="8" y="136" width="300" height="300"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="utv-IQ-qzx">
@@ -109,14 +113,37 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccr-XZ-pWx">
+                                                <rect key="frame" x="8" y="940" width="123" height="56"/>
+                                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="20"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Hours:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-jh-z2p">
+                                                <rect key="frame" x="8" y="1051" width="123" height="56"/>
+                                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="20"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-GR-2zS">
                                                 <rect key="frame" x="-23" y="513" width="363" height="56"/>
                                                 <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="17"/>
                                                 <color key="textColor" red="0.47748974116161613" green="0.17823481376205305" blue="0.44755231579809307" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
                                                 <rect key="frame" x="97" y="566" width="211" height="117.5"/>
+                                                <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                    <rect key="frame" x="97" y="563" width="211" height="117.5"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdX-Xo-lXR">
+                                                <rect key="frame" x="97" y="955" width="181" height="81.5"/>
+                                                <string key="text">〒145-0067 東京都大田区雪谷大塚町11-8   (0.5 km away)
+</string>
                                                 <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -133,16 +160,44 @@
                                                     <rect key="frame" x="60" y="79" width="197.5" height="35"/>
                                                 </variation>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-nQ-iyB">
-                                                <rect key="frame" x="38" y="660" width="240" height="240"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-nQ-iyB">
+                                                <rect key="frame" x="38" y="674" width="240" height="240"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-ID-aiI">
+                                                <rect key="frame" x="97" y="1066" width="181" height="81.5"/>
+                                                <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                    <rect key="frame" x="97" y="563" width="211" height="117.5"/>
+                                                </variation>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="FRZ-ID-aiI" secondAttribute="trailing" constant="322" id="EJI-8r-QfS"/>
+                                            <constraint firstItem="FRZ-ID-aiI" firstAttribute="baseline" secondItem="Vsa-jh-z2p" secondAttribute="baseline" constant="41.5" id="ae6-Tm-Amr"/>
+                                            <constraint firstAttribute="bottom" secondItem="FRZ-ID-aiI" secondAttribute="bottom" constant="52.5" id="gTs-3U-fBv"/>
+                                            <constraint firstItem="Vsa-jh-z2p" firstAttribute="leading" secondItem="6CT-sQ-ExC" secondAttribute="leading" constant="8" id="r6r-d8-aDi"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottomMargin" secondItem="6CT-sQ-ExC" secondAttribute="bottom" id="4s2-jP-9kM"/>
+                                    <constraint firstItem="6CT-sQ-ExC" firstAttribute="top" secondItem="Naj-Oz-YIH" secondAttribute="topMargin" id="Fxd-wx-OFm"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="6CT-sQ-ExC" secondAttribute="trailing" id="LZZ-jd-VeQ"/>
+                                    <constraint firstItem="6CT-sQ-ExC" firstAttribute="leading" secondItem="Naj-Oz-YIH" secondAttribute="leadingMargin" id="ZWh-eh-CYU"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Naj-Oz-YIH" secondAttribute="bottom" id="0lB-IK-ia6"/>
+                            <constraint firstItem="6CT-sQ-ExC" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="3vC-ul-fXR"/>
+                            <constraint firstItem="Naj-Oz-YIH" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="XVb-Qj-wI3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Naj-Oz-YIH" secondAttribute="trailing" id="d6s-ai-ret"/>
+                            <constraint firstItem="Naj-Oz-YIH" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="umT-Px-ngT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9wv-KA-mxb">
                         <barButtonItem key="leftBarButtonItem" id="Qw7-eA-VQF">
@@ -163,12 +218,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1200"/>
                     <connections>
                         <outlet property="bowlView" destination="Ice-Cb-jvk" id="YNW-JJ-UpY"/>
                         <outlet property="chopsticksImage" destination="Byd-g5-v1t" id="WdJ-Mh-2Dx"/>
+                        <outlet property="contentView" destination="6CT-sQ-ExC" id="jvV-Os-yly"/>
                         <outlet property="distanceLabel" destination="8NA-2v-CHo" id="FSb-8g-NzW"/>
                         <outlet property="mapButton" destination="U1y-p9-Ioh" id="1mp-IK-aYf"/>
-                        <outlet property="venueName" destination="8cr-ZL-WGr" id="cth-Xo-B1H"/>
+                        <outlet property="scrollView" destination="Naj-Oz-YIH" id="Sc3-C3-CcG"/>
+                        <outlet property="venueName" destination="6yz-Av-ftZ" id="btZ-KF-eIT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -184,17 +243,17 @@
         <!--Map View Controller-->
         <scene sceneID="nev-vS-XL3">
             <objects>
-                <viewController storyboardIdentifier="map" id="PMc-ZR-mhw" customClass="MapViewController" customModule="Ramen_Compass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="map" id="PMc-ZR-mhw" customClass="MapViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PYF-tE-1e5"/>
                         <viewControllerLayoutGuide type="bottom" id="BsC-8Q-Fo3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5st-OY-Ni9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f68-WF-iyY">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                                 <connections>
                                     <outlet property="delegate" destination="PMc-ZR-mhw" id="676-3K-9Nt"/>
                                 </connections>
@@ -224,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keV-Eg-oZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="-257"/>
+            <point key="canvasLocation" x="-284" y="-918"/>
         </scene>
     </scenes>
     <resources>

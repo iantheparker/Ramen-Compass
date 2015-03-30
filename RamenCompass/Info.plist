@@ -4,10 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to point you towards the nearest bowl of delicious ramen.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We use your location to point you towards the nearest bowl of delicious ramen.</string>
+	<key>CFBundleDisplayName</key>
+	<string>RamCom</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,6 +24,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We use your location to point you towards the nearest bowl of delicious ramen.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We use your location to point you towards the nearest bowl of delicious ramen.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>HouschkaAltHeavy.ttf</string>
+		<string>HouschkaAltLight.ttf</string>
+		<string>HouschkaAltMedium.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -37,12 +45,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>HouschkaAltHeavy.ttf</string>
-		<string>HouschkaAltLight.ttf</string>
-		<string>HouschkaAltMedium.ttf</string>
 	</array>
 </dict>
 </plist>
