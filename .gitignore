@@ -26,3 +26,5 @@ DerivedData
 # Pods/
 
 Ramen Compass/ApiKeys.plist
+
+Ramen Compass.xcodeproj/project.pbxproj

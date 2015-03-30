@@ -132,17 +132,21 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         var radians = newHeading.trueHeading * (M_PI/180.0)
         println("radians = \(radians), Updated heading to \(newHeading)")
-        var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
-        var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
-        /*
-        UIView.animateWithDuration(0.2,
-            delay: 0.0,
-            options: .CurveEaseInOut,
-            animations: {
-                self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
-            },
-            completion: { finished in
-        })*/
+
+        if (selectedRamen != nil){
+            var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+            var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
+            
+            UIView.animateWithDuration(0.2,
+                delay: 0.0,
+                options: .CurveEaseInOut,
+                animations: {
+                    self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
+                },
+                completion: { finished in
+            })
+        }
+        
         
     }
     
@@ -246,13 +250,15 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate {
     
     func updateDisplayedRamen(){
         //need to make sure
-        selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as Venue
-        println(selectedRamen.description)
-        
-        venueName.text = selectedRamen.name.uppercaseString
-        let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
-        distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
-        locationManager.startUpdatingHeading()
+        if let selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
+            
+            println(selectedRamen.description)
+            
+            venueName.text = selectedRamen.name.uppercaseString
+            let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
+            distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
+            locationManager.startUpdatingHeading()
+        }
     }
     
     //MARK: - Button Actions
