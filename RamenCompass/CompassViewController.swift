@@ -22,6 +22,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
 
     var selectedRamen: Venue!
     private var _selectedRamenIndex: Int = 0
+    private var hideStatusBar: Bool = false
     
     @IBOutlet weak var chopsticksImage : UIImageView!
     @IBOutlet weak var bowlView: UIView!
@@ -35,7 +36,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         super.viewDidLoad()
         
         scrollView.delegate = self
-        scrollView.contentSize = CGSizeMake(self.view.bounds.width, UIScreen.mainScreen().bounds.height*2)
+        //scrollView.contentSize = CGSizeMake(self.view.bounds.width, UIScreen.mainScreen().bounds.height*2)
         println(scrollView.contentSize)
         println(self.view.bounds)
         println(contentView.bounds)
@@ -266,7 +267,20 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     func scrollViewDidScroll(scrollView: UIScrollView) {
         //self.navigationController?.navigationBar.center = CGPointMake(self.scrollView.center.x, self.scrollView.contentOffset.y)
         //println(self.navigationController?.navigationBar.bounds)
+        if (scrollView.contentOffset.y == 0){
+            UIApplication.sharedApplication().setStatusBarHidden( false, withAnimation: UIStatusBarAnimation.Fade)
+            hideStatusBar = false
+        }
+        else {
+            UIApplication.sharedApplication().setStatusBarHidden( true, withAnimation: UIStatusBarAnimation.None)
+            self.navigationController?.navigationBarHidden
+            hideStatusBar = true
 
+        }
+
+    }
+    override func prefersStatusBarHidden() -> Bool {
+        return hideStatusBar;
     }
     
     //MARK: - Button Actions
