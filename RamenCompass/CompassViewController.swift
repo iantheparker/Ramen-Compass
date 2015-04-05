@@ -255,15 +255,17 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             return self._selectedRamenIndex
         }
         set{
-            var newIndex = newValue
-            if (newValue < 0){
-                newIndex = Venue.allObjects().count-1
+            if Venue.allObjects().count != 0{
+                var newIndex = newValue
+                if (newValue < 0){
+                    newIndex = Venue.allObjects().count-1
+                }
+                else if (newValue > Venue.allObjects().count-1){
+                    newIndex = 0
+                }
+                self._selectedRamenIndex = newIndex
+                updateDisplayedRamen()
             }
-            else if (newIndex > Venue.allObjects().count-1){
-                newIndex = 0
-            }
-            self._selectedRamenIndex = newIndex
-            updateDisplayedRamen()
         }
     
     }
@@ -271,6 +273,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     func updateDisplayedRamen(){
         //need to make sure
         if let selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
+            println("setting")
             println(selectedRamen.description)
             
             venueNameJP.text = selectedRamen.name.uppercaseString
