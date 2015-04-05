@@ -22,7 +22,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
     var notificationToken: RLMNotificationToken?
     var selectedRamen: Venue!
-    let realm = RLMRealm(path: NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent("ramcom.realm"), readOnly: true, error: nil)
+    //let realm = RLMRealm(path: NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent("ramcom.realm"), readOnly: true, error: nil)
     private var _selectedRamenIndex: Int = 0
     
     @IBOutlet weak var chopsticksImage : UIImageView!
@@ -275,7 +275,6 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             
             venueNameJP.text = selectedRamen.name.uppercaseString
             println(venueNameJP.text! as NSString)
-            println((venueNameJP.text! as NSString).stringByTransliteratingJapaneseToRomaji().stringByRemovingPercentEncoding)
             let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
             distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
             locationManager.startUpdatingHeading()
