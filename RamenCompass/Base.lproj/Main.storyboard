@@ -336,7 +336,8 @@
                         <outlet property="distanceLabel" destination="8NA-2v-CHo" id="FSb-8g-NzW"/>
                         <outlet property="mapButton" destination="P9F-NZ-Zbs" id="8uR-Fe-4Ri"/>
                         <outlet property="scrollView" destination="Naj-Oz-YIH" id="Sc3-C3-CcG"/>
-                        <outlet property="venueName" destination="6yz-Av-ftZ" id="btZ-KF-eIT"/>
+                        <outlet property="venueNameEN" destination="8cr-ZL-WGr" id="fBw-Vn-nDn"/>
+                        <outlet property="venueNameJP" destination="6yz-Av-ftZ" id="IPh-4t-eNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

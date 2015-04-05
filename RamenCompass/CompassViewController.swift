@@ -18,15 +18,17 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     let locationManager = CLLocationManager()
     var locationFixAchieved : Bool = false
     var currentLocation : CLLocation!
-    var notificationToken: RLMNotificationToken?
-
-    var selectedRamen: Venue!
-    private var _selectedRamenIndex: Int = 0
     private var hideStatusBar: Bool = false
+    
+    var notificationToken: RLMNotificationToken?
+    var selectedRamen: Venue!
+    let realm = RLMRealm(path: NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent("ramcom.realm"), readOnly: true, error: nil)
+    private var _selectedRamenIndex: Int = 0
     
     @IBOutlet weak var chopsticksImage : UIImageView!
     @IBOutlet weak var bowlView: UIView!
-    @IBOutlet weak var venueName: UILabel!
+    @IBOutlet weak var venueNameJP: UILabel!
+    @IBOutlet weak var venueNameEN: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var scrollView : UIScrollView!
@@ -104,6 +106,13 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         println("my current location \(currentLocation)")
         if (locationFixAchieved == false) {
             locationFixAchieved = true
+            if (Venue.allObjects().count > 0){
+                println("In loc, using realm")
+            }
+            else{
+                println("In loc, building realm")
+                self.getListVenues(currentLocation)
+            }
             CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
                 if (error != nil)
                 {
@@ -117,13 +126,13 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
                     let pm = placemarks[0] as CLPlacemark
                     let country = (pm.country != nil) ? pm.country : ""
                     if (country == "Japan"){
-                        if (Venue.allObjects().count > 0){
-                            println("In Japan, using realm")
-                        }
-                        else{
-                            println("In Japan, building realm")
-                            self.getListVenues(manager.location)
-                        }
+//                        if (Venue.allObjects().count > 0){
+//                            println("In Japan, using realm")
+//                        }
+//                        else{
+//                            println("In Japan, building realm")
+//                            self.getListVenues(manager.location)
+//                        }
                     }
                     else {
                         self.searchVenues(manager.location)
@@ -141,17 +150,21 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         var radians = newHeading.trueHeading * (M_PI/180.0)
         println("radians = \(radians), Updated heading to \(newHeading)")
-        var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
-        var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
+        if (selectedRamen != nil){
+            var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+            var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
+            println("course = \(course)")
+            
+            UIView.animateWithDuration(0.2,
+                delay: 0.0,
+                options: .CurveEaseInOut,
+                animations: {
+                    self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
+                },
+                completion: { finished in
+            })
+        }
         
-        UIView.animateWithDuration(0.2,
-            delay: 0.0,
-            options: .CurveEaseInOut,
-            animations: {
-                self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
-            },
-            completion: { finished in
-        })
         
     }
     
@@ -159,7 +172,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         println("i'm on loc error")
         println(error.localizedDescription)
         locationManager.stopUpdatingLocation()
-        venueName.text = error.localizedDescription
+        venueNameJP.text = error.localizedDescription
     }
 
     //MARK: - Foursquare
@@ -224,6 +237,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             }
         }
         realm.commitWriteTransaction()
+        realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
+
         //TODO: reset selectedRamen OR choose closest
         //FIXME: setting the index from here could recursively call updateDisplay when paired with the realmNotif block
         selectedRamenIndex = 0
@@ -232,7 +247,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
     
     
-    //MARK: - Venue Switch Methods
+    //MARK: - Update Display Methods
     
     
     var selectedRamenIndex : Int{
@@ -255,13 +270,16 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
     func updateDisplayedRamen(){
         //need to make sure
-        selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as Venue
-        println(selectedRamen.description)
-        
-        venueName.text = selectedRamen.name.uppercaseString
-        let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
-        distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
-        locationManager.startUpdatingHeading()
+        if let selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
+            println(selectedRamen.description)
+            
+            venueNameJP.text = selectedRamen.name.uppercaseString
+            println(venueNameJP.text! as NSString)
+            println((venueNameJP.text! as NSString).stringByTransliteratingJapaneseToRomaji().stringByRemovingPercentEncoding)
+            let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
+            distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
+            locationManager.startUpdatingHeading()
+        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -280,7 +298,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
 
     }
     override func prefersStatusBarHidden() -> Bool {
-        return hideStatusBar;
+        return hideStatusBar
     }
     
     //MARK: - Button Actions
