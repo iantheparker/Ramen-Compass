@@ -51,11 +51,11 @@ typedef enum{
 // very RUDIMENTARY 'sounds like' comparison of two japanese strings
 // compares the the reciever to the passed string
 // returns a 'score' from 0 to 1 (1 being the most similar to the reciever)
--(CGFloat)phoneticSimilarityToString:(NSString*)targetString;
+//-(CGFloat)phoneticSimilarityToString:(NSString*)targetString;
 
 // pass YES to improve performance by skipping transliteraion
 // the reciever and the passed string should already be converted to latinScript
--(CGFloat)phoneticSimilarityToString:(NSString*)string isLatinScript:(BOOL)isLatinScript;
+//-(CGFloat)phoneticSimilarityToString:(NSString*)string isLatinScript:(BOOL)isLatinScript;
 
  
 

@@ -12,17 +12,26 @@ import Realm
 class Location: RLMObject {
     dynamic var lat = 0.0  // latitude
     dynamic var lng = 0.0  // longitude
+    dynamic var distance = 0.0
+    dynamic var address = ""
     dynamic var postalCode = ""
     dynamic var cc = ""
+    dynamic var city = ""
     dynamic var state = ""
     dynamic var country = ""
-    dynamic var distance = 0.0
+    
 }
 
 class Venue: RLMObject {
     dynamic var id = ""
     dynamic var name = ""
     dynamic var location = Location()
+    
+    dynamic var hours = ""
+    dynamic var tips = ""
+    
+    dynamic var photoUrl = ""
+    dynamic var photoData : NSData = NSData()
     
     override class func primaryKey() -> String! {
         return "id"

@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Realm
+import MapKit
 
 class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
     
@@ -32,16 +33,15 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var scrollView : UIScrollView!
-    @IBOutlet weak var contentView : UIView!
+    @IBOutlet weak var addressButton : UIButton!
+    @IBOutlet weak var tipLabel : UILabel!
+    @IBOutlet weak var hoursLabel : UILabel!
+    @IBOutlet weak var photoIView : UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.delegate = self
-        //scrollView.contentSize = CGSizeMake(self.view.bounds.width, UIScreen.mainScreen().bounds.height*2)
-        println(scrollView.contentSize)
-        println(self.view.bounds)
-        println(contentView.bounds)
         
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
@@ -108,6 +108,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             locationFixAchieved = true
             if (Venue.allObjects().count > 0){
                 println("In loc, using realm")
+                selectedRamenIndex=0
             }
             else{
                 println("In loc, building realm")
@@ -237,6 +238,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             }
         }
         realm.commitWriteTransaction()
+        
+        //FIXME: use the copy of this realm
         realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
 
         //TODO: reset selectedRamen OR choose closest
@@ -272,14 +275,18 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
     func updateDisplayedRamen(){
         //need to make sure
-        if let selectedRamen = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
-            println("setting")
+        if let selectedRamenTest = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
+            selectedRamen = selectedRamenTest
             println(selectedRamen.description)
             
             venueNameJP.text = selectedRamen.name.uppercaseString
-            println(venueNameJP.text! as NSString)
+            venueNameEN.text = ((venueNameJP.text! as NSString).stringByTransliteratingJapaneseToRomajiWithWordSeperator(" ") as String).capitalizedString
+
             let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
             distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
+            let addressText = selectedRamen.location.address + "\n" + selectedRamen.location.city + ", " + selectedRamen.location.cc + "  " + selectedRamen.location.postalCode
+            addressButton.setTitle(addressText, forState: UIControlState.Normal)
+            tipLabel.sizeToFit()
             locationManager.startUpdatingHeading()
         }
     }
@@ -292,6 +299,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             hideStatusBar = false
         }
         else {
+            //TODO: handle hiding statusbar on scroll
             UIApplication.sharedApplication().setStatusBarHidden( true, withAnimation: UIStatusBarAnimation.None)
             self.navigationController?.navigationBarHidden
             hideStatusBar = true
@@ -310,6 +318,19 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     @IBAction func rightBowl(){
         selectedRamenIndex += 1
+    }
+    
+    
+    @IBAction func openMapDirections(sender: UIButton) {
+        println("openMapDirections pressed")
+        var coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+        var options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        
+        var placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        var mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "\(selectedRamen.name)"
+        mapItem.openInMapsWithLaunchOptions(options)
+        
     }
     
     @IBAction func mapButtonPressed() {

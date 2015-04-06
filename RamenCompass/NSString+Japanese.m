@@ -251,6 +251,9 @@ char_class getCharClass(unichar c){
     
     CFRelease(tok);
     
+    CFStringTransform((__bridge CFMutableStringRef)aLatinString, nil, kCFStringTransformStripCombiningMarks, false);
+
+    
     return [NSString stringWithString:aLatinString];
 }
 //
@@ -339,74 +342,74 @@ char_class getCharClass(unichar c){
 //
 //
 //
--(CGFloat)phoneticSimilarityToString:(NSString*)string{
-    
-   return [self phoneticSimilarityToString:string isLatinScript:NO];
-}
+//-(CGFloat)phoneticSimilarityToString:(NSString*)string{
+//    
+//   return [self phoneticSimilarityToString:string isLatinScript:NO];
+//}
+////
+////
+////
+//-(CGFloat)phoneticSimilarityToString:(NSString*)string isLatinScript:(BOOL)isLatinScript{
+//    
+//    
+//    NSString* sourceString= self;
+//    
+//    if(isLatinScript==NO)
+//        sourceString = [self stringByTransliteratingJapaneseToHiragana];
+//    
+//    
+//    __block NSMutableSet* sourceSet = [[NSMutableSet alloc]init];
 //
+//    [sourceString enumerateSubstringsInRange:NSMakeRange(0,[sourceString length])
+//                                 options:NSStringEnumerationByComposedCharacterSequences
+//                              usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+//                        
+//                                  if(isLatinScript==NO){
+//                                        [sourceSet addObject:[substring stringByTransliteratingJapaneseToRomaji]];
+//                                  }
+//                                  else{
+//                                      [sourceSet addObject:substring];
+//                                  }
+//                        
+//                              }];
+//    
+//    
+//    
+//   NSString* targetString = string;
+//    
+//   if(isLatinScript==NO)
+//       [string stringByTransliteratingJapaneseToHiragana];
 //
+//    __block NSMutableSet* targetSet = [[NSMutableSet alloc]init];
+//    
+//    [targetString enumerateSubstringsInRange:NSMakeRange(0,[targetString length])
+//                                     options:NSStringEnumerationByComposedCharacterSequences
+//                                  usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+//                                      
+//                                      if(isLatinScript==NO){
+//                                          [targetSet addObject:[substring stringByTransliteratingJapaneseToRomaji]];
+//                                      }
+//                                      else{
+//                                          [targetSet addObject:substring];
+//                                      }
+//                                    
+//                                  }];
+//    
+//    CGFloat sourceTotal = [sourceSet count];
+//    CGFloat targetTotal = [targetSet count];
+//    
+//    CGFloat lengthRatio = fabsf(sourceTotal-targetTotal)/(MAX(sourceTotal,targetTotal));
+//    
 //
--(CGFloat)phoneticSimilarityToString:(NSString*)string isLatinScript:(BOOL)isLatinScript{
-    
-    
-    NSString* sourceString= self;
-    
-    if(isLatinScript==NO)
-        sourceString = [self stringByTransliteratingJapaneseToHiragana];
-    
-    
-    __block NSMutableSet* sourceSet = [[NSMutableSet alloc]init];
-
-    [sourceString enumerateSubstringsInRange:NSMakeRange(0,[sourceString length])
-                                 options:NSStringEnumerationByComposedCharacterSequences
-                              usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-                        
-                                  if(isLatinScript==NO){
-                                        [sourceSet addObject:[substring stringByTransliteratingJapaneseToRomaji]];
-                                  }
-                                  else{
-                                      [sourceSet addObject:substring];
-                                  }
-                        
-                              }];
-    
-    
-    
-   NSString* targetString = string;
-    
-   if(isLatinScript==NO)
-       [string stringByTransliteratingJapaneseToHiragana];
-
-    __block NSMutableSet* targetSet = [[NSMutableSet alloc]init];
-    
-    [targetString enumerateSubstringsInRange:NSMakeRange(0,[targetString length])
-                                     options:NSStringEnumerationByComposedCharacterSequences
-                                  usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-                                      
-                                      if(isLatinScript==NO){
-                                          [targetSet addObject:[substring stringByTransliteratingJapaneseToRomaji]];
-                                      }
-                                      else{
-                                          [targetSet addObject:substring];
-                                      }
-                                    
-                                  }];
-    
-    CGFloat sourceTotal = [sourceSet count];
-    CGFloat targetTotal = [targetSet count];
-    
-    CGFloat lengthRatio = fabsf(sourceTotal-targetTotal)/(MAX(sourceTotal,targetTotal));
-    
-
-    // remove the source sounds from the target
-    // the result are the  target sounds not contained in the source
-    [targetSet minusSet:sourceSet];
-    CGFloat adjustedCount = [targetSet count];
-    
-
-    return (1- (adjustedCount/targetTotal)*(1-lengthRatio));
-    
-}
+//    // remove the source sounds from the target
+//    // the result are the  target sounds not contained in the source
+//    [targetSet minusSet:sourceSet];
+//    CGFloat adjustedCount = [targetSet count];
+//    
+//
+//    return (1- (adjustedCount/targetTotal)*(1-lengthRatio));
+//    
+//}
 
 
 @end
