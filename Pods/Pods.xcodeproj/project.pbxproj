@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A5554FC6F94BE3B60DADDBB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3192C1BD44E087B2C70A1603 /* Foundation.framework */; };
+		B6644097541F64B9BAC5209F /* Pods-RamenCompass-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AA25E1FBD5A8D388A35F71 /* Pods-RamenCompass-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08FEBFA03E67FFF63378235B /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		09E816DC7C864185E483E9EB /* Pods-RamenCompass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RamenCompass.release.xcconfig"; sourceTree = "<group>"; };
+		16135F1B020875E121B7D4C4 /* Pods-RamenCompass-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RamenCompass-acknowledgements.plist"; sourceTree = "<group>"; };
+		3192C1BD44E087B2C70A1603 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		409661EB5ADDF313BF8ADD13 /* Pods-RamenCompass-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RamenCompass-environment.h"; sourceTree = "<group>"; };
+		5BDD3BF61125606E4E0DBE65 /* libPods-RamenCompass.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RamenCompass.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FE13AD0C28F530C8F4E3C1B /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		C12AD6501DE9763C5B731088 /* Pods-RamenCompass-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RamenCompass-resources.sh"; sourceTree = "<group>"; };
+		C70FFD7F36F5BC329D0637EE /* Pods-RamenCompass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RamenCompass.debug.xcconfig"; sourceTree = "<group>"; };
+		D0AA25E1FBD5A8D388A35F71 /* Pods-RamenCompass-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RamenCompass-dummy.m"; sourceTree = "<group>"; };
+		F789D62947D3A0A300D1EA1C /* Pods-RamenCompass-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RamenCompass-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F97F232ABD66A4F0E14958B3 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DBC9DA8B3B757EE2CA5CC9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A5554FC6F94BE3B60DADDBB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		246D14C18330E4650B6E8212 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7FE13AD0C28F530C8F4E3C1B /* GoogleMaps.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		3A51334F1D239E98B510B5FB = {
+			isa = PBXGroup;
+			children = (
+				F97F232ABD66A4F0E14958B3 /* Podfile */,
+				5CD5D98043F494946F1180FB /* Frameworks */,
+				4FF90CE0285D463C96F666E1 /* Pods */,
+				C32636449FFA3EC07D4048D9 /* Products */,
+				634C914DAABDF17F7A09F71A /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		4FF90CE0285D463C96F666E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E796E0F36DA4A5CD99513B05 /* Google-Maps-iOS-SDK */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5CD5D98043F494946F1180FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				624609516887019F47682A7C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		624609516887019F47682A7C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3192C1BD44E087B2C70A1603 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		634C914DAABDF17F7A09F71A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				79C5837B2303325D4A571C04 /* Pods-RamenCompass */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		79C5837B2303325D4A571C04 /* Pods-RamenCompass */ = {
+			isa = PBXGroup;
+			children = (
+				F789D62947D3A0A300D1EA1C /* Pods-RamenCompass-acknowledgements.markdown */,
+				16135F1B020875E121B7D4C4 /* Pods-RamenCompass-acknowledgements.plist */,
+				D0AA25E1FBD5A8D388A35F71 /* Pods-RamenCompass-dummy.m */,
+				409661EB5ADDF313BF8ADD13 /* Pods-RamenCompass-environment.h */,
+				C12AD6501DE9763C5B731088 /* Pods-RamenCompass-resources.sh */,
+				C70FFD7F36F5BC329D0637EE /* Pods-RamenCompass.debug.xcconfig */,
+				09E816DC7C864185E483E9EB /* Pods-RamenCompass.release.xcconfig */,
+			);
+			name = "Pods-RamenCompass";
+			path = "Target Support Files/Pods-RamenCompass";
+			sourceTree = "<group>";
+		};
+		9686C4FF3A8F6B6EF9C10B82 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08FEBFA03E67FFF63378235B /* GoogleMaps.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C32636449FFA3EC07D4048D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BDD3BF61125606E4E0DBE65 /* libPods-RamenCompass.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E796E0F36DA4A5CD99513B05 /* Google-Maps-iOS-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				9686C4FF3A8F6B6EF9C10B82 /* Frameworks */,
+				246D14C18330E4650B6E8212 /* Resources */,
+			);
+			path = "Google-Maps-iOS-SDK";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D3A5BDA1AC75BB350ACC7F34 /* Pods-RamenCompass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E76CBB0E0BBB08CD45746F5 /* Build configuration list for PBXNativeTarget "Pods-RamenCompass" */;
+			buildPhases = (
+				EC844A70E6E0398094619026 /* Sources */,
+				8DBC9DA8B3B757EE2CA5CC9B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-RamenCompass";
+			productName = "Pods-RamenCompass";
+			productReference = 5BDD3BF61125606E4E0DBE65 /* libPods-RamenCompass.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0D19636598E0D85F640A3D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = C63BB65B1E5E840F9935501A /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3A51334F1D239E98B510B5FB;
+			productRefGroup = C32636449FFA3EC07D4048D9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D3A5BDA1AC75BB350ACC7F34 /* Pods-RamenCompass */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC844A70E6E0398094619026 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B6644097541F64B9BAC5209F /* Pods-RamenCompass-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		83D269F57A82DC39E3DD7042 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09E816DC7C864185E483E9EB /* Pods-RamenCompass.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9139687D1223C6BA753CDEF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		A2D25C3F1E1F0511578E922A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DED59C992A904FC92264F192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C70FFD7F36F5BC329D0637EE /* Pods-RamenCompass.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E76CBB0E0BBB08CD45746F5 /* Build configuration list for PBXNativeTarget "Pods-RamenCompass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DED59C992A904FC92264F192 /* Debug */,
+				83D269F57A82DC39E3DD7042 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C63BB65B1E5E840F9935501A /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9139687D1223C6BA753CDEF0 /* Debug */,
+				A2D25C3F1E1F0511578E922A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0D19636598E0D85F640A3D2 /* Project object */;
+}

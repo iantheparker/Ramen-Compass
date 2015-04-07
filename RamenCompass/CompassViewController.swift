@@ -321,8 +321,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     
     
-    @IBAction func openMapDirections(sender: UIButton) {
-        println("openMapDirections pressed")
+    func openAppleMapDirections(){
+        println("openAppleMapDirections pressed")
         var coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
         var options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
         
@@ -331,6 +331,40 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         mapItem.name = "\(selectedRamen.name)"
         mapItem.openInMapsWithLaunchOptions(options)
         
+    }
+    
+    @IBAction func addressDirectionButtonPressed(sender: AnyObject) {
+        if (UIApplication.sharedApplication().canOpenURL(
+            NSURL(string: "comgooglemaps://")!) == false){
+                openAppleMapDirections()
+                println("no google maps")
+                return
+        }
+        
+        let optionMenu = UIAlertController(title: nil, message: "You can go your own waaaay", preferredStyle: .ActionSheet)
+        
+        let googleAction = UIAlertAction(title: "Google Maps", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            println("Open Google Maps")
+            UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
+        })
+        let appleAction = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            println("Open Apple Maps")
+            self.openAppleMapDirections()
+            
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            println("Cancelled")
+        })
+        
+        optionMenu.addAction(googleAction)
+        optionMenu.addAction(appleAction)
+        optionMenu.addAction(cancelAction)
+        
+        self.presentViewController(optionMenu, animated: true, completion: nil)
     }
     
     @IBAction func mapButtonPressed() {

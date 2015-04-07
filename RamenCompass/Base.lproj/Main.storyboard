@@ -242,7 +242,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="openMapDirections:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="sqa-jV-lFA"/>
+                                            <action selector="addressDirectionButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7o1-TT-Xlq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -438,23 +438,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keV-Eg-oZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-284" y="-918"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="27h-lr-EP2">
-            <objects>
-                <viewController id="OJe-pz-Cf1" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oWv-7v-srJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="USH-Ea-Y7g"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tP9-xG-xa1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eD8-pR-bwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>
