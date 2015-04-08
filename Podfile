@@ -3,6 +3,7 @@
 
 target 'RamenCompass' do
 pod 'Google-Maps-iOS-SDK', '~> 1.9'
+pod 'pop', '~> 1.0'
 end
 
 target 'RamenCompassTests' do

@@ -42,6 +42,13 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         super.viewDidLoad()
         
         scrollView.delegate = self
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "respondToSwipeGesture:")
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left
+        self.view.addGestureRecognizer(swipeLeft)
         
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
@@ -292,20 +299,36 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        //self.navigationController?.navigationBar.center = CGPointMake(self.scrollView.center.x, self.scrollView.contentOffset.y)
-        //println(self.navigationController?.navigationBar.bounds)
         if (scrollView.contentOffset.y == 0){
-            UIApplication.sharedApplication().setStatusBarHidden( false, withAnimation: UIStatusBarAnimation.Fade)
-            hideStatusBar = false
+            //UIApplication.sharedApplication().setStatusBarHidden( false, withAnimation: UIStatusBarAnimation.Fade)
+            if (hideStatusBar){
+                hideStatusBar = false
+                setNeedsStatusBarAppearanceUpdate()
+            }
         }
         else {
-            //TODO: handle hiding statusbar on scroll
-            UIApplication.sharedApplication().setStatusBarHidden( true, withAnimation: UIStatusBarAnimation.None)
-            self.navigationController?.navigationBarHidden
-            hideStatusBar = true
-
+            if (!hideStatusBar){
+                hideStatusBar = true
+                setNeedsStatusBarAppearanceUpdate()
+            }
         }
-
+    }
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.Right:
+                println("Swiped right")
+                leftBowl()
+            case UISwipeGestureRecognizerDirection.Left:
+                println("Swiped left")
+                rightBowl()
+            default:
+                break
+            }
+        }
     }
     override func prefersStatusBarHidden() -> Bool {
         return hideStatusBar
@@ -318,19 +341,6 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     @IBAction func rightBowl(){
         selectedRamenIndex += 1
-    }
-    
-    
-    func openAppleMapDirections(){
-        println("openAppleMapDirections pressed")
-        var coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
-        var options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-        
-        var placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        var mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = "\(selectedRamen.name)"
-        mapItem.openInMapsWithLaunchOptions(options)
-        
     }
     
     @IBAction func addressDirectionButtonPressed(sender: AnyObject) {
@@ -365,6 +375,16 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         optionMenu.addAction(cancelAction)
         
         self.presentViewController(optionMenu, animated: true, completion: nil)
+    }
+    
+    func openAppleMapDirections(){
+        println("openAppleMapDirections pressed")
+        var coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+        var options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        var placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        var mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "\(selectedRamen.name)"
+        mapItem.openInMapsWithLaunchOptions(options)
     }
     
     @IBAction func mapButtonPressed() {
