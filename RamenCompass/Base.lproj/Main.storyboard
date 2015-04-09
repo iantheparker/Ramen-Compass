@@ -70,7 +70,7 @@
                                         <rect key="frame" x="146" y="5" width="308" height="81"/>
                                     </imageView>
                                     <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk" userLabel="Ramen + Chopsticks">
-                                        <rect key="frame" x="150" y="148" width="300" height="300"/>
+                                        <rect key="frame" x="150" y="163" width="300" height="300"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="utv-IQ-qzx">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="301"/>
@@ -108,7 +108,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="767" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-GR-2zS">
-                                        <rect key="frame" x="199" y="507" width="200" height="43"/>
+                                        <rect key="frame" x="199" y="522" width="200" height="43"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="43" id="M08-9j-O08"/>
                                             <constraint firstAttribute="width" constant="200" id="h5s-YH-36X"/>
@@ -121,7 +121,7 @@
                                         <rect key="frame" x="140" y="468" width="310" height="65"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A2-Q4-6hC">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A2-Q4-6hC" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="95" y="468" width="45" height="65"/>
                                         <state key="normal" title="&lt;" image="leftButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -130,7 +130,7 @@
                                             <action selector="leftBowl" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yUm-Ur-vym"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tg-qm-o2b">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tg-qm-o2b" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="459" y="466" width="45" height="65"/>
                                         <state key="normal" title="&gt;" image="rightButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +140,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try this: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztE-ji-hX4">
-                                        <rect key="frame" x="133" y="570" width="80" height="56"/>
+                                        <rect key="frame" x="133" y="585" width="80" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="872-6a-vyP"/>
                                         </constraints>
@@ -166,7 +166,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
                                         <rect key="frame" x="230" y="583" width="222" height="118"/>
                                         <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -206,7 +206,7 @@
                                             <constraint firstAttribute="width" constant="240" id="NDU-wm-XcR"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-ID-aiI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-ID-aiI">
                                         <rect key="frame" x="222" y="1054" width="230" height="60"/>
                                         <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,7 +215,7 @@
                                             <rect key="frame" x="97" y="563" width="211" height="117.5"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtc-N4-mgw">
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtc-N4-mgw" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="454" y="25" width="50" height="42"/>
                                         <state key="normal" image="refreshButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -224,7 +224,7 @@
                                             <action selector="refreshLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1HZ-ca-Aeu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9F-NZ-Zbs">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9F-NZ-Zbs" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="95" y="20" width="51" height="50"/>
                                         <state key="normal" image="mapButton">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -233,9 +233,9 @@
                                             <segue destination="PMc-ZR-mhw" kind="show" identifier="map" id="6Es-si-9cq"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-ru-vWW">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-ru-vWW" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="222" y="985" width="230" height="61"/>
-                                        <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Street Address">
                                             <color key="titleColor" red="0.25882352941176473" green="0.77254901960784317" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
@@ -276,7 +276,7 @@
                                     <constraint firstItem="Rtc-N4-mgw" firstAttribute="leading" secondItem="HNe-CQ-GDi" secondAttribute="trailing" id="MWK-1v-Knz"/>
                                     <constraint firstAttribute="bottom" secondItem="FRZ-ID-aiI" secondAttribute="bottom" constant="20" symbolic="YES" id="Nfc-35-Bwh"/>
                                     <constraint firstItem="4tk-nQ-iyB" firstAttribute="trailing" secondItem="TdX-Xo-lXR" secondAttribute="trailing" constant="-49" id="OmK-Wn-Xci"/>
-                                    <constraint firstItem="HNe-CQ-GDi" firstAttribute="top" secondItem="Naj-Oz-YIH" secondAttribute="top" constant="5" id="OtJ-o7-ejj"/>
+                                    <constraint firstItem="HNe-CQ-GDi" firstAttribute="top" secondItem="Naj-Oz-YIH" secondAttribute="top" constant="20" symbolic="YES" id="OtJ-o7-ejj"/>
                                     <constraint firstItem="Ccr-XZ-pWx" firstAttribute="leading" secondItem="ztE-ji-hX4" secondAttribute="leading" id="Pis-ds-ntl"/>
                                     <constraint firstItem="ztE-ji-hX4" firstAttribute="top" secondItem="M7g-JD-nDb" secondAttribute="top" id="T4r-dl-Kft"/>
                                     <constraint firstItem="2nf-GR-2zS" firstAttribute="centerX" secondItem="6yz-Av-ftZ" secondAttribute="centerX" id="TA3-bU-pBT"/>
@@ -371,13 +371,15 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1200"/>
                     <connections>
-                        <outlet property="addressButton" destination="F3a-ru-vWW" id="FaU-6I-MID"/>
+                        <outlet property="addressButton" destination="F3a-ru-vWW" id="oCw-pR-NbD"/>
                         <outlet property="bowlView" destination="Ice-Cb-jvk" id="YNW-JJ-UpY"/>
                         <outlet property="chopsticksImage" destination="Byd-g5-v1t" id="WdJ-Mh-2Dx"/>
                         <outlet property="distanceLabel" destination="8NA-2v-CHo" id="FSb-8g-NzW"/>
                         <outlet property="hoursLabel" destination="FRZ-ID-aiI" id="KTA-tn-vBz"/>
+                        <outlet property="leftButton" destination="9A2-Q4-6hC" id="jdg-at-V6W"/>
                         <outlet property="mapButton" destination="P9F-NZ-Zbs" id="8uR-Fe-4Ri"/>
                         <outlet property="photoIView" destination="4tk-nQ-iyB" id="Wds-Q9-CMe"/>
+                        <outlet property="rightButton" destination="3Tg-qm-o2b" id="OGy-hH-uj2"/>
                         <outlet property="scrollView" destination="Naj-Oz-YIH" id="Sc3-C3-CcG"/>
                         <outlet property="tipLabel" destination="M7g-JD-nDb" id="bsJ-3F-1kg"/>
                         <outlet property="venueNameEN" destination="8cr-ZL-WGr" id="fBw-Vn-nDn"/>

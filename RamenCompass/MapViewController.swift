@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.animatesDrop = true
             pinView!.pinColor = .Red
-            var detailDisclosure = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIButton
+            var detailDisclosure = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
             pinView!.rightCalloutAccessoryView = detailDisclosure
         }
         else {
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!) {
         
-        for annotationView in views as [MKAnnotationView] {
+        for annotationView in views as! [MKAnnotationView] {
             if (annotationView.annotation is RamenAnnotation) {
                 annotationView.transform = CGAffineTransformMakeTranslation(0, -500)
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
@@ -68,7 +68,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Create annotations for each one
         for venue in venues { // 2
-            let aVenue = venue as Venue
+            let aVenue = venue as! Venue
             let coord = CLLocationCoordinate2D(latitude: aVenue.location.lat, longitude: aVenue.location.lng)
             let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.postalCode, venue: aVenue) as RamenAnnotation
             mapView.addAnnotation(venueAnno)

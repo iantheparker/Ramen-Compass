@@ -33,10 +33,12 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var scrollView : UIScrollView!
-    @IBOutlet weak var addressButton : UIButton!
+    @IBOutlet weak var addressButton : PopButton!
     @IBOutlet weak var tipLabel : UILabel!
     @IBOutlet weak var hoursLabel : UILabel!
     @IBOutlet weak var photoIView : UIImageView!
+    @IBOutlet weak var leftButton : PopButton!
+    @IBOutlet weak var rightButton : PopButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +55,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSKernAttributeName: 200.0, NSFontAttributeName: UIFont(name: "HouschkaAltHeavy", size: 20)!]
-        self.navigationController!.navigationBar.titleTextAttributes = titleDict
+        self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         mapButton.layer.cornerRadius = 5.0
         
         locationManager.delegate = self
@@ -73,7 +75,8 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         
         notificationToken = RLMRealm.defaultRealm().addNotificationBlock { note, realm in
             println("notif block")
-            self.updateDisplayedRamen()
+            //self.updateDisplayedRamen()
+            self.selectedRamenIndex = 0
         }
     }
     
@@ -109,7 +112,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         var locationArray = locations as NSArray
-        currentLocation = locationArray.lastObject as CLLocation
+        currentLocation = locationArray.lastObject as! CLLocation
         println("my current location \(currentLocation)")
         if (locationFixAchieved == false) {
             locationFixAchieved = true
@@ -131,7 +134,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
                 
                 if placemarks.count > 0
                 {
-                    let pm = placemarks[0] as CLPlacemark
+                    let pm = placemarks[0] as! CLPlacemark
                     let country = (pm.country != nil) ? pm.country : ""
                     if (country == "Japan"){
 //                        if (Venue.allObjects().count > 0){
@@ -193,8 +196,11 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
             if data != nil {
                 let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
-                if let venues = (json["response"] as? NSDictionary)?["venues"] as? [NSDictionary] {
-                    self.setUpRealm("" ,venues: venues)
+                if let
+                    res     = json["response"] as? [String: AnyObject],
+                    venues  = res["venues"] as? [NSDictionary]
+                {
+                    self.setUpRealm("", venues: venues)
                 }
             }
             if error != nil {
@@ -217,7 +223,12 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
                 let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
                 //println(json)
                 //list{listItems{items({
-                if let venues = (((json["response"] as? NSDictionary)? ["list"])? ["listItems"])? ["items"] as? [NSDictionary] {
+                if let
+                    res     = json["response"] as? [String: AnyObject],
+                    list    = res["list"] as? [String: AnyObject],
+                    listItems    = list["listItems"] as? [String: AnyObject],
+                    venues = listItems["items"] as? [NSDictionary]
+                {
                     self.setUpRealm("list",venues: venues)
                 }
             }
@@ -268,9 +279,9 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             if Venue.allObjects().count != 0{
                 var newIndex = newValue
                 if (newValue < 0){
-                    newIndex = Venue.allObjects().count-1
+                    newIndex = Int(Venue.allObjects().count)-1
                 }
-                else if (newValue > Venue.allObjects().count-1){
+                else if (newValue > (Int(Venue.allObjects().count)-1)){
                     newIndex = 0
                 }
                 self._selectedRamenIndex = newIndex
@@ -283,8 +294,11 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     func updateDisplayedRamen(){
         //need to make sure
         if let selectedRamenTest = Venue.allObjects().objectAtIndex(UInt(selectedRamenIndex)) as? Venue {
+            
             selectedRamen = selectedRamenTest
             println(selectedRamen.description)
+            
+            
             
             venueNameJP.text = selectedRamen.name.uppercaseString
             venueNameEN.text = ((venueNameJP.text! as NSString).stringByTransliteratingJapaneseToRomajiWithWordSeperator(" ") as String).capitalizedString
@@ -293,6 +307,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             distanceLabel.text = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0) //this isn't calculated by locationmanager
             let addressText = selectedRamen.location.address + "\n" + selectedRamen.location.city + ", " + selectedRamen.location.cc + "  " + selectedRamen.location.postalCode
             addressButton.setTitle(addressText, forState: UIControlState.Normal)
+            //FIXME: sizeToFit is only working 10% of the time
             tipLabel.sizeToFit()
             locationManager.startUpdatingHeading()
         }
@@ -300,16 +315,21 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y == 0){
-            //UIApplication.sharedApplication().setStatusBarHidden( false, withAnimation: UIStatusBarAnimation.Fade)
             if (hideStatusBar){
                 hideStatusBar = false
-                setNeedsStatusBarAppearanceUpdate()
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.setNeedsStatusBarAppearanceUpdate()
+
+                }, completion: { (Bool) -> Void in})
             }
         }
         else {
             if (!hideStatusBar){
                 hideStatusBar = true
-                setNeedsStatusBarAppearanceUpdate()
+                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    self.setNeedsStatusBarAppearanceUpdate()
+                    
+                    }, completion: { (Bool) -> Void in})
             }
         }
     }
@@ -333,6 +353,9 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     override func prefersStatusBarHidden() -> Bool {
         return hideStatusBar
     }
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Slide
+    }
     
     //MARK: - Button Actions
     
@@ -344,6 +367,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     }
     
     @IBAction func addressDirectionButtonPressed(sender: AnyObject) {
+        
         if (UIApplication.sharedApplication().canOpenURL(
             NSURL(string: "comgooglemaps://")!) == false){
                 openAppleMapDirections()
@@ -398,7 +422,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         
         if (segue.identifier == "map") {
-            let controller = segue.destinationViewController as MapViewController
+            let controller = segue.destinationViewController as! MapViewController
         }
         
     }
