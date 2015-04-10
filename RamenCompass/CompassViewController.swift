@@ -11,13 +11,12 @@ import CoreLocation
 import Realm
 import MapKit
 
+
 class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScrollViewDelegate {
-    
-    let clientId = valueForAPIKey(keyname:  "clientId")
-    let clientSecret = valueForAPIKey(keyname:  "clientSecret")
     
     let locationManager = CLLocationManager()
     var locationFixAchieved : Bool = false
+    var locationCC: String = ""
     var currentLocation : CLLocation!
     private var hideStatusBar: Bool = false
     
@@ -122,38 +121,40 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             }
             else{
                 println("In loc, building realm")
-                self.getListVenues(currentLocation)
+                Foursquare.sharedInstance.getListVenues(currentLocation)
             }
-            CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
-                if (error != nil)
-                {
-                    println("Reverse geocoder failed with error" + error.localizedDescription)
-                    //pull location from map?
-                    return
-                }
-                
-                if placemarks.count > 0
-                {
-                    let pm = placemarks[0] as! CLPlacemark
-                    let country = (pm.country != nil) ? pm.country : ""
-                    if (country == "Japan"){
-//                        if (Venue.allObjects().count > 0){
-//                            println("In Japan, using realm")
-//                        }
-//                        else{
-//                            println("In Japan, building realm")
-//                            self.getListVenues(manager.location)
-//                        }
+            if (locationCC == ""){
+                CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
+                    if (error != nil)
+                    {
+                        println("Reverse geocoder failed with error" + error.localizedDescription)
+                        //pull location from map?
+                        return
                     }
-                    else {
-                        self.searchVenues(manager.location)
+                    
+                    if placemarks.count > 0
+                    {
+                        let pm = placemarks[0] as! CLPlacemark
+                        self.locationCC = (pm.country != nil) ? pm.country : ""
+                        if (self.locationCC == "Japan"){
+    //                        if (Venue.allObjects().count > 0){
+    //                            println("In Japan, using realm")
+    //                        }
+    //                        else{
+    //                            println("In Japan, building realm")
+    //                            self.getListVenues(manager.location)
+    //                        }
+                        }
+                        else {
+                            Foursquare.sharedInstance.searchVenues(manager.location)
+                        }
                     }
-                }
-                else
-                {
-                    println("Problem with the data received from geocoder")
-                }
-            })
+                    else
+                    {
+                        println("Problem with the data received from geocoder")
+                    }
+                })
+            }
             
         }
     }
@@ -186,88 +187,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         venueNameJP.text = error.localizedDescription
     }
 
-    //MARK: - Foursquare
-    
-    func searchVenues(coord: CLLocation) {
-        //update this line here also move it to a foursquare class?
-        let url = NSURL(string: "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&intent=browse&radius=2000")
-        let request = NSURLRequest(URL:url!)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
-            if data != nil {
-                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
-                if let
-                    res     = json["response"] as? [String: AnyObject],
-                    venues  = res["venues"] as? [NSDictionary]
-                {
-                    self.setUpRealm("", venues: venues)
-                }
-            }
-            if error != nil {
-                let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
-            }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
-    }
-    
-    func getListVenues(coord: CLLocation) {
-        //200 ramen list id
-        let ramenListId = "4e5fada1483b8637b3d0372c"
-        let llTolerance = 0.5
-        let url = NSURL(string: "https://api.foursquare.com/v2/lists/\(ramenListId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215")
-        let request = NSURLRequest(URL:url!)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
-            if data != nil {
-                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
-                //println(json)
-                //list{listItems{items({
-                if let
-                    res     = json["response"] as? [String: AnyObject],
-                    list    = res["list"] as? [String: AnyObject],
-                    listItems    = list["listItems"] as? [String: AnyObject],
-                    venues = listItems["items"] as? [NSDictionary]
-                {
-                    self.setUpRealm("list",venues: venues)
-                }
-            }
-            if error != nil {
-                let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
-            }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
-    }
-    
-    //MARK: - DB Creation
-    
-    func setUpRealm(type: String , venues: [NSDictionary]) {
-        let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        //realm.deleteAllObjects() --warning ---this can break
-        // Save one Venue object (and dependents) for each element of the array
-        for venue in venues {
-            if (type == "list") {
-                Venue.createOrUpdateInDefaultRealmWithObject(venue["venue"])
-            }
-            else {
-                Venue.createOrUpdateInDefaultRealmWithObject(venue)
-            }
-        }
-        realm.commitWriteTransaction()
-        
-        //FIXME: use the copy of this realm
-        realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
 
-        //TODO: reset selectedRamen OR choose closest
-        //FIXME: setting the index from here could recursively call updateDisplay when paired with the realmNotif block
-        selectedRamenIndex = 0
-    }
-
-    
-    
-    
     //MARK: - Update Display Methods
     
     
@@ -277,6 +197,9 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         }
         set{
             if Venue.allObjects().count != 0{
+                leftButton.enabled = true
+                rightButton.enabled = true
+                
                 var newIndex = newValue
                 if (newValue < 0){
                     newIndex = Int(Venue.allObjects().count)-1
@@ -287,8 +210,11 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
                 self._selectedRamenIndex = newIndex
                 updateDisplayedRamen()
             }
+            else {
+                leftButton.enabled = false
+                rightButton.enabled = false
+            }
         }
-    
     }
     
     func updateDisplayedRamen(){
@@ -309,8 +235,10 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
             addressButton.setTitle(addressText, forState: UIControlState.Normal)
             //FIXME: sizeToFit is only working 10% of the time
             tipLabel.sizeToFit()
+            //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
         }
+        
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
