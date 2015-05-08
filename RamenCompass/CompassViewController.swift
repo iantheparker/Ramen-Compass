@@ -19,6 +19,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     var locationCC: String = ""
     var currentLocation : CLLocation!
     private var hideStatusBar: Bool = false
+    private var mapDown: Bool = false
     
     var notificationToken: RLMNotificationToken?
     var selectedRamen: Venue!
@@ -38,6 +39,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     @IBOutlet weak var photoIView : UIImageView!
     @IBOutlet weak var leftButton : PopButton!
     @IBOutlet weak var rightButton : PopButton!
+    @IBOutlet weak var RCTitle: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -241,6 +243,22 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         
     }
     
+    override func viewWillLayoutSubviews() {
+        //
+//        var toValue = CGRectGetMidX(self.view.bounds)
+//        
+//        var onscreenAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+//        onscreenAnimation.fromValue = @(self.view.bounds.size.width);
+//        onscreenAnimation.toValue = @(toValue);
+//        onscreenAnimation.springBounciness = 10.f;
+//        
+//        POPBasicAnimation *onscreenAlpha = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
+//        onscreenAlpha.fromValue = @(0.0f);
+//        onscreenAlpha.toValue = @(1.0f);
+//        onscreenAlpha.duration = 0.5f;
+        //println("inlayoutsubviews")
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y == 0){
             if (hideStatusBar){
@@ -342,9 +360,15 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     @IBAction func mapButtonPressed() {
         
         println("hit mapButtonPressed")
-        //var vc = self.storyboard?.instantiateViewControllerWithIdentifier("map") as MapViewController
-        //modalTransitionStyle = .PartialCurl
-        //self.presentViewController(vc, animated: true, completion: nil)
+        
+        var scrolldistance = (RCTitle.bounds.height + 10) - UIScreen.mainScreen().bounds.height
+
+        if mapDown {
+            scrolldistance = 0
+        }
+        
+        self.scrollView.setContentOffset(CGPointMake(0, scrolldistance), animated: true)
+        mapDown = !mapDown
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
@@ -401,4 +425,18 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
     
 
 }
+
+extension UIView {
+    enum swipeDirection {
+        case Left
+        case Right
+    }
+    class func swipeAnimation(direction: Int, sender: UIView) {
+        let toValue = CGRectGetMidX(sender.bounds)
+            
+        
+    }
+}
+
+
 

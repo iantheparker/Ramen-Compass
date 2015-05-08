@@ -27,7 +27,7 @@ class PopButton: UIButton {
     
     func scaleToSmall(){
         var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.95, 0.95))
+        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
         self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
     }
     

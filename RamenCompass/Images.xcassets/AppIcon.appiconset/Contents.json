@@ -23,13 +23,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iPhone 5 and 6 App Icon.png",
+      "filename" : "RamComAppIcon@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iPhone 6 Plus App Icon.png",
+      "filename" : "RamComAppIcon@3x.png",
       "scale" : "3x"
     }
   ],
