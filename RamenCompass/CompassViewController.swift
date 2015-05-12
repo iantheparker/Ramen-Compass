@@ -56,7 +56,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
         let titleDict: NSDictionary = [NSForegroundColorAttributeName: UIColor.whiteColor(), NSKernAttributeName: 200.0, NSFontAttributeName: UIFont(name: "HouschkaAltHeavy", size: 20)!]
-        self.navigationController!.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = titleDict as [NSObject : AnyObject]
         mapButton.layer.cornerRadius = 5.0
         
         locationManager.delegate = self
@@ -243,21 +243,6 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         
     }
     
-    override func viewWillLayoutSubviews() {
-        //
-//        var toValue = CGRectGetMidX(self.view.bounds)
-//        
-//        var onscreenAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
-//        onscreenAnimation.fromValue = @(self.view.bounds.size.width);
-//        onscreenAnimation.toValue = @(toValue);
-//        onscreenAnimation.springBounciness = 10.f;
-//        
-//        POPBasicAnimation *onscreenAlpha = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
-//        onscreenAlpha.fromValue = @(0.0f);
-//        onscreenAlpha.toValue = @(1.0f);
-//        onscreenAlpha.duration = 0.5f;
-        //println("inlayoutsubviews")
-    }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y == 0){
@@ -378,6 +363,7 @@ class CompassViewController: UIViewController, CLLocationManagerDelegate, UIScro
         }
         
     }
+
     
     @IBAction func refreshLocation(){
         locationFixAchieved = false
