@@ -12,6 +12,18 @@
 #define COCOAPODS_VERSION_MINOR_Google_Maps_iOS_SDK 9
 #define COCOAPODS_VERSION_PATCH_Google_Maps_iOS_SDK 2
 
+// Realm
+#define COCOAPODS_POD_AVAILABLE_Realm
+#define COCOAPODS_VERSION_MAJOR_Realm 0
+#define COCOAPODS_VERSION_MINOR_Realm 92
+#define COCOAPODS_VERSION_PATCH_Realm 2
+
+// Realm/Headers
+#define COCOAPODS_POD_AVAILABLE_Realm_Headers
+#define COCOAPODS_VERSION_MAJOR_Realm_Headers 0
+#define COCOAPODS_VERSION_MINOR_Realm_Headers 92
+#define COCOAPODS_VERSION_PATCH_Realm_Headers 2
+
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
 #define COCOAPODS_VERSION_MAJOR_pop 1
