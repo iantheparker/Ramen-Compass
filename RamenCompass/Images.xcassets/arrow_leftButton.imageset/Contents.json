@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "Arrow_left @1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "leftButton.png"
+      "filename" : "Arrow_left @2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "Arrow_left @3x.png"
     }
   ],
   "info" : {
