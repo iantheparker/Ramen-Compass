@@ -18,16 +18,18 @@
 		2A7B5A0C1AC8039800304550 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A031AC8039800304550 /* AppDelegate.swift */; };
 		2A7B5A0D1AC8039800304550 /* CompassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A041AC8039800304550 /* CompassViewController.swift */; };
 		2A7B5A0E1AC8039800304550 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B5A051AC8039800304550 /* Images.xcassets */; };
-		2A7B5A0F1AC8039800304550 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A061AC8039800304550 /* MapViewController.swift */; };
+		2A7B5A0F1AC8039800304550 /* CompassMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A061AC8039800304550 /* CompassMapViewController.swift */; };
 		2A7B5A101AC8039800304550 /* Ramen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A071AC8039800304550 /* Ramen.swift */; };
 		2A7B5A111AC8039800304550 /* RamenAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A081AC8039800304550 /* RamenAnnotation.swift */; };
 		2A7B5A181AC8041800304550 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B5A141AC8041800304550 /* LaunchScreen.xib */; };
 		2A7B5A191AC8041800304550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B5A161AC8041800304550 /* Main.storyboard */; };
 		2AAEAF8D1AD6BAF400267F26 /* Foursquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */; };
+		2ADB4F031B0903B3001213D4 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F021B0903B3001213D4 /* MasterViewController.swift */; };
+		2ADB4F051B0927D6001213D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F041B0927D6001213D4 /* DetailViewController.swift */; };
 		2AF75DB41AC8575A0063DF90 /* HouschkaAltMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FB1AC8035200304550 /* HouschkaAltMedium.ttf */; };
 		2AF75DB51AC8575F0063DF90 /* HouschkaAltLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FA1AC8035200304550 /* HouschkaAltLight.ttf */; };
 		2AF75DB61AC857630063DF90 /* HouschkaAltHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59F91AC8035200304550 /* HouschkaAltHeavy.ttf */; };
-		F7E95EADCBC2BEDB7F86F4D9 /* libPods-RamenCompass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A68433C7056FC25DCF37DA8D /* libPods-RamenCompass.a */; };
+		ED91AFB0A033F8EDEFFA4DA2 /* Pods_RamenCompass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139DDC8491ACC806832F618 /* Pods_RamenCompass.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +59,7 @@
 		2A7B5A031AC8039800304550 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = RamenCompass/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A041AC8039800304550 /* CompassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompassViewController.swift; path = RamenCompass/CompassViewController.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A051AC8039800304550 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RamenCompass/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		2A7B5A061AC8039800304550 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapViewController.swift; path = RamenCompass/MapViewController.swift; sourceTree = SOURCE_ROOT; };
+		2A7B5A061AC8039800304550 /* CompassMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompassMapViewController.swift; path = RamenCompass/CompassMapViewController.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A071AC8039800304550 /* Ramen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Ramen.swift; path = RamenCompass/Ramen.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A081AC8039800304550 /* RamenAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RamenAnnotation.swift; path = RamenCompass/RamenAnnotation.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A151AC8041800304550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = RamenCompass/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
@@ -68,9 +70,11 @@
 		2AB7CB291A95B8DE003EE308 /* RamenCompassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RamenCompassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB7CB2E1A95B8DE003EE308 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB7CB2F1A95B8DE003EE308 /* Ramen_CompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ramen_CompassTests.swift; sourceTree = "<group>"; };
+		2ADB4F021B0903B3001213D4 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = RamenCompass/MasterViewController.swift; sourceTree = SOURCE_ROOT; };
+		2ADB4F041B0927D6001213D4 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = RamenCompass/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		949DB00649033B896FD23DED /* Pods-RamenCompass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RamenCompass.release.xcconfig"; path = "Pods/Target Support Files/Pods-RamenCompass/Pods-RamenCompass.release.xcconfig"; sourceTree = "<group>"; };
 		A48CB94BAA4D7C7A1B98509D /* Pods-RamenCompass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RamenCompass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RamenCompass/Pods-RamenCompass.debug.xcconfig"; sourceTree = "<group>"; };
-		A68433C7056FC25DCF37DA8D /* libPods-RamenCompass.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RamenCompass.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F139DDC8491ACC806832F618 /* Pods_RamenCompass.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RamenCompass.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +85,7 @@
 				2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */,
 				2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */,
 				2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */,
-				F7E95EADCBC2BEDB7F86F4D9 /* libPods-RamenCompass.a in Frameworks */,
+				ED91AFB0A033F8EDEFFA4DA2 /* Pods_RamenCompass.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +105,7 @@
 				2A11B2931A9981CD0048B6B4 /* libc++.dylib */,
 				2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */,
 				2A787BEE1A95CA420069C0B1 /* MapKit.framework */,
-				A68433C7056FC25DCF37DA8D /* libPods-RamenCompass.a */,
+				F139DDC8491ACC806832F618 /* Pods_RamenCompass.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -133,10 +137,12 @@
 				2A7B5A161AC8041800304550 /* Main.storyboard */,
 				2A7B5A021AC8039800304550 /* ApiKeys.swift */,
 				2A7B5A031AC8039800304550 /* AppDelegate.swift */,
+				2ADB4F021B0903B3001213D4 /* MasterViewController.swift */,
 				2A7B5A041AC8039800304550 /* CompassViewController.swift */,
+				2ADB4F041B0927D6001213D4 /* DetailViewController.swift */,
+				2A7B5A061AC8039800304550 /* CompassMapViewController.swift */,
 				2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */,
 				2A70FFE31AD529900032103B /* PopButton.swift */,
-				2A7B5A061AC8039800304550 /* MapViewController.swift */,
 				2A7B5A071AC8039800304550 /* Ramen.swift */,
 				2A7B5A081AC8039800304550 /* RamenAnnotation.swift */,
 				2A015ED31AD10F4600C0DFA4 /* ramcom.realm */,
@@ -207,6 +213,7 @@
 				2AB7CB111A95B8DE003EE308 /* Frameworks */,
 				2AB7CB121A95B8DE003EE308 /* Resources */,
 				DB1757789D0BBFA3662058EA /* Copy Pods Resources */,
+				3CFE189C3FF6C7FE745A5587 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -299,6 +306,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3CFE189C3FF6C7FE745A5587 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RamenCompass/Pods-RamenCompass-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		900C5BC4E98AC4EA8AAEDAFC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,12 +358,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ADB4F051B0927D6001213D4 /* DetailViewController.swift in Sources */,
+				2ADB4F031B0903B3001213D4 /* MasterViewController.swift in Sources */,
 				2A7B5A0B1AC8039800304550 /* ApiKeys.swift in Sources */,
 				2A7B5A0D1AC8039800304550 /* CompassViewController.swift in Sources */,
 				2AAEAF8D1AD6BAF400267F26 /* Foursquare.swift in Sources */,
 				2A015ED71AD22E9400C0DFA4 /* NSString+Japanese.m in Sources */,
 				2A7B5A111AC8039800304550 /* RamenAnnotation.swift in Sources */,
-				2A7B5A0F1AC8039800304550 /* MapViewController.swift in Sources */,
+				2A7B5A0F1AC8039800304550 /* CompassMapViewController.swift in Sources */,
 				2A70FFE41AD529900032103B /* PopButton.swift in Sources */,
 				2A7B5A101AC8039800304550 /* Ramen.swift in Sources */,
 				2A7B5A0C1AC8039800304550 /* AppDelegate.swift in Sources */,

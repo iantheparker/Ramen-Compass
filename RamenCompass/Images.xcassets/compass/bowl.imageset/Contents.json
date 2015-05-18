@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "Imported Layers Copy.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "bowl.png"
+      "filename" : "Imported Layers Copy@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "Imported Layers Copy@3x.png"
     }
   ],
   "info" : {

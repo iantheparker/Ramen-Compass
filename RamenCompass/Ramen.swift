@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Realm
+import RealmSwift
 
-class Location: RLMObject {
+class Location: Object {
     dynamic var lat = 0.0  // latitude
     dynamic var lng = 0.0  // longitude
     dynamic var distance = 0.0
@@ -22,7 +22,7 @@ class Location: RLMObject {
     
 }
 
-class Venue: RLMObject {
+class Venue: Object {
     dynamic var id = ""
     dynamic var name = ""
     dynamic var location = Location()
@@ -33,7 +33,7 @@ class Venue: RLMObject {
     dynamic var photoUrl = ""
     dynamic var photoData : NSData = NSData()
     
-    override class func primaryKey() -> String! {
+    override static func primaryKey() -> String? {
         return "id"
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Realm
+import RealmSwift
 import CoreLocation
 
 class Foursquare: NSObject {
@@ -83,22 +83,21 @@ class Foursquare: NSObject {
     //MARK: - Realm DB Creation
     
     func setUpAutoRealm(type: String , venues: [NSDictionary]) {
-        let realm = RLMRealm.defaultRealm()
-        realm.beginWriteTransaction()
-        //realm.deleteAllObjects() --warning ---this can break
-        // Save one Venue object (and dependents) for each element of the array
-        for venue in venues {
-            if (type == "list") {
-                Venue.createOrUpdateInDefaultRealmWithObject(venue["venue"])
-            }
-            else {
-                Venue.createOrUpdateInDefaultRealmWithObject(venue)
+        
+        let realm = Realm()
+        realm.write {
+            // Save one Venue object (and dependents) for each element of the array
+            for venue in venues {
+                if (type == "list"){
+                    realm.create(Venue.self, value: venue["venue"]!, update: true)
+
+                }else {realm.create(Venue.self, value: venue, update: true)}
+                //println(venue)
             }
         }
-        realm.commitWriteTransaction()
         
         //FIXME: use the copy of this realm
-        realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
+        //realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
         
         //TODO: reset selectedRamen OR choose closest
         //FIXME: setting the index from here could recursively call updateDisplay when paired with the realmNotif block

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -11,12 +11,22 @@
             <string>HouschkaAltHeavy</string>
             <string>HouschkaAltHeavy</string>
             <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
+            <string>HouschkaAltHeavy</string>
         </mutableArray>
         <mutableArray key="HouschkaAltLight.ttf">
             <string>HouschkaAltLight</string>
             <string>HouschkaAltLight</string>
+            <string>HouschkaAltLight</string>
+            <string>HouschkaAltLight</string>
         </mutableArray>
         <mutableArray key="HouschkaAltMedium.ttf">
+            <string>HouschkaAltMedium</string>
+            <string>HouschkaAltMedium</string>
+            <string>HouschkaAltMedium</string>
+            <string>HouschkaAltMedium</string>
             <string>HouschkaAltMedium</string>
             <string>HouschkaAltMedium</string>
             <string>HouschkaAltMedium</string>
@@ -28,7 +38,7 @@
         <!--Compass-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="main" title="Compass" id="vXZ-lx-hvc" customClass="CompassViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Compass" id="vXZ-lx-hvc" customClass="CompassViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -37,7 +47,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Naj-Oz-YIH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Naj-Oz-YIH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6CT-sQ-ExC" userLabel="Content View">
@@ -49,6 +59,24 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="RCTitle" translatesAutoresizingMaskIntoConstraints="NO" id="HNe-CQ-GDi">
                                         <rect key="frame" x="146" y="5" width="308" height="81"/>
                                     </imageView>
+                                    <button opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtc-N4-mgw" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                        <rect key="frame" x="454" y="25" width="50" height="42"/>
+                                        <state key="normal" image="refreshButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="refreshLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1HZ-ca-Aeu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9F-NZ-Zbs" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="20" width="51" height="50"/>
+                                        <state key="normal" image="mapButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="mapButtonPressed" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wgc-90-rj5"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BCB-o6-GPf" userLabel="distanceView">
                                         <rect key="frame" x="235" y="87" width="184" height="74"/>
                                         <subviews>
@@ -62,7 +90,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="757" fixedFrame="YES" text="in Kanagawa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-q3-t0E">
-                                                <rect key="frame" x="27" y="52" width="131" height="22"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="22"/>
                                                 <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="19"/>
                                                 <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -71,7 +99,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="757" fixedFrame="YES" text="km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp1-sp-apn">
-                                                <rect key="frame" x="132" y="18" width="32" height="46"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="46"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" red="0.81960784313725488" green="0.0" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -80,20 +108,23 @@
                                                 </variation>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="184" id="Ffu-N9-JHP"/>
+                                            <constraint firstAttribute="height" constant="74" id="etD-kN-QKi"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk" userLabel="Ramen + Chopsticks">
+                                    <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ice-Cb-jvk" userLabel="Ramen + Chopsticks">
                                         <rect key="frame" x="150" y="163" width="300" height="300"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="utv-IQ-qzx">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="utv-IQ-qzx">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="301"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="chopsticks" translatesAutoresizingMaskIntoConstraints="NO" id="Byd-g5-v1t">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chopsticks" translatesAutoresizingMaskIntoConstraints="NO" id="Byd-g5-v1t">
                                                 <rect key="frame" x="28" y="18" width="250" height="265"/>
                                                 <gestureRecognizers/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="utv-IQ-qzx" firstAttribute="centerY" secondItem="Ice-Cb-jvk" secondAttribute="centerY" id="4et-V3-J2J"/>
@@ -108,10 +139,10 @@
                                             <constraint firstItem="Byd-g5-v1t" firstAttribute="top" secondItem="Ice-Cb-jvk" secondAttribute="top" constant="18" id="wPO-y9-wdu"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-Bc-Q8t" userLabel="carousel">
+                                    <view contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-Bc-Q8t" userLabel="carousel">
                                         <rect key="frame" x="15" y="478" width="570" height="65"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="767" ambiguous="YES" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-GR-2zS">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="767" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nf-GR-2zS">
                                                 <rect key="frame" x="228" y="-20" width="114" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="43" id="M08-9j-O08"/>
@@ -127,13 +158,13 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="409" placeholderIntrinsicHeight="28.5" text="[VENUE JP]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6yz-Av-ftZ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="409" placeholderIntrinsicHeight="28.5" text="[VENUE JP]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6yz-Av-ftZ">
                                                 <rect key="frame" x="33" y="34" width="504" height="29"/>
                                                 <fontDescription key="fontDescription" name="HouschkaAltLight" family="HouschkaAltLight" pointSize="24"/>
                                                 <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A2-Q4-6hC" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A2-Q4-6hC" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="8" width="31" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="U9z-tm-G7i"/>
@@ -146,7 +177,7 @@
                                                     <action selector="leftBowl" destination="vXZ-lx-hvc" eventType="touchUpInside" id="yUm-Ur-vym"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tg-qm-o2b" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Tg-qm-o2b" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                                 <rect key="frame" x="539" y="8" width="31" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="31" id="Ixn-of-asm"/>
@@ -159,8 +190,8 @@
                                                     <action selector="rightBowl" destination="vXZ-lx-hvc" eventType="touchUpInside" id="GJj-hA-JbG"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="[VENUE EN]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-ZL-WGr">
-                                                <rect key="frame" x="33" y="2" width="504" height="29"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="[VENUE EN]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8cr-ZL-WGr">
+                                                <rect key="frame" x="33" y="3" width="504" height="28"/>
                                                 <fontDescription key="fontDescription" name="HouschkaAltLight" family="HouschkaAltLight" pointSize="24"/>
                                                 <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -190,7 +221,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Try this: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztE-ji-hX4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Try this: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztE-ji-hX4">
                                         <rect key="frame" x="136" y="862" width="80" height="56"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="872-6a-vyP"/>
@@ -199,7 +230,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccr-XZ-pWx">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccr-XZ-pWx">
                                         <rect key="frame" x="136" y="985" width="80" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="tSI-kO-eMJ"/>
@@ -208,7 +239,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Hours:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-jh-z2p">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hours:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsa-jh-z2p">
                                         <rect key="frame" x="136" y="1054" width="80" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="16" id="gGp-UG-PAn"/>
@@ -217,7 +248,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7g-JD-nDb">
                                         <rect key="frame" x="228" y="860" width="222" height="118"/>
                                         <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -226,7 +257,7 @@
                                             <rect key="frame" x="97" y="563" width="211" height="117.5"/>
                                         </variation>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdX-Xo-lXR">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TdX-Xo-lXR">
                                         <rect key="frame" x="222" y="985" width="230" height="82"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="27g-dM-Wuh"/>
@@ -241,7 +272,7 @@
                                             <rect key="frame" x="97" y="563" width="211" height="117.5"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="ramenImg" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-nQ-iyB">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ramenImg" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-nQ-iyB">
                                         <rect key="frame" x="179" y="573" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="240" id="Lih-Aw-Seu"/>
@@ -253,7 +284,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-ID-aiI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRZ-ID-aiI">
                                         <rect key="frame" x="222" y="1054" width="230" height="60"/>
                                         <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -262,25 +293,7 @@
                                             <rect key="frame" x="97" y="563" width="211" height="117.5"/>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtc-N4-mgw" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
-                                        <rect key="frame" x="454" y="25" width="50" height="42"/>
-                                        <state key="normal" image="refreshButton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="refreshLocation" destination="vXZ-lx-hvc" eventType="touchUpInside" id="1HZ-ca-Aeu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9F-NZ-Zbs" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
-                                        <rect key="frame" x="95" y="20" width="51" height="50"/>
-                                        <state key="normal" image="mapButton">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="mapButtonPressed" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wgc-90-rj5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-ru-vWW" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="F3a-ru-vWW" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
                                         <rect key="frame" x="222" y="985" width="230" height="61"/>
                                         <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="18"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
@@ -311,12 +324,15 @@
                                     <constraint firstItem="M7g-JD-nDb" firstAttribute="leading" secondItem="TdX-Xo-lXR" secondAttribute="leading" constant="8" id="Fok-ku-Kzv"/>
                                     <constraint firstItem="FRZ-ID-aiI" firstAttribute="top" secondItem="TdX-Xo-lXR" secondAttribute="bottom" constant="8" symbolic="YES" id="Imu-gJ-sb1"/>
                                     <constraint firstItem="HNe-CQ-GDi" firstAttribute="centerY" secondItem="Rtc-N4-mgw" secondAttribute="centerY" id="JTV-r0-oPr"/>
+                                    <constraint firstItem="BCB-o6-GPf" firstAttribute="top" secondItem="HNe-CQ-GDi" secondAttribute="bottom" constant="1" id="K8P-Jl-Myb"/>
+                                    <constraint firstAttribute="centerX" secondItem="Ice-Cb-jvk" secondAttribute="centerX" id="Kkv-KK-eGy"/>
                                     <constraint firstItem="Rtc-N4-mgw" firstAttribute="leading" secondItem="HNe-CQ-GDi" secondAttribute="trailing" id="MWK-1v-Knz"/>
                                     <constraint firstItem="yCh-Bc-Q8t" firstAttribute="top" secondItem="utv-IQ-qzx" secondAttribute="bottom" constant="18" id="N2Q-Ba-h3F"/>
                                     <constraint firstAttribute="bottom" secondItem="FRZ-ID-aiI" secondAttribute="bottom" constant="20" symbolic="YES" id="Nfc-35-Bwh"/>
                                     <constraint firstItem="4tk-nQ-iyB" firstAttribute="trailing" secondItem="TdX-Xo-lXR" secondAttribute="trailing" constant="-49" id="OmK-Wn-Xci"/>
                                     <constraint firstItem="HNe-CQ-GDi" firstAttribute="top" secondItem="Naj-Oz-YIH" secondAttribute="top" constant="20" symbolic="YES" id="OtJ-o7-ejj"/>
                                     <constraint firstItem="Ccr-XZ-pWx" firstAttribute="leading" secondItem="ztE-ji-hX4" secondAttribute="leading" id="Pis-ds-ntl"/>
+                                    <constraint firstAttribute="centerX" secondItem="BCB-o6-GPf" secondAttribute="centerX" id="T4X-VS-y4V"/>
                                     <constraint firstItem="ztE-ji-hX4" firstAttribute="top" secondItem="M7g-JD-nDb" secondAttribute="top" constant="2" id="T4r-dl-Kft"/>
                                     <constraint firstItem="F3a-ru-vWW" firstAttribute="top" secondItem="Ccr-XZ-pWx" secondAttribute="top" id="VFD-rO-MFe"/>
                                     <constraint firstItem="4tk-nQ-iyB" firstAttribute="top" secondItem="ztE-ji-hX4" secondAttribute="bottom" constant="62" id="VNl-1Q-OKv"/>
@@ -354,14 +370,17 @@
                                     <constraint firstItem="TdX-Xo-lXR" firstAttribute="leading" secondItem="Ccr-XZ-pWx" secondAttribute="trailing" constant="7" id="yPw-Xr-o2C"/>
                                     <constraint firstItem="HNe-CQ-GDi" firstAttribute="centerY" secondItem="P9F-NZ-Zbs" secondAttribute="centerY" id="yhZ-GJ-w61"/>
                                     <constraint firstItem="FRZ-ID-aiI" firstAttribute="top" secondItem="F3a-ru-vWW" secondAttribute="bottom" constant="8" symbolic="YES" id="z91-Ku-Lje"/>
+                                    <constraint firstItem="Ice-Cb-jvk" firstAttribute="top" secondItem="BCB-o6-GPf" secondAttribute="bottom" constant="2" id="zg1-wg-G9W"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="g6r-DD-Ucf"/>
                                         <exclude reference="OmK-Wn-Xci"/>
                                         <exclude reference="VNl-1Q-OKv"/>
                                         <exclude reference="m5l-ze-jL2"/>
                                         <exclude reference="vfx-rX-mYE"/>
                                         <exclude reference="T4r-dl-Kft"/>
+                                        <exclude reference="byw-it-GZQ"/>
                                         <exclude reference="Fok-ku-Kzv"/>
                                         <exclude reference="Xu7-Bg-0c8"/>
                                         <exclude reference="2zi-sx-CZd"/>
@@ -425,10 +444,378 @@
             </objects>
             <point key="canvasLocation" x="-292" y="397"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Detail View Controller-->
+        <scene sceneID="phE-Kh-WDm">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="h0W-7h-n8B" customClass="DetailViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CPe-dS-6Ox"/>
+                        <viewControllerLayoutGuide type="bottom" id="pCp-IF-WWp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JYf-6C-xYt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xH9-3k-SJ1">
+                                <rect key="frame" x="185" y="448" width="230" height="60"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="97" y="563" width="211" height="117.5"/>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PvP-t8-uGc" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                <rect key="frame" x="185" y="385" width="230" height="61"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="18"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="-5" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Street Address">
+                                    <color key="titleColor" red="0.25882352939999997" green="0.7725490196" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addressButtonPressed:" destination="h0W-7h-n8B" eventType="touchUpInside" id="5ul-nD-4dO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcG-97-2hO">
+                                <rect key="frame" x="116" y="380" width="80" height="16"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZU-FF-4bS">
+                                <rect key="frame" x="126" y="450" width="80" height="16"/>
+                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ramenImg" translatesAutoresizingMaskIntoConstraints="NO" id="bjO-pw-l1b">
+                                <rect key="frame" x="169" y="44" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="kfY-7K-dr4"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="kfY-7K-dr4"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="h6g-gR-jhS">
+                                <rect key="frame" x="30" y="369" width="506" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ypN-K2-BRZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ypN-K2-BRZ" id="Jil-iU-5ew">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Try this: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AlF-Vo-YPR">
+                                                    <rect key="frame" x="110" y="-6" width="80" height="56"/>
+                                                    <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Chashu Men = チャシュー麺 - A light, tonkotsu (pork bone) and fish broth ramen, topped with lots of pork" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpF-GR-zJ4">
+                                                    <rect key="frame" x="197" y="-37" width="222" height="118"/>
+                                                    <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="97" y="563" width="211" height="117.5"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.11211034659999999" blue="0.051258819939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dkg-jM-ztF">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dkg-jM-ztF" id="R0y-sl-4i5">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gUa-Sy-UvH">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gUa-Sy-UvH" id="ZqM-VR-Kqe">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qRN-Hn-5ks">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qRN-Hn-5ks" id="HNb-18-3yC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.11211034659999999" blue="0.051258819939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="bjO-pw-l1b" secondAttribute="trailing" constant="10" id="1VT-Qw-IcF"/>
+                            <constraint firstAttribute="centerX" secondItem="h6g-gR-jhS" secondAttribute="centerX" id="AH8-8H-sjO"/>
+                            <constraint firstItem="pCp-IF-WWp" firstAttribute="top" secondItem="h6g-gR-jhS" secondAttribute="bottom" constant="-69" id="FGy-63-3EY"/>
+                            <constraint firstAttribute="centerX" secondItem="bjO-pw-l1b" secondAttribute="centerX" id="PVO-GQ-0qN"/>
+                            <constraint firstItem="bjO-pw-l1b" firstAttribute="leading" secondItem="JYf-6C-xYt" secondAttribute="leadingMargin" constant="10" id="WsX-SB-nZb"/>
+                            <constraint firstItem="bjO-pw-l1b" firstAttribute="top" secondItem="CPe-dS-6Ox" secondAttribute="bottom" constant="5" id="l6x-TR-1ew"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressButton" destination="PvP-t8-uGc" id="v92-JZ-6vZ"/>
+                        <outlet property="tableview" destination="h6g-gR-jhS" id="Dk3-Pl-Y1g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4XD-xN-13j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="824" y="920"/>
+        </scene>
+        <!--Compass-->
+        <scene sceneID="Vwd-aJ-PZ4">
+            <objects>
+                <viewController storyboardIdentifier="Compass" title="Compass" id="9ej-6d-bFx" customClass="CompassViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tyS-it-nf9"/>
+                        <viewControllerLayoutGuide type="bottom" id="OKm-w2-lWa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RU5-MK-xRr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RCTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Hnm-Pb-g7m">
+                                <rect key="frame" x="182" y="30" width="236" height="56"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-KR-0te" userLabel="MapButton" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                <rect key="frame" x="26" y="39" width="36" height="38"/>
+                                <state key="normal" image="mapButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mapButtonPressed:" destination="9ej-6d-bFx" eventType="touchUpInside" id="KZA-0V-0ZT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="100" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-Rs-WW5" userLabel="RefreshButton" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                <rect key="frame" x="545" y="43" width="29" height="30"/>
+                                <state key="normal" image="refreshButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refreshLocation" destination="9ej-6d-bFx" eventType="touchUpInside" id="keO-hh-va5"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afT-0A-zFz" userLabel="distanceView">
+                                <rect key="frame" x="208" y="94" width="184" height="74"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="757" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Ac-ibs">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="55"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="1.4 ">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="60" name="HelveticaNeue-Thin"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="km">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Thin"/>
+                                                    <font key="NSOriginalFont" size="14" name="HelveticaNeue-Thin"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="60" y="79" width="197.5" height="35"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="757" misplaced="YES" text="in Kanagawa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCK-5W-1en">
+                                        <rect key="frame" x="1" y="50" width="184" height="23"/>
+                                        <fontDescription key="fontDescription" name="HouschkaAltMedium" family="HouschkaAltMedium" pointSize="19"/>
+                                        <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="60" y="79" width="197.5" height="35"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="184" id="EOm-8s-1mD"/>
+                                    <constraint firstAttribute="height" constant="74" id="NRR-3C-iSe"/>
+                                    <constraint firstAttribute="centerX" secondItem="su3-Ac-ibs" secondAttribute="centerX" id="eCy-pr-bxZ"/>
+                                    <constraint firstItem="OCK-5W-1en" firstAttribute="width" secondItem="afT-0A-zFz" secondAttribute="width" id="i5E-0w-OLk"/>
+                                    <constraint firstAttribute="bottom" secondItem="OCK-5W-1en" secondAttribute="bottom" id="o94-xV-wgl"/>
+                                    <constraint firstItem="su3-Ac-ibs" firstAttribute="top" secondItem="afT-0A-zFz" secondAttribute="top" id="oOP-ma-5nG"/>
+                                    <constraint firstAttribute="centerX" secondItem="OCK-5W-1en" secondAttribute="centerX" id="p9T-1X-nsi"/>
+                                    <constraint firstItem="su3-Ac-ibs" firstAttribute="width" secondItem="afT-0A-zFz" secondAttribute="width" id="sHI-lg-w1j"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BYB-5i-7pF" userLabel="Ramen + Chopsticks">
+                                <rect key="frame" x="150" y="200" width="300" height="300"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bowl" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-nN-7O7">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="301"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chopsticks" translatesAutoresizingMaskIntoConstraints="NO" id="xsR-OU-8Ax">
+                                        <rect key="frame" x="28" y="18" width="250" height="265"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="1tr-nN-7O7" firstAttribute="top" secondItem="BYB-5i-7pF" secondAttribute="top" id="GpZ-JI-cmf"/>
+                                    <constraint firstItem="xsR-OU-8Ax" firstAttribute="centerY" secondItem="1tr-nN-7O7" secondAttribute="centerY" id="TAn-hu-WyP"/>
+                                    <constraint firstAttribute="height" constant="300" id="UrR-ES-7oz"/>
+                                    <constraint firstAttribute="trailing" secondItem="xsR-OU-8Ax" secondAttribute="trailing" constant="22" id="ddI-M4-GId"/>
+                                    <constraint firstItem="xsR-OU-8Ax" firstAttribute="leading" secondItem="BYB-5i-7pF" secondAttribute="leading" constant="28" id="egz-ba-f2l"/>
+                                    <constraint firstItem="1tr-nN-7O7" firstAttribute="leading" secondItem="BYB-5i-7pF" secondAttribute="leading" id="fxI-v7-ckL"/>
+                                    <constraint firstItem="1tr-nN-7O7" firstAttribute="centerY" secondItem="BYB-5i-7pF" secondAttribute="centerY" id="iTq-Lg-rwh"/>
+                                    <constraint firstItem="xsR-OU-8Ax" firstAttribute="top" secondItem="BYB-5i-7pF" secondAttribute="top" constant="18" id="jKg-LQ-OzI"/>
+                                    <constraint firstAttribute="width" constant="300" id="lEb-tr-Njm"/>
+                                    <constraint firstItem="1tr-nN-7O7" firstAttribute="centerX" secondItem="BYB-5i-7pF" secondAttribute="centerX" id="uag-dT-6IX"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="U0F-Xu-oYZ" userLabel="carousel">
+                                <rect key="frame" x="10" y="525" width="580" height="65"/>
+                                <subviews>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="767" misplaced="YES" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-2w-PfR">
+                                        <rect key="frame" x="228" y="-20" width="114" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="NFv-sv-UzO"/>
+                                            <constraint firstAttribute="height" constant="43" id="Ynn-RC-QC5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="17"/>
+                                        <color key="textColor" red="0.47748974119999998" green="0.1782348138" blue="0.44755231579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="NFv-sv-UzO"/>
+                                                <exclude reference="Ynn-RC-QC5"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="409" placeholderIntrinsicHeight="28.5" text="[VENUE JP]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Awx-nI-VEd">
+                                        <rect key="frame" x="33" y="34" width="504" height="29"/>
+                                        <fontDescription key="fontDescription" name="HouschkaAltLight" family="HouschkaAltLight" pointSize="24"/>
+                                        <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="[VENUE EN]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kQ8-Qk-xpD">
+                                        <rect key="frame" x="33" y="3" width="504" height="28"/>
+                                        <fontDescription key="fontDescription" name="HouschkaAltLight" family="HouschkaAltLight" pointSize="24"/>
+                                        <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egX-Li-Efp" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="8" width="31" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ejs-a3-d9D"/>
+                                            <constraint firstAttribute="width" constant="31" id="ohP-RO-3Q4"/>
+                                        </constraints>
+                                        <state key="normal" title="&lt;" image="arrow_leftButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="leftObject:" destination="9ej-6d-bFx" eventType="touchUpInside" id="6b1-nf-dhY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLa-HU-Bah" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                        <rect key="frame" x="539" y="8" width="31" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="RhD-VN-d2k"/>
+                                            <constraint firstAttribute="width" constant="31" id="mbO-9W-DXn"/>
+                                        </constraints>
+                                        <state key="normal" title="&gt;" image="arrow_rightButton">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rightObject:" destination="9ej-6d-bFx" eventType="touchUpInside" id="rk0-Cj-ylc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="Awx-nI-VEd" firstAttribute="trailing" secondItem="kQ8-Qk-xpD" secondAttribute="trailing" id="77o-DP-Ntj"/>
+                                    <constraint firstItem="Awx-nI-VEd" firstAttribute="height" secondItem="kQ8-Qk-xpD" secondAttribute="height" id="Anc-Dv-dOb"/>
+                                    <constraint firstAttribute="trailing" secondItem="lLa-HU-Bah" secondAttribute="trailing" id="AwG-dO-uyc"/>
+                                    <constraint firstItem="egX-Li-Efp" firstAttribute="leading" secondItem="U0F-Xu-oYZ" secondAttribute="leading" id="Ikb-9t-Vmp"/>
+                                    <constraint firstAttribute="centerX" secondItem="GrN-2w-PfR" secondAttribute="centerX" id="LD1-rx-XZD"/>
+                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="leading" secondItem="egX-Li-Efp" secondAttribute="trailing" constant="2" id="TRL-HV-ZLa"/>
+                                    <constraint firstItem="lLa-HU-Bah" firstAttribute="leading" secondItem="kQ8-Qk-xpD" secondAttribute="trailing" constant="2" id="Tyg-dl-opt"/>
+                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="leading" secondItem="U0F-Xu-oYZ" secondAttribute="leading" constant="81" id="Wcn-Iu-JIT"/>
+                                    <constraint firstAttribute="centerY" secondItem="lLa-HU-Bah" secondAttribute="centerY" id="X41-Ys-1Rb"/>
+                                    <constraint firstAttribute="centerY" secondItem="egX-Li-Efp" secondAttribute="centerY" id="ePQ-Q7-hh6"/>
+                                    <constraint firstAttribute="centerY" secondItem="kQ8-Qk-xpD" secondAttribute="bottom" constant="1" id="eVc-Q4-1nJ"/>
+                                    <constraint firstAttribute="top" secondItem="GrN-2w-PfR" secondAttribute="bottom" id="jIf-UV-uZn"/>
+                                    <constraint firstItem="Awx-nI-VEd" firstAttribute="leading" secondItem="kQ8-Qk-xpD" secondAttribute="leading" id="oUc-aq-GbO"/>
+                                    <constraint firstAttribute="height" constant="65" id="owe-hQ-bp1"/>
+                                    <constraint firstItem="Awx-nI-VEd" firstAttribute="top" secondItem="U0F-Xu-oYZ" secondAttribute="centerY" constant="1" id="w2d-Fr-n46"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Wcn-Iu-JIT"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="afT-0A-zFz" firstAttribute="centerX" secondItem="Hnm-Pb-g7m" secondAttribute="centerX" id="2D5-y8-zw5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ecs-Rs-WW5" secondAttribute="trailing" constant="10" id="5Cg-lG-Air"/>
+                            <constraint firstItem="U0F-Xu-oYZ" firstAttribute="leading" secondItem="RU5-MK-xRr" secondAttribute="leading" constant="10" id="5hh-iZ-fpi"/>
+                            <constraint firstAttribute="bottom" secondItem="U0F-Xu-oYZ" secondAttribute="bottom" constant="10" id="7J2-lB-Cq6"/>
+                            <constraint firstAttribute="centerX" secondItem="BYB-5i-7pF" secondAttribute="centerX" id="I9e-26-lKe"/>
+                            <constraint firstItem="Hnm-Pb-g7m" firstAttribute="top" secondItem="tyS-it-nf9" secondAttribute="bottom" constant="10" id="JL3-ji-MdE"/>
+                            <constraint firstAttribute="trailing" secondItem="U0F-Xu-oYZ" secondAttribute="trailing" constant="10" id="JsX-U8-lg5"/>
+                            <constraint firstItem="dPm-KR-0te" firstAttribute="leading" secondItem="RU5-MK-xRr" secondAttribute="leadingMargin" constant="10" id="M7T-KJ-J3W"/>
+                            <constraint firstItem="Ecs-Rs-WW5" firstAttribute="centerY" secondItem="Hnm-Pb-g7m" secondAttribute="centerY" id="ntf-uP-e9T"/>
+                            <constraint firstItem="afT-0A-zFz" firstAttribute="top" secondItem="Hnm-Pb-g7m" secondAttribute="bottom" constant="8" symbolic="YES" id="onU-7m-pHA"/>
+                            <constraint firstAttribute="centerX" secondItem="Hnm-Pb-g7m" secondAttribute="centerX" id="w8U-Rk-PUf"/>
+                            <constraint firstItem="Hnm-Pb-g7m" firstAttribute="centerY" secondItem="dPm-KR-0te" secondAttribute="centerY" id="xfK-x2-kry"/>
+                            <constraint firstAttribute="centerY" secondItem="BYB-5i-7pF" secondAttribute="centerY" id="y7i-P8-eRc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pPo-Sg-cct">
+                        <barButtonItem key="leftBarButtonItem" id="5hN-6S-uDC">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="aJu-t5-Am3">
+                                <rect key="frame" x="16" y="7" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
+                            <connections>
+                                <action selector="mapButtonPressed" destination="9ej-6d-bFx" id="zog-sk-foi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chopsticksImage" destination="xsR-OU-8Ax" id="bmd-rU-dAr"/>
+                        <outlet property="leftButton" destination="egX-Li-Efp" id="rUq-3Y-Bhb"/>
+                        <outlet property="mapButton" destination="dPm-KR-0te" id="IFX-tv-g9i"/>
+                        <outlet property="rightButton" destination="lLa-HU-Bah" id="mgR-JW-NWI"/>
+                        <outlet property="venueNameEN" destination="kQ8-Qk-xpD" id="2wv-e3-Yzr"/>
+                        <outlet property="venueNameJP" destination="Awx-nI-VEd" id="24z-rx-h73"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ts3-vN-O3f" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="vZc-Xh-Xdk">
+                    <connections>
+                        <action selector="panBowl:" destination="9ej-6d-bFx" id="kFw-Za-6Wn"/>
+                        <outlet property="delegate" destination="9ej-6d-bFx" id="Z6v-w9-r96"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="824" y="271"/>
+        </scene>
+        <!--CompassMapViewController-->
         <scene sceneID="nev-vS-XL3">
             <objects>
-                <viewController storyboardIdentifier="map" id="PMc-ZR-mhw" customClass="MapViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map" title="CompassMapViewController" id="PMc-ZR-mhw" customClass="CompassMapViewController" customModule="RamenCompass" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PYF-tE-1e5"/>
                         <viewControllerLayoutGuide type="bottom" id="BsC-8Q-Fo3"/>
@@ -437,47 +824,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f68-WF-iyY">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f68-WF-iyY">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <outlet property="delegate" destination="PMc-ZR-mhw" id="676-3K-9Nt"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-hi-PvE">
-                                <rect key="frame" x="50" y="454" width="22" height="22"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.63" colorSpace="calibratedWhite"/>
-                                <state key="normal">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-hi-PvE" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                <rect key="frame" x="546" y="536" width="44" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="mapCenterOn">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" image="mapCenterOff"/>
                                 <connections>
-                                    <action selector="centerToUsersLocation" destination="PMc-ZR-mhw" eventType="touchUpInside" id="FLV-Wt-lsF"/>
+                                    <action selector="centerToUsersLocation" destination="PMc-ZR-mhw" eventType="touchUpInside" id="bSE-Jm-Eap"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="f68-WF-iyY" firstAttribute="leading" secondItem="5st-OY-Ni9" secondAttribute="leadingMargin" constant="-16" id="C8m-Rr-e6P"/>
-                            <constraint firstItem="BsC-8Q-Fo3" firstAttribute="top" secondItem="f68-WF-iyY" secondAttribute="bottom" id="V58-d8-zrL"/>
-                            <constraint firstItem="f68-WF-iyY" firstAttribute="top" secondItem="5st-OY-Ni9" secondAttribute="topMargin" id="ppS-0k-0Tp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="f68-WF-iyY" secondAttribute="trailing" constant="-16" id="rZU-5M-jc1"/>
+                            <constraint firstItem="f68-WF-iyY" firstAttribute="top" secondItem="5st-OY-Ni9" secondAttribute="top" id="2Jd-UN-dV6"/>
+                            <constraint firstItem="f68-WF-iyY" firstAttribute="leading" secondItem="5st-OY-Ni9" secondAttribute="leading" id="2P6-7D-XW7"/>
+                            <constraint firstAttribute="trailing" secondItem="9Nz-hi-PvE" secondAttribute="trailing" constant="10" id="CVP-1k-fcn"/>
+                            <constraint firstAttribute="trailing" secondItem="f68-WF-iyY" secondAttribute="trailing" id="xQL-74-jEO"/>
+                            <constraint firstItem="BsC-8Q-Fo3" firstAttribute="top" secondItem="9Nz-hi-PvE" secondAttribute="bottom" constant="20" id="xig-fK-rAs"/>
+                            <constraint firstItem="BsC-8Q-Fo3" firstAttribute="top" secondItem="f68-WF-iyY" secondAttribute="bottom" id="ydk-Oq-rcl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="centerButton" destination="9Nz-hi-PvE" id="GHS-jd-K8p"/>
                         <outlet property="mapView" destination="f68-WF-iyY" id="H9J-gb-IKj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keV-Eg-oZo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-284" y="-918"/>
+            <point key="canvasLocation" x="824" y="-378"/>
         </scene>
     </scenes>
     <resources>
-        <image name="RCTitle" width="308" height="81"/>
+        <image name="RCTitle" width="236" height="56"/>
         <image name="arrow_leftButton" width="31" height="50"/>
         <image name="arrow_rightButton" width="31" height="50"/>
-        <image name="bowl" width="440" height="379"/>
+        <image name="bowl" width="267" height="271"/>
         <image name="chopsticks" width="59" height="460"/>
         <image name="mapButton" width="36" height="38"/>
+        <image name="mapCenterOff" width="44" height="44"/>
+        <image name="mapCenterOn" width="44" height="44"/>
         <image name="ramenImg" width="423" height="317"/>
         <image name="refreshButton" width="29" height="30"/>
     </resources>
