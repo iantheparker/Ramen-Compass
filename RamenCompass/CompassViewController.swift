@@ -17,6 +17,7 @@ protocol CompassViewControllerDelegate {
     func detailButtonPressed()
 }
 
+
 class CompassViewController: UIViewController {
     
     let locationManager = CLLocationManager()
@@ -25,30 +26,35 @@ class CompassViewController: UIViewController {
     var currentLocation : CLLocation!
     
     var notificationToken: NotificationToken?
-    var selectedRamen: Venue!
     //let realm = RLMRealm(path: NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent("ramcom.realm"), readOnly: true, error: nil)
     private var _selectedRamenIndex: Int = 0
-    var venueResults = Realm().objects(Venue)
-    
+    var venueResults = [Results<Venue>]()
+    let venResSection = 0
+    var selectedRamen: Venue! {
+        didSet{
+            NSNotificationCenter.defaultCenter().postNotificationName("selectedRamenChanged", object: self, userInfo: ["selectedRamen":selectedRamen])
+            println("set notif for selectedRamen")
+        }
+    }
+
     @IBOutlet weak var RCTitle: UIImageView!
     @IBOutlet weak var chopsticksImage : UIImageView!
     @IBOutlet weak var bowlView: UIView!
     @IBOutlet weak var venueNameJP: UILabel!
     @IBOutlet weak var venueNameEN: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var mapButton: PopButton!
     @IBOutlet weak var leftButton : PopButton!
     @IBOutlet weak var rightButton : PopButton!
+    @IBOutlet weak var refreshButton: PopButton!
     
     var delegate: CompassViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
-        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
@@ -66,16 +72,19 @@ class CompassViewController: UIViewController {
         
         notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
             println("notif block")
-            //self.updateDisplayedRamen()
-            self.venueResults = Realm().objects(Venue)
+            self.setupVenueResults()
             self.selectedRamenIndex = 0
         }
+        
+}
+    
+    func setupVenueResults(){
+        //let unsortedVenues = Realm().objects(Venue).filter(" ")
+        venueResults.removeAll(keepCapacity: false)
+        let sortedVenues = Realm().objects(Venue).sorted("name", ascending: true)
+        venueResults.append(sortedVenues)
     }
     
-    
-    
-
-
     //MARK: - Update Display Methods
     
     
@@ -89,10 +98,10 @@ class CompassViewController: UIViewController {
                 rightButton.enabled = true
                 
                 var newIndex = newValue
-                if (newValue < 0){
-                    newIndex = Int(venueResults.count)-1
+                if (newIndex < 0){
+                    newIndex = Int(venueResults[venResSection].count)-1
                 }
-                else if (newValue > (Int(venueResults.count)-1)){
+                else if (newIndex > Int(venueResults[venResSection].count)-1){
                     newIndex = 0
                 }
                 self._selectedRamenIndex = newIndex
@@ -104,28 +113,27 @@ class CompassViewController: UIViewController {
             }
         }
     }
+    func venueForIndexPath(indexPath: NSIndexPath) -> Venue? {
+        //println("venueResults in venueForIndexPath = \(venueResults)")
+        return venueResults[indexPath.section][indexPath.row]
+    }
     
     func updateDisplayedRamen(){
         //need to make sure
-        if let selectedRamenTest = venueResults.first {
+        if let selectedRamenTest = venueForIndexPath(NSIndexPath(forRow: selectedRamenIndex, inSection: venResSection)){
             
             selectedRamen = selectedRamenTest
-            println(selectedRamen.description)
-            
-            
+            println("selectedRamen.description at \(selectedRamenIndex) = \(selectedRamen.description)")
             
             venueNameJP.text = selectedRamen.name.uppercaseString
-            venueNameEN.text = ((venueNameJP.text! as NSString).stringByTransliteratingJapaneseToRomajiWithWordSeperator(" ") as String).capitalizedString
-
-            let ramenll: CLLocation = CLLocation.init(latitude: selectedRamen.location.lat,longitude: selectedRamen.location.lng)
+            venueNameEN.text = selectedRamen.nameJPTransliterated
+            
             let font = UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)
             let textFont = [NSFontAttributeName:font]
-            let distanceString = String(format: "%0.1f km", currentLocation.distanceFromLocation(ramenll)/1000.0)
-            var attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont) //this isn't calculated by locationmanager
+            let distanceString = String(format: "%0.1f km", selectedRamen.location.distanceFrom(currentLocation).0)
+            var attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
             //attributedString.appendAttributedString( NSAttributedString(string: "km", attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 18.0)!]))
             //distanceLabel.attributedText = attributedString
-            let addressText = selectedRamen.location.address + "\n" + selectedRamen.location.city + ", " + selectedRamen.location.cc + "  " + selectedRamen.location.postalCode
-            //addressButton.setTitle(addressText, forState: UIControlState.Normal)
 
             //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
@@ -141,17 +149,21 @@ class CompassViewController: UIViewController {
     
     @IBAction func rightObject(sender: AnyObject) {
         selectedRamenIndex += 1
+        
+        // TODO: move this to anytime user touches bowl or venue names
+        //delegate?.detailButtonPressed()
     }
     
     @IBAction func mapButtonPressed(sender: AnyObject) {
         delegate?.mapButtonPressed()
+        println("map button pressed")
+        //mapButton.selected = !mapButton.selected
     }
     
     @IBAction func refreshLocation(){
         locationFixAchieved = false
         locationManager.startUpdatingLocation()
-        // TODO: move this to anytime user touches bowl or venue names
-        delegate?.detailButtonPressed()
+        
 
     }
     
@@ -234,7 +246,8 @@ extension CompassViewController: CLLocationManagerDelegate{
             }
             else{
                 println("In loc, building realm")
-                Foursquare.sharedInstance.getListVenues(currentLocation)
+                //Foursquare.sharedInstance.searchVenues(currentLocation)
+                Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
             }
             if (locationCC == ""){
                 CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
@@ -250,13 +263,7 @@ extension CompassViewController: CLLocationManagerDelegate{
                         let pm = placemarks[0] as! CLPlacemark
                         self.locationCC = (pm.country != nil) ? pm.country : ""
                         if (self.locationCC == "Japan"){
-                            //                        if (Venue.allObjects().count > 0){
-                            //                            println("In Japan, using realm")
-                            //                        }
-                            //                        else{
-                            //                            println("In Japan, building realm")
-                            //                            self.getListVenues(manager.location)
-                            //                        }
+                            
                         }
                         else {
                             Foursquare.sharedInstance.searchVenues(manager.location)
@@ -317,7 +324,7 @@ extension CompassViewController: DetailViewControllerDelegate{
         let googleAction = UIAlertAction(title: "Google Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             println("Open Google Maps")
-            UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
+            //UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
         })
         let appleAction = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in

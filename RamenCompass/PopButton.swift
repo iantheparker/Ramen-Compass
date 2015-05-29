@@ -33,9 +33,9 @@ class PopButton: UIButton {
     
     func scaleAnimation(){
         var scaleAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnimation.velocity = NSValue(CGSize: CGSizeMake(3.0, 3.0))
+        scaleAnimation.velocity = NSValue(CGSize: CGSizeMake(5.0, 5.0))
         scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
-        scaleAnimation.springBounciness = 18.0
+        scaleAnimation.springBounciness = 25.0
         self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSpringAnimation")
         
         if (self.tag == 100){ //Buttons tagged with 1 are rotation as well

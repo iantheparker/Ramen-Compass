@@ -8,27 +8,40 @@
 
 import Foundation
 import RealmSwift
+import CoreLocation
 
 class Location: Object {
     dynamic var lat = 0.0  // latitude
     dynamic var lng = 0.0  // longitude
-    dynamic var distance = 0.0
     dynamic var address = ""
     dynamic var postalCode = ""
     dynamic var cc = ""
     dynamic var city = ""
     dynamic var state = ""
     dynamic var country = ""
+    var formattedAddress : String {
+        return address + "\n" + city + ", " + cc + "  " + postalCode
+    }
+    
+    func distanceFrom (loc: CLLocation) -> (CLLocationDistance, String){
+        //TODO: returns km now, but should be able to handle miles
+        return ((loc.distanceFromLocation(CLLocation.init(latitude: lat,longitude: lng)))/1000.0, "km")
+    }
+    
+    
     
 }
 
 class Venue: Object {
     dynamic var id = ""
     dynamic var name = ""
+    var nameJPTransliterated: String {
+        return ((name as NSString).stringByTransliteratingJapaneseToRomajiWithWordSeperator(" ") as String).capitalizedString
+    }
     dynamic var location = Location()
     
-    dynamic var hours = ""
-    dynamic var tips = ""
+    dynamic var hours = "11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm"
+    dynamic var tips = "Try the ramen. It's what you came here for, right?"
     
     dynamic var photoUrl = ""
     dynamic var photoData : NSData = NSData()

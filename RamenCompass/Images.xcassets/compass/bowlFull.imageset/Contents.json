@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "c_sticks@1x-06.png"
+      "filename" : "Group.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "c_sticks@2x-06.png"
+      "filename" : "Group@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "c_sticks@3x-06.png"
+      "filename" : "Group@3x.png"
     }
   ],
   "info" : {

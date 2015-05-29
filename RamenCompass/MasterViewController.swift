@@ -70,10 +70,11 @@ class MasterViewController: UIViewController {
             attribute: .Height,
             multiplier: 1.0, constant: -overlap)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: nil, metrics: nil, views: ["scrollView": scrollView])
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [scrollHeightConstraint])
+        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [scrollHeightConstraint]) // [] had scrollHeightConstrant
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
         tapRecognizer.delegate = self
+        // FIXME: buttons on side views are unresponsive
         view.addGestureRecognizer(tapRecognizer)
     }
     
@@ -122,8 +123,8 @@ class MasterViewController: UIViewController {
     
     private func addShadowToView(destView: UIView) {
         destView.layer.shadowPath = UIBezierPath(rect: destView.bounds).CGPath
-        destView.layer.shadowRadius = 2.5
-        destView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        destView.layer.shadowRadius = 5.5
+        destView.layer.shadowOffset = CGSize(width: 0, height: 5)
         destView.layer.shadowOpacity = 1.0
         destView.layer.shadowColor = UIColor.blackColor().CGColor
     }
@@ -173,31 +174,61 @@ extension MasterViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let tapLocation = touch.locationInView(view)
         let tapWasInTopOverlapArea = tapLocation.y >= CGRectGetHeight(view.bounds) - overlap
-        let tapWasInBottomOverlapArea = tapLocation.y <= overlap
         
-        return
-            (tapWasInTopOverlapArea && topVCIsOpen()) ||
-                (tapWasInBottomOverlapArea && bottomVCIsOpen())
+        if (tapWasInTopOverlapArea && topVCIsOpen()){
+            if (tapLocation.x <= CGRectGetWidth(view.bounds)/7) {
+
+                mainViewController.mapButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+            else if (tapLocation.x >= CGRectGetWidth(view.bounds) * 6/7){
+                mainViewController.refreshButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+            else {return true}
+        } else if (tapWasInTopOverlapArea && !bottomVCIsOpen()){
+            if (tapLocation.x <= CGRectGetWidth(view.bounds)/7) {
+                
+                mainViewController.leftButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+            else if (tapLocation.x >= CGRectGetWidth(view.bounds) * 6/7){
+                mainViewController.rightButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+            }
+            else {return true}
+        }
+        
+        //let tapWasInBottomOverlapArea = tapLocation.y <= overlap
+
+        return false
+        
     }
 }
 
 extension MasterViewController: UIScrollViewDelegate{
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y == 0){
+            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
+                self.mainViewController.mapButton.selected = true
+                }, completion: nil)
+        }
         if (scrollView.contentOffset.y == scrollView.frame.height){
             if (hideStatusBar){
                 hideStatusBar = false
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
-                    
+                    self.mainViewController.view.bounds = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
                     }, completion: { (Bool) -> Void in})
             }
+            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { () -> Void in
+                self.mainViewController.mapButton.selected = false
+            }, completion: nil)
+            
         }
         else {
             if (!hideStatusBar){
                 hideStatusBar = true
                 UIView.animateWithDuration(0.1, animations: { () -> Void in
                     self.setNeedsStatusBarAppearanceUpdate()
-                    
+                    self.mainViewController.view.bounds = CGRectMake(0, 10, self.view.bounds.width, self.view.bounds.height)
                     }, completion: { (Bool) -> Void in})
             }
         }

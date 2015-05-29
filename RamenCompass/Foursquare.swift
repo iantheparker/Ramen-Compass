@@ -9,23 +9,160 @@
 import UIKit
 import RealmSwift
 import CoreLocation
+import Alamofire
+
+let versionDate = "20150515"
+private let clientId = valueForAPIKey(keyname:  "clientId")
+private let clientSecret = valueForAPIKey(keyname:  "clientSecret")
 
 class Foursquare: NSObject {
     
-    private let clientId = valueForAPIKey(keyname:  "clientId")
-    private let clientSecret = valueForAPIKey(keyname:  "clientSecret")
+    
+    
+    var notificationToken: NotificationToken?
+    let pendingOperations = PendingOperations()
+    var venueResults = [Results<Venue>]()
+
     
     class var sharedInstance: Foursquare {
-        //2
+        
         struct Singleton {
-            //3
+            
             static let instance = Foursquare()
         }
-        //4
+        
         return Singleton.instance
     }
     
     //MARK: - Foursquare GET VENUES
+    
+    func search(coord: CLLocation, radius: String?=nil, completionHandler: (NSArray?, NSError?) -> ()) -> (){
+        
+        let radius = radius ?? "200"
+        
+        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&intent=browse&radius=\(radius)", parameters: nil)
+            .responseJSON { (req, res, json, error) in
+                
+                if(error != nil) {
+                    
+                    NSLog("Error: \(error)")
+                    println(req)
+                    println(res)
+                    completionHandler(nil,error!)
+                    self.showAlert(error!)
+                    
+                } else {
+                    if let
+                        data    = json as? NSDictionary,
+                        res     = data["response"] as? [String: AnyObject],
+                        venues  = res["venues"] as? [NSDictionary]
+                    {
+                        
+                        completionHandler(venues, nil)
+                    }
+                }
+        }
+    }
+    
+    func getVenueDetails(id: String, completionHandler: (NSDictionary?, NSError?) -> ()) -> (){
+        
+        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/\(id)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)", parameters: nil)
+            .responseJSON { (req, res, json, error) in
+                
+                if(error != nil) {
+                    
+                    NSLog("Error: \(error)")
+                    println(req)
+                    println(res)
+                    completionHandler(nil,error!)
+                    self.showAlert(error!)
+                    
+                } else {
+                    if let
+                        data    = json as? NSDictionary,
+                        res     = data["response"] as? [String: AnyObject],
+                        venue   = res["venue"] as? NSDictionary
+                    {
+                        
+                        completionHandler(venue, nil)
+                    }
+                }
+        }
+    }
+    
+    func searchWithDetails(coord: CLLocation, radius: String?=nil) {
+        self.search(coord, radius: radius) {( response, error) ->() in
+            if (error != nil){
+                println(error)
+            }else {
+                let venues = response as! [NSDictionary]
+                let realm = Realm()
+                realm.write {
+                    // Save one Venue object (and dependents) for each element of the array
+                    for venue in venues {
+                        self.getVenueDetails((venue["id"] as! String)) {( response, error) ->() in
+                            if ( error != nil){
+                                println(error)
+                            }else {
+                                println("\(index) and response \(response)")
+                            }
+                        }
+                        realm.create(Venue.self, value: venue, update: true)}
+                    }
+                }
+//                println("search with details notif block")
+//                self.venueResults.removeAll(keepCapacity: false)
+//                let sortedVenues = Realm().objects(Venue).sorted("name", ascending: true)
+//                self.venueResults.append(sortedVenues)
+//
+//                for index in 0..<self.venueResults[0].count{
+//                    let sdf = self.venueResults[0][index] as Venue
+//                    self.getVenueDetails(sdf.id) {( response, error) ->() in
+//                        if ( error != nil){
+//                            println(error)
+//                        }else {
+//                            println("\(index) and response \(response)")
+//                        }
+//                    }
+//                }
+            
+            }
+        
+    }
+    
+    
+    func getListVenues(coord: CLLocation) {
+        //200 ramen list id
+        let ramenListId = "4e5fada1483b8637b3d0372c"
+        let llTolerance = 0.5
+        let url = NSURL(string: "https://api.foursquare.com/v2/lists/\(ramenListId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)")
+        let request = NSURLRequest(URL:url!)
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
+            if data != nil {
+                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
+                //println(json)
+                //list{listItems{items({
+                if let
+                    res         = json["response"] as? [String: AnyObject],
+                    list        = res["list"] as? [String: AnyObject],
+                    listItems   = list["listItems"] as? [String: AnyObject],
+                    venues      = listItems["items"] as? [NSDictionary]
+                {
+                    let realm = Realm()
+                    realm.write {
+                        for venue in venues {
+                            realm.create(Venue.self, value: venue["venue"]!, update: true)
+                        }
+                    }
+                }
+            }
+            if error != nil {
+                self.showAlert(error)
+            }
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+    }
     
     func searchVenues(coord: CLLocation) {
         //update this line here also move it to a foursquare class?
@@ -40,41 +177,12 @@ class Foursquare: NSObject {
                     res     = json["response"] as? [String: AnyObject],
                     venues  = res["venues"] as? [NSDictionary]
                 {
+                    println(venues)
                     self.setUpAutoRealm("", venues: venues)
                 }
             }
             if error != nil {
-                let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
-            }
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
-    }
-    
-    func getListVenues(coord: CLLocation) {
-        //200 ramen list id
-        let ramenListId = "4e5fada1483b8637b3d0372c"
-        let llTolerance = 0.5
-        let url = NSURL(string: "https://api.foursquare.com/v2/lists/\(ramenListId)?client_id=\(clientId)&client_secret=\(clientSecret)&v=20150215")
-        let request = NSURLRequest(URL:url!)
-        
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {response, data, error in
-            if data != nil {
-                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
-                //println(json)
-                //list{listItems{items({
-                if let
-                    res         = json["response"] as? [String: AnyObject],
-                    list        = res["list"] as? [String: AnyObject],
-                    listItems   = list["listItems"] as? [String: AnyObject],
-                    venues      = listItems["items"] as? [NSDictionary]
-                {
-                    self.setUpAutoRealm("list",venues: venues)
-                }
-            }
-            if error != nil {
-                let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
-                alert.show()
+                self.showAlert(error)
             }
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
@@ -104,8 +212,9 @@ class Foursquare: NSObject {
         //selectedRamenIndex = 0
     }
     
-    
-    
+    func showAlert(error: NSError){
+        let alert = UIAlertView(title:"Get a better connection!",message:error.localizedDescription, delegate:nil, cancelButtonTitle:"OK")
+        alert.show()
+    }
 }
-
 

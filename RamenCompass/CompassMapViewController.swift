@@ -51,7 +51,7 @@ class CompassMapViewController: UIViewController {
         panRecognizer.delegate = self
         mapView.addGestureRecognizer(panRecognizer)
         
-        mapView.userTrackingMode = MKUserTrackingMode.FollowWithHeading
+        mapView.userTrackingMode = MKUserTrackingMode.Follow
         populateMap()
 
     }
