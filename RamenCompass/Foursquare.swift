@@ -1,4 +1,4 @@
-//
+////
 //  Foursquare.swift
 //  RamenCompass
 //
@@ -15,12 +15,11 @@ let versionDate = "20150515"
 private let clientId = valueForAPIKey(keyname:  "clientId")
 private let clientSecret = valueForAPIKey(keyname:  "clientSecret")
 
+var notificationToken: NotificationToken?
+
+
 class Foursquare: NSObject {
     
-    
-    
-    var notificationToken: NotificationToken?
-    let pendingOperations = PendingOperations()
     var venueResults = [Results<Venue>]()
 
     
@@ -40,7 +39,7 @@ class Foursquare: NSObject {
         
         let radius = radius ?? "200"
         
-        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&intent=browse&radius=\(radius)", parameters: nil)
+        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735", parameters: nil)
             .responseJSON { (req, res, json, error) in
                 
                 if(error != nil) {
@@ -57,7 +56,7 @@ class Foursquare: NSObject {
                         res     = data["response"] as? [String: AnyObject],
                         venues  = res["venues"] as? [NSDictionary]
                     {
-                        
+                        println("Foursquare search returned \(venues)")
                         completionHandler(venues, nil)
                     }
                 }
@@ -83,10 +82,99 @@ class Foursquare: NSObject {
                         res     = data["response"] as? [String: AnyObject],
                         venue   = res["venue"] as? NSDictionary
                     {
-                        
                         completionHandler(venue, nil)
                     }
                 }
+        }
+    }
+    
+    func getVenueDetailsFull(id: String, completionHandler: (Venue?, NSError?) -> ()) -> (){
+        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/\(id)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)", parameters: nil)
+            .responseJSON { (req, res, json, error) in
+                
+                if(error != nil) {
+                    
+                    NSLog("Error: \(error)")
+                    println(req)
+                    println(res)
+                    completionHandler(nil,error!)
+                    self.showAlert(error!)
+                    
+                    
+                } else {
+                    if let
+                        data    = json as? NSDictionary,
+                        res     = data["response"] as? [String: AnyObject],
+                        venue   = res["venue"] as? NSDictionary
+                    {
+                        //return realm
+                        let detailResponse = venue
+                        var detailVenue = Venue()
+                        detailVenue.id = (detailResponse["id"] as? String)!
+                        detailVenue.name = (detailResponse["name"] as? String)!
+                        if let rating = detailResponse["rating"] as? Double {detailVenue.rating = rating}
+                        //println(detailResponse["location"] as? [String: AnyObject])
+                        var loc = Location()
+                            if let
+                                location = detailResponse["location"] as? [String: AnyObject],
+                                address = location["address"] as? String,
+                                postalCode = location["postalCode"] as? String,
+                                cc = location["cc"] as? String,
+                                city = location["city"] as? String,
+                                state = location["state"] as? String,
+                                country = location["country"] as? String,
+                                lat = location["lat"] as? Double,
+                                lng = location["lng"] as? Double
+                            {
+                                loc.address = address
+                                loc.postalCode = postalCode
+                                loc.cc = cc
+                                loc.city = city
+                                loc.state = state
+                                loc.country = country
+                                loc.lat = lat
+                                loc.lng = lng
+                                detailVenue.location = loc
+                            }
+                        
+                        if let
+                            bestPhoto = detailResponse["bestPhoto"] as? [String: AnyObject],
+                            imgprefix = bestPhoto["prefix"] as? String,
+                            imgsuffix = bestPhoto["suffix"] as? String
+                        {
+                            detailVenue.photoUrl = imgprefix + "300x300" + imgsuffix
+                        }
+                        if let
+                            timeframes = (detailResponse["hours"] as? [String: AnyObject])? ["timeframes"] as? [NSDictionary]
+                        {
+                            for timeframe in timeframes{
+                                if let
+                                    hours = timeframe as? [String: AnyObject],
+                                    days = hours["days"] as? String,
+                                    open = hours["open"] as? [NSDictionary],
+                                    renderedTime = open[0]["renderedTime"] as? String
+                                {
+                                    detailVenue.hours += days + " " + renderedTime + " "
+                                }
+                            }
+                        }
+                        if let
+                            phrases = detailResponse["phrases"] as? [NSDictionary]
+                        {
+                            for phrase in phrases{
+                                if let
+                                    dict = phrase as? [String: AnyObject],
+                                    keyPhrase = phrase["phrase"] as? String
+                                {
+                                    detailVenue.tips += keyPhrase + ", "
+                                }
+                            }
+                            println("\(detailVenue.id) = \(detailVenue.tips)")
+                        }
+                        completionHandler(detailVenue, nil)
+                    }
+                }
+
         }
     }
     
@@ -97,37 +185,18 @@ class Foursquare: NSObject {
             }else {
                 let venues = response as! [NSDictionary]
                 let realm = Realm()
-                realm.write {
-                    // Save one Venue object (and dependents) for each element of the array
-                    for venue in venues {
-                        self.getVenueDetails((venue["id"] as! String)) {( response, error) ->() in
-                            if ( error != nil){
-                                println(error)
-                            }else {
-                                println("\(index) and response \(response)")
+                for venue in venues {
+                    self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
+                        if (error == nil){
+                            println(" venuedeets \(venueDeets)")
+                            realm.write {
+                                realm.create(Venue.self, value: venueDeets!, update: true)
                             }
                         }
-                        realm.create(Venue.self, value: venue, update: true)}
-                    }
+                    })
                 }
-//                println("search with details notif block")
-//                self.venueResults.removeAll(keepCapacity: false)
-//                let sortedVenues = Realm().objects(Venue).sorted("name", ascending: true)
-//                self.venueResults.append(sortedVenues)
-//
-//                for index in 0..<self.venueResults[0].count{
-//                    let sdf = self.venueResults[0][index] as Venue
-//                    self.getVenueDetails(sdf.id) {( response, error) ->() in
-//                        if ( error != nil){
-//                            println(error)
-//                        }else {
-//                            println("\(index) and response \(response)")
-//                        }
-//                    }
-//                }
-            
             }
-        
+        }
     }
     
     

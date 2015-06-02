@@ -40,8 +40,9 @@ class Venue: Object {
     }
     dynamic var location = Location()
     
-    dynamic var hours = "11:30 am - 2:00 pm (3:00pm on Sundays and Holidays) / 6:00 pm - 10:00pm"
-    dynamic var tips = "Try the ramen. It's what you came here for, right?"
+    dynamic var hours = ""
+    dynamic var tips = ""
+    dynamic var rating = 0.0
     
     dynamic var photoUrl = ""
     dynamic var photoData : NSData = NSData()

@@ -43,6 +43,7 @@ class CompassViewController: UIViewController {
     @IBOutlet weak var venueNameJP: UILabel!
     @IBOutlet weak var venueNameEN: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var mapButton: PopButton!
     @IBOutlet weak var leftButton : PopButton!
     @IBOutlet weak var rightButton : PopButton!
@@ -71,7 +72,7 @@ class CompassViewController: UIViewController {
         }
         
         notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
-            println("notif block")
+            println("CompassVC notif block")
             self.setupVenueResults()
             self.selectedRamenIndex = 0
         }
@@ -93,7 +94,7 @@ class CompassViewController: UIViewController {
             return self._selectedRamenIndex
         }
         set{
-            if venueResults.count > 0{
+            if Int(venueResults[venResSection].count) > 0{
                 leftButton.enabled = true
                 rightButton.enabled = true
                 
@@ -123,17 +124,26 @@ class CompassViewController: UIViewController {
         if let selectedRamenTest = venueForIndexPath(NSIndexPath(forRow: selectedRamenIndex, inSection: venResSection)){
             
             selectedRamen = selectedRamenTest
-            println("selectedRamen.description at \(selectedRamenIndex) = \(selectedRamen.description)")
+            println("selectedRamen.description at \(selectedRamenIndex) = \(selectedRamen.name)")
             
-            venueNameJP.text = selectedRamen.name.uppercaseString
-            venueNameEN.text = selectedRamen.nameJPTransliterated
+            if (NSString.stringContainsJapaneseText((selectedRamen.name as NSString) as String)){
+                venueNameJP.text = selectedRamen.name.uppercaseString
+                venueNameEN.text = selectedRamen.nameJPTransliterated
+            }
+            else{
+                venueNameEN.text = selectedRamen.name
+                venueNameEN.center = CGPointMake(venueNameEN.center.x, (venueNameJP.center.y - 15))
+                venueNameJP.hidden = true
+            }
             
             let font = UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)
             let textFont = [NSFontAttributeName:font]
             let distanceString = String(format: "%0.1f km", selectedRamen.location.distanceFrom(currentLocation).0)
             var attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
             //attributedString.appendAttributedString( NSAttributedString(string: "km", attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 18.0)!]))
-            //distanceLabel.attributedText = attributedString
+            distanceLabel.text = distanceString ?? "WTF"
+            cityLabel.text = "in " + selectedRamen.location.city ?? "in Somewhere"
+            //println(attributedString)
 
             //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
@@ -157,13 +167,11 @@ class CompassViewController: UIViewController {
     @IBAction func mapButtonPressed(sender: AnyObject) {
         delegate?.mapButtonPressed()
         println("map button pressed")
-        //mapButton.selected = !mapButton.selected
     }
     
     @IBAction func refreshLocation(){
         locationFixAchieved = false
         locationManager.startUpdatingLocation()
-        
 
     }
     
@@ -240,15 +248,17 @@ extension CompassViewController: CLLocationManagerDelegate{
         println("my current location \(currentLocation)")
         if (locationFixAchieved == false) {
             locationFixAchieved = true
-            if (venueResults.count > 0){
-                println("In loc, using realm")
-                selectedRamenIndex=0
-            }
-            else{
-                println("In loc, building realm")
-                //Foursquare.sharedInstance.searchVenues(currentLocation)
-                Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
-            }
+            Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
+
+//            if (Int(venueResults[venResSection].count) > 0){
+//                println("In loc, using realm")
+//                selectedRamenIndex=0
+//            }
+//            else{
+//                println("In loc, building realm")
+//                //Foursquare.sharedInstance.searchVenues(currentLocation)
+//                Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
+//            }
             if (locationCC == ""){
                 CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
                     if (error != nil)

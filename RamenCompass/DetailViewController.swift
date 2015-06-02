@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @objc
 protocol DetailViewControllerDelegate {
@@ -21,6 +22,7 @@ class DetailViewController: UIViewController {
     var delegate: DetailViewControllerDelegate?
     var detailSelectedRamen: Venue?
     @IBOutlet weak var pictureIV: UIImageView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +30,7 @@ class DetailViewController: UIViewController {
         tableview.delegate = self
         tableview.dataSource = self
 
-        //addressButton.setTitle(selectedRamen.location.formattedAddress, forState: UIControlState.Normal)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"reload:", name: "selectedRamenChanged", object: nil)
-
 
     }
     deinit {
@@ -44,8 +43,7 @@ class DetailViewController: UIViewController {
         detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         println("detail reload notif \(detailSelectedRamen)")
         tableview.reloadData()
-        //TODO: update imageview
-        //pictureIV.sd_setImageWithURL(NSURL(string: ""), placeholderImage: UIImage(named: ""))
+        pictureIV.sd_setImageWithURL(NSURL(string: self.detailSelectedRamen!.photoUrl))
     }
     
     @IBAction func addressButtonPressed(sender: AnyObject) {
@@ -67,13 +65,13 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         
         cell.leadingLabel.text = leadingLabels[indexPath.row]
         if (indexPath.row == leadingLabels.indexOfObject("TRY THIS")){
-            cell.descriptionLabel.text = detailSelectedRamen?.tips
+            cell.descriptionLabel.text = (detailSelectedRamen?.tips == "") ? "Get the ramen, duhhh! Apparently it's pretty tasty here." : detailSelectedRamen?.tips
         }
         else if (indexPath.row == leadingLabels.indexOfObject("ADDRESS")){
             cell.descriptionLabel.text = detailSelectedRamen?.location.formattedAddress
         }
         else if (indexPath.row == leadingLabels.indexOfObject("HOURS")){
-            cell.descriptionLabel.text = detailSelectedRamen?.hours
+            cell.descriptionLabel.text = (detailSelectedRamen?.hours == "") ? "Shhh...No one knows. It's a secret. Show up sometime and maybe you'll get lucky." : detailSelectedRamen?.hours
         }
         
         return cell
