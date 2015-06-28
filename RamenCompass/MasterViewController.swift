@@ -16,6 +16,9 @@ class MasterViewController: UIViewController {
     var scrollView: UIScrollView!
     var firstTime = true
     private var hideStatusBar: Bool = false
+    var page1pos : CGFloat = 0
+    var page2pos : CGFloat = 0
+    var page3pos : CGFloat = 0
 
     
     
@@ -52,7 +55,8 @@ class MasterViewController: UIViewController {
     func setupScrollView() {
         scrollView = UIScrollView()
         scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        scrollView.pagingEnabled = true
+        scrollView.pagingEnabled = false
+        scrollView.decelerationRate = UIScrollViewDecelerationRateFast
         scrollView.bounces = false
         scrollView.clipsToBounds = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -70,7 +74,7 @@ class MasterViewController: UIViewController {
             attribute: .Height,
             multiplier: 1.0, constant: -overlap)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: nil, metrics: nil, views: ["scrollView": scrollView])
-        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [scrollHeightConstraint]) // [] had scrollHeightConstrant
+        NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints) // [] had scrollHeightConstrant
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
         tapRecognizer.delegate = self
@@ -85,7 +89,7 @@ class MasterViewController: UIViewController {
         
         addShadowToView(mainViewController.view)
         
-        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -overlap, right: 0)
+        //scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -overlap, right: 0)
         
         let views = ["top": topViewcontroller.view, "main": mainViewController.view, "bottom": bottomViewController.view, "outer": view]
         
@@ -109,9 +113,11 @@ class MasterViewController: UIViewController {
             "V:|[top][main(==outer)][bottom]|", options: .AlignAllLeft | .AlignAllRight, metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [topHeightConstraint, bottomHeightConstraint])
         
-        view.addGestureRecognizer(scrollView.panGestureRecognizer)
+        //view.addGestureRecognizer(scrollView.panGestureRecognizer)
         
-
+        page1pos = 0
+        page2pos = CGRectGetHeight(self.view.frame) - overlap
+        page3pos = page2pos * 2
     }
     
     private func addViewController(viewController: UIViewController) {
@@ -130,7 +136,7 @@ class MasterViewController: UIViewController {
     }
     
     func closeTopAnimated(animated: Bool) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: CGRectGetHeight(scrollView.frame)), animated: animated)
+        scrollView.setContentOffset(CGPoint(x: 0, y: page2pos), animated: animated)
     }
     
     func topVCIsOpen() -> Bool {
@@ -138,7 +144,7 @@ class MasterViewController: UIViewController {
     }
     
     func bottomVCIsOpen() -> Bool {
-        return scrollView.contentOffset.y == CGRectGetHeight(scrollView.frame) * 2
+        return scrollView.contentOffset.y == page3pos
     }
     
     func openTopVCAnimated(animated: Bool) {
@@ -146,7 +152,7 @@ class MasterViewController: UIViewController {
     }
     
     func openBottomVCAnimated(animated: Bool) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: CGRectGetHeight(scrollView.frame) * 2), animated: animated)
+        scrollView.setContentOffset(CGPoint(x: 0, y: page3pos), animated: animated)
     }
     
     func toggleTopAnimated(animated: Bool) {
@@ -205,12 +211,12 @@ extension MasterViewController: UIGestureRecognizerDelegate {
 extension MasterViewController: UIScrollViewDelegate{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y == 0){
+        if (scrollView.contentOffset.y == page1pos){
             UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
                 self.mainViewController.mapButton.selected = true
                 }, completion: nil)
         }
-        if (scrollView.contentOffset.y == scrollView.frame.height){
+        if (scrollView.contentOffset.y == page2pos){
             if (hideStatusBar){
                 hideStatusBar = false
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -232,6 +238,65 @@ extension MasterViewController: UIScrollViewDelegate{
                     }, completion: { (Bool) -> Void in})
             }
         }
+    }
+    
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        var scrollOffset = targetContentOffset.memory.y
+        println("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)")
+        
+        if ((scrollOffset >= page1pos) && scrollOffset < page2pos){
+            if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
+                scrollOffset = page1pos
+            }else{
+                scrollOffset = page2pos
+            }
+            
+        }else if ((scrollOffset >= page2pos) && scrollOffset <= page3pos){
+            if (fabs(scrollOffset - page2pos) < fabs(scrollOffset - page3pos)){
+                scrollOffset = page2pos
+            }else{
+                scrollOffset = page3pos
+            }
+        }
+        //targetContentOffset.memory.y = scrollOffset
+
+        if (velocity.y == 0){
+            targetContentOffset.memory.y = scrollOffset
+
+        }else if (velocity.y > 0){
+
+        }else if (velocity.y < 0){
+            
+        }
+        
+        
+
+        println("#2 \(scrollOffset)")
+        
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        var scrollOffset = scrollView.contentOffset.y
+        
+        if ((scrollOffset >= page1pos) && scrollOffset < page2pos){
+            if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
+                scrollOffset = page1pos
+            }else{
+                scrollOffset = page2pos
+            }
+            
+        }else if ((scrollOffset >= page2pos) && scrollOffset <= page3pos){
+            if (fabs(scrollOffset - page2pos) < fabs(scrollOffset - page3pos)){
+                scrollOffset = page2pos
+            }else{
+                scrollOffset = page3pos
+            }
+        }
+        UIView.animateWithDuration(0.33, delay: 0, options: .CurveEaseInOut, animations: { () -> Void in
+                self.scrollView.contentOffset.y = scrollOffset
+                }, completion: nil)
     }
     
     override func prefersStatusBarHidden() -> Bool {

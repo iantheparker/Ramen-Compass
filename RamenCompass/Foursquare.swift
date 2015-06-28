@@ -152,6 +152,7 @@ class Foursquare: NSObject {
                                     hours = timeframe as? [String: AnyObject],
                                     days = hours["days"] as? String,
                                     open = hours["open"] as? [NSDictionary],
+                                    // TODO: need to handle beyond index 0 here 
                                     renderedTime = open[0]["renderedTime"] as? String
                                 {
                                     detailVenue.hours += days + " " + renderedTime + " "

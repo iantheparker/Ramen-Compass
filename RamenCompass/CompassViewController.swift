@@ -20,7 +20,7 @@ protocol CompassViewControllerDelegate {
 
 class CompassViewController: UIViewController {
     
-    let locationManager = CLLocationManager()
+    lazy var locationManager = CLLocationManager()
     var locationFixAchieved : Bool = false
     var locationCC: String = ""
     var currentLocation : CLLocation!
