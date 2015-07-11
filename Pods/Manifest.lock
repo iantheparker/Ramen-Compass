@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (1.2.2)
-  - Google-Maps-iOS-SDK (1.9.2)
+  - GoogleMaps (1.10.1)
   - pop (1.0.7)
   - Realm (0.92.3):
     - Realm/Headers (= 0.92.3)
@@ -14,7 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - Google-Maps-iOS-SDK (~> 1.9)
+  - GoogleMaps
   - pop (~> 1.0)
   - RealmSwift
   - SDWebImage (~> 3.7)
@@ -22,7 +22,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
-  Google-Maps-iOS-SDK: 7f89cc1edb3ca239a410e5bc83cd1e060db3a289
+  GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   Realm: bf604805d5e897850da488260f93889f510924b3
   RealmSwift: a5e48c7d5774eaa299b0b3a843add3b55e7f0061

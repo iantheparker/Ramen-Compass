@@ -2,10 +2,11 @@
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Google-Maps-iOS-SDK', '~> 1.9'
-pod 'pop', '~> 1.0'
-pod 'RealmSwift'
-pod 'SwiftyJSON'
-pod 'Alamofire'
-pod 'SDWebImage', '~>3.7'
-
+target 'RamenCompass' do
+    pod 'GoogleMaps'
+    pod 'pop', '~> 1.0'
+    pod 'RealmSwift'
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod 'SDWebImage', '~>3.7'
+end

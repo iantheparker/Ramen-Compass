@@ -29,6 +29,7 @@
 		2AF75DB41AC8575A0063DF90 /* HouschkaAltMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FB1AC8035200304550 /* HouschkaAltMedium.ttf */; };
 		2AF75DB51AC8575F0063DF90 /* HouschkaAltLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FA1AC8035200304550 /* HouschkaAltLight.ttf */; };
 		2AF75DB61AC857630063DF90 /* HouschkaAltHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59F91AC8035200304550 /* HouschkaAltHeavy.ttf */; };
+		DC7B7EB4753ED08B36003133 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FE1E7B5DCEA4B2BB116B6F /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		ED91AFB0A033F8EDEFFA4DA2 /* Pods_RamenCompass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F139DDC8491ACC806832F618 /* Pods_RamenCompass.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10FE1E7B5DCEA4B2BB116B6F /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A015ED31AD10F4600C0DFA4 /* ramcom.realm */ = {isa = PBXFileReference; lastKnownFileType = file; name = ramcom.realm; path = RamenCompass/ramcom.realm; sourceTree = SOURCE_ROOT; };
 		2A015ED51AD22E9400C0DFA4 /* NSString+Japanese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Japanese.h"; path = "RamenCompass/NSString+Japanese.h"; sourceTree = SOURCE_ROOT; };
 		2A015ED61AD22E9400C0DFA4 /* NSString+Japanese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Japanese.m"; path = "RamenCompass/NSString+Japanese.m"; sourceTree = SOURCE_ROOT; };
@@ -86,6 +88,7 @@
 				2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */,
 				2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */,
 				ED91AFB0A033F8EDEFFA4DA2 /* Pods_RamenCompass.framework in Frameworks */,
+				DC7B7EB4753ED08B36003133 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +109,7 @@
 				2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */,
 				2A787BEE1A95CA420069C0B1 /* MapKit.framework */,
 				F139DDC8491ACC806832F618 /* Pods_RamenCompass.framework */,
+				10FE1E7B5DCEA4B2BB116B6F /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -318,7 +322,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RamenCompass/Pods-RamenCompass-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		900C5BC4E98AC4EA8AAEDAFC /* Check Pods Manifest.lock */ = {
