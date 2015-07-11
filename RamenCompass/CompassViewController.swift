@@ -11,7 +11,7 @@ import CoreLocation
 import RealmSwift
 import MapKit
 
-@objc
+
 protocol CompassViewControllerDelegate {
     func mapButtonPressed()
     func detailButtonPressed()
@@ -27,7 +27,6 @@ class CompassViewController: UIViewController {
     
     var notificationToken: NotificationToken?
     //let realm = RLMRealm(path: NSBundle.mainBundle().resourcePath!.stringByAppendingPathComponent("ramcom.realm"), readOnly: true, error: nil)
-    private var _selectedRamenIndex: Int = 0
     var venueResults = [Results<Venue>]()
     let venResSection = 0
     var selectedRamen: Venue! {
@@ -88,7 +87,7 @@ class CompassViewController: UIViewController {
     
     //MARK: - Update Display Methods
     
-    
+    private var _selectedRamenIndex: Int = 0
     var selectedRamenIndex : Int{
         get {
             return self._selectedRamenIndex
@@ -365,6 +364,16 @@ extension CompassViewController: DetailViewControllerDelegate{
         var mapItem = MKMapItem(placemark: placemark)
         mapItem.name = "\(selectedRamen.name)"
         mapItem.openInMapsWithLaunchOptions(options)
+    }
+}
+
+extension CompassViewController: MapViewControllerDelegate{
+    
+    func ramenSelected(venue: Venue) {
+        delegate?.mapButtonPressed()
+        println("in ramen selected")
+        selectedRamenIndex = venueResults[venResSection].indexOf(venue)!
+                
     }
 }
 

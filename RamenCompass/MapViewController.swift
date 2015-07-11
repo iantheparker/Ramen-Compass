@@ -13,12 +13,30 @@ import RealmSwift
 let kDistanceMeters:CLLocationDistance = 2000
 
 
+protocol MapViewControllerDelegate{
+    func ramenSelected(venue: Venue)
+}
+
 class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var centerButton: UIButton!
 
     var userLocated:Bool = false
+    var delegate : MapViewControllerDelegate?
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let panRecognizer = UIPanGestureRecognizer(target: self, action: "mapPanned:")
+        panRecognizer.delegate = self
+        mapView.addGestureRecognizer(panRecognizer)
+        
+        mapView.userTrackingMode = MKUserTrackingMode.Follow
+        populateMap()
+        
+    }
     
     func populateMap() {
         mapView.removeAnnotations(mapView.annotations)
@@ -28,7 +46,7 @@ class MapViewController: UIViewController {
         for venue in venues { // 2
             let aVenue = venue as Venue
             let coord = CLLocationCoordinate2D(latitude: aVenue.location.lat, longitude: aVenue.location.lng)
-            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.postalCode, venue: aVenue) as RamenAnnotation
+            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.address, venue: aVenue) as RamenAnnotation
             mapView.addAnnotation(venueAnno)
         }
     }
@@ -44,17 +62,7 @@ class MapViewController: UIViewController {
     }
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let panRecognizer = UIPanGestureRecognizer(target: self, action: "mapPanned:")
-        panRecognizer.delegate = self
-        mapView.addGestureRecognizer(panRecognizer)
-        
-        mapView.userTrackingMode = MKUserTrackingMode.Follow
-        populateMap()
-
-    }
+    
     func mapPanned(recognizer:UIPanGestureRecognizer) {
         centerButton.selected = true
     }
@@ -82,15 +90,28 @@ extension MapViewController: MKMapViewDelegate{
             pinView!.canShowCallout = true
             pinView!.animatesDrop = true
             pinView!.pinColor = .Red
-            var detailDisclosure = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIButton
+            var detailDisclosure = UIButton.buttonWithType(UIButtonType.InfoLight) as! UIButton
+            var imageview = UIImageView(frame: CGRectMake(0, 0, 50, 55))
+            imageview.image = UIImage(named: "darkIcon")
+            pinView!.leftCalloutAccessoryView = imageview
             pinView!.rightCalloutAccessoryView = detailDisclosure
+            pinView!.rightCalloutAccessoryView.tintColor = UIColor.redColor()
         }
         else {
             pinView!.annotation = annotation
         }
-        
         return pinView
-        
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        if control == view.rightCalloutAccessoryView {
+            //println("Disclosure Pressed! \(view.annotation.subtitle)")
+            
+            if let ramen = view.annotation as? RamenAnnotation {
+                println("ramen = \(ramen.venue.name)")
+                delegate?.ramenSelected(ramen.venue)
+            }
+        }
     }
     
     func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!) {

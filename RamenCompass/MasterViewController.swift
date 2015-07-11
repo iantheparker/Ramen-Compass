@@ -35,6 +35,7 @@ class MasterViewController: UIViewController {
         
         super.init(nibName: nil, bundle: nil)
         
+        self.topViewcontroller.delegate = mainViewController
         self.bottomViewController.delegate = mainViewController
         self.mainViewController.delegate = self
         

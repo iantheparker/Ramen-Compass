@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 
-@objc
 protocol DetailViewControllerDelegate {
     func addressDirectionButtonPressed()
 }
