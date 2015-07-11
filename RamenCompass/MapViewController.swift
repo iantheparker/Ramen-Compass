@@ -13,7 +13,7 @@ import RealmSwift
 let kDistanceMeters:CLLocationDistance = 2000
 
 
-class CompassMapViewController: UIViewController {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var centerButton: UIButton!
@@ -60,7 +60,7 @@ class CompassMapViewController: UIViewController {
     }
 }
 
-extension CompassMapViewController: MKMapViewDelegate{
+extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         println("mapview got user lat \(userLocation.coordinate.latitude) and long \(userLocation.coordinate.longitude)")
@@ -108,7 +108,7 @@ extension CompassMapViewController: MKMapViewDelegate{
     
 }
 
-extension CompassMapViewController: UIGestureRecognizerDelegate{
+extension MapViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(UIGestureRecognizer,
         shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
             return true

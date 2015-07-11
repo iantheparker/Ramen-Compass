@@ -9,7 +9,7 @@
 import UIKit
 
 class MasterViewController: UIViewController {
-    var topViewcontroller: CompassMapViewController!
+    var topViewcontroller: MapViewController!
     var mainViewController: CompassViewController!
     var bottomViewController: DetailViewController!
     var overlap: CGFloat!
@@ -27,7 +27,7 @@ class MasterViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    init(topViewcontroller: CompassMapViewController, mainViewController: CompassViewController, bottomViewController: DetailViewController, overlap: CGFloat) {
+    init(topViewcontroller: MapViewController, mainViewController: CompassViewController, bottomViewController: DetailViewController, overlap: CGFloat) {
         self.topViewcontroller = topViewcontroller
         self.mainViewController = mainViewController
         self.bottomViewController = bottomViewController

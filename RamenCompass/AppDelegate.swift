@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let topMap = storyboard.instantiateViewControllerWithIdentifier("Map") as! CompassMapViewController
+        let topMap = storyboard.instantiateViewControllerWithIdentifier("Map") as! MapViewController
 
         let mainCompass = storyboard.instantiateViewControllerWithIdentifier("Compass") as! CompassViewController
         
