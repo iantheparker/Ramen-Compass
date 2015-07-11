@@ -245,14 +245,14 @@ extension MasterViewController: UIScrollViewDelegate{
         var scrollOffset = targetContentOffset.memory.y
         println("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)")
         
-        if ((scrollOffset >= page1pos) && scrollOffset < page2pos){
+        if ((scrollOffset >= page1pos) && (scrollOffset < page2pos)){
             if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
                 scrollOffset = page1pos
             }else{
                 scrollOffset = page2pos
             }
             
-        }else if ((scrollOffset >= page2pos) && scrollOffset <= page3pos){
+        }else if ((scrollOffset >= page2pos) && (scrollOffset <= page3pos)){
             if (fabs(scrollOffset - page2pos) < fabs(scrollOffset - page3pos)){
                 scrollOffset = page2pos
             }else{
@@ -280,14 +280,14 @@ extension MasterViewController: UIScrollViewDelegate{
         
         var scrollOffset = scrollView.contentOffset.y
         
-        if ((scrollOffset >= page1pos) && scrollOffset < page2pos){
+        if ((scrollOffset >= page1pos) && (scrollOffset < page2pos)){
             if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
                 scrollOffset = page1pos
             }else{
                 scrollOffset = page2pos
             }
             
-        }else if ((scrollOffset >= page2pos) && scrollOffset <= page3pos){
+        }else if ((scrollOffset >= page2pos) && (scrollOffset <= page3pos)){
             if (fabs(scrollOffset - page2pos) < fabs(scrollOffset - page3pos)){
                 scrollOffset = page2pos
             }else{
