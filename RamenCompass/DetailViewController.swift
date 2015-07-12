@@ -60,16 +60,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath) as! DetailTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(leadingLabels[indexPath.row], forIndexPath: indexPath) as! DetailTableViewCell
         
-        cell.leadingLabel.text = leadingLabels[indexPath.row]
         if (indexPath.row == leadingLabels.indexOfObject("TRY THIS")){
             cell.descriptionLabel.text = (detailSelectedRamen?.tips == "") ? "Get the ramen, duhhh! Apparently it's pretty tasty here." : detailSelectedRamen?.tips
         }
         else if (indexPath.row == leadingLabels.indexOfObject("ADDRESS")){
             cell.descriptionLabel.text = detailSelectedRamen?.location.formattedAddress
-            cell.descriptionLabel.tintColor = UIColor.blueColor()
-            cell.descriptionLabel.textColor = UIColor.blueColor()
+            cell.descriptionLabel.tintColor = UIColor.redColor()
         }
         else if (indexPath.row == leadingLabels.indexOfObject("HOURS")){
             cell.descriptionLabel.text = (detailSelectedRamen?.hours == "") ? "Shhh...No one knows. It's a secret. Show up sometime and maybe you'll get lucky." : detailSelectedRamen?.hours
@@ -83,6 +81,10 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // TODO: if i end up using the ramen image as a section header, then this is a problem
+        return 0.1
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == leadingLabels.indexOfObject("ADDRESS")){
