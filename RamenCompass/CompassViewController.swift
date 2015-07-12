@@ -170,7 +170,17 @@ class CompassViewController: UIViewController {
     
     @IBAction func refreshLocation(){
         locationFixAchieved = false
-        locationManager.startUpdatingLocation()
+        
+        if let
+            masterVC = self.parentViewController as? MasterViewController,
+            mapVC = masterVC.childViewControllers[0] as? MapViewController
+            where masterVC.topVCIsOpen()
+        {
+            println("top is open")
+            Foursquare.sharedInstance.searchWithDetails(mapVC.getMapCenterCoord(), radius: nil)
+        }else{
+            locationManager.startUpdatingLocation()
+        }
 
     }
     
@@ -370,10 +380,8 @@ extension CompassViewController: DetailViewControllerDelegate{
 extension CompassViewController: MapViewControllerDelegate{
     
     func ramenSelected(venue: Venue) {
-        delegate?.mapButtonPressed()
-        println("in ramen selected")
+        delegate?.detailButtonPressed()
         selectedRamenIndex = venueResults[venResSection].indexOf(venue)!
-                
     }
 }
 

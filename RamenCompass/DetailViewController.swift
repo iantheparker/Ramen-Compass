@@ -42,7 +42,7 @@ class DetailViewController: UIViewController {
         detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         println("detail reload notif \(detailSelectedRamen)")
         tableview.reloadData()
-        pictureIV.sd_setImageWithURL(NSURL(string: self.detailSelectedRamen!.photoUrl))
+        pictureIV.sd_setImageWithURL(NSURL(string: self.detailSelectedRamen!.photoUrl), placeholderImage: UIImage(named: "ramenImg"))
     }
     
     @IBAction func addressButtonPressed(sender: AnyObject) {

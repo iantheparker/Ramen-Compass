@@ -35,7 +35,6 @@ class MapViewController: UIViewController {
         
         mapView.userTrackingMode = MKUserTrackingMode.Follow
         populateMap()
-        
     }
     
     func populateMap() {
@@ -60,11 +59,14 @@ class MapViewController: UIViewController {
         
         centerButton.selected = false
     }
-
-    
     
     func mapPanned(recognizer:UIPanGestureRecognizer) {
         centerButton.selected = true
+    }
+    
+    func getMapCenterCoord() -> CLLocation{
+        let center : CLLocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        return center
     }
 }
 

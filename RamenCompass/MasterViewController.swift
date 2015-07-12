@@ -180,30 +180,21 @@ class MasterViewController: UIViewController {
 extension MasterViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let tapLocation = touch.locationInView(view)
-        let tapWasInTopOverlapArea = tapLocation.y >= CGRectGetHeight(view.bounds) - overlap
+        let tapWasInTopOverlapArea = tapLocation.y <= overlap
+        let tapWasInBottomOverlapArea = tapLocation.y >= CGRectGetHeight(view.bounds) - overlap
         
-        if (tapWasInTopOverlapArea && topVCIsOpen()){
-            if (tapLocation.x <= CGRectGetWidth(view.bounds)/7) {
-
+        if ((tapWasInBottomOverlapArea && topVCIsOpen()) || (tapWasInTopOverlapArea && (!topVCIsOpen() && !bottomVCIsOpen()))){
+            if (tapLocation.x >= CGRectGetWidth(view.bounds)/6 && tapLocation.x <= CGRectGetWidth(view.bounds) * 5/6) {
                 mainViewController.mapButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
             }
-            else if (tapLocation.x >= CGRectGetWidth(view.bounds) * 6/7){
-                mainViewController.refreshButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-            }
             else {return true}
-        } else if (tapWasInTopOverlapArea && !bottomVCIsOpen()){
-            if (tapLocation.x <= CGRectGetWidth(view.bounds)/7) {
-                
-                mainViewController.leftButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
-            }
-            else if (tapLocation.x >= CGRectGetWidth(view.bounds) * 6/7){
-                mainViewController.rightButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+        } else if ((tapWasInBottomOverlapArea && !bottomVCIsOpen()) || (tapWasInTopOverlapArea && bottomVCIsOpen())){
+            if (tapLocation.x >= CGRectGetWidth(view.bounds)/6 && tapLocation.x <= CGRectGetWidth(view.bounds) * 5/6) {
+                toggleBottomAnimated(true)
             }
             else {return true}
         }
         
-        //let tapWasInBottomOverlapArea = tapLocation.y <= overlap
-
         return false
         
     }

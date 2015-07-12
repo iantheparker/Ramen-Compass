@@ -17,7 +17,6 @@ private let clientSecret = valueForAPIKey(keyname:  "clientSecret")
 
 var notificationToken: NotificationToken?
 
-
 class Foursquare: NSObject {
     
     var venueResults = [Results<Venue>]()
