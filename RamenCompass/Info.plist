@@ -30,9 +30,10 @@
 	<string>We use your location to point you towards the nearest bowl of delicious ramen.</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>HouschkaAltHeavy.ttf</string>
-		<string>HouschkaAltLight.ttf</string>
-		<string>HouschkaAltMedium.ttf</string>
+		<string>Whitney-Bold-Pro.otf</string>
+		<string>Whitney-Book-Pro.otf</string>
+		<string>Whitney-Light-Pro.otf</string>
+		<string>Whitney-Medium-Pro.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

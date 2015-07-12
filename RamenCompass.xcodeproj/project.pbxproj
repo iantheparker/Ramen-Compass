@@ -10,6 +10,10 @@
 		2A015ED41AD10F4600C0DFA4 /* ramcom.realm in Resources */ = {isa = PBXBuildFile; fileRef = 2A015ED31AD10F4600C0DFA4 /* ramcom.realm */; };
 		2A015ED71AD22E9400C0DFA4 /* NSString+Japanese.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A015ED61AD22E9400C0DFA4 /* NSString+Japanese.m */; };
 		2A11B2941A9981CD0048B6B4 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A11B2931A9981CD0048B6B4 /* libc++.dylib */; };
+		2A34BAF41B52A41C0071D640 /* Whitney-Bold-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF01B52A41C0071D640 /* Whitney-Bold-Pro.otf */; };
+		2A34BAF51B52A41C0071D640 /* Whitney-Book-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF11B52A41C0071D640 /* Whitney-Book-Pro.otf */; };
+		2A34BAF61B52A41C0071D640 /* Whitney-Light-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF21B52A41C0071D640 /* Whitney-Light-Pro.otf */; };
+		2A34BAF71B52A41C0071D640 /* Whitney-Medium-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF31B52A41C0071D640 /* Whitney-Medium-Pro.otf */; };
 		2A70FFE41AD529900032103B /* PopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FFE31AD529900032103B /* PopButton.swift */; };
 		2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BEE1A95CA420069C0B1 /* MapKit.framework */; };
 		2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */; };
@@ -26,9 +30,6 @@
 		2AAEAF8D1AD6BAF400267F26 /* Foursquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */; };
 		2ADB4F031B0903B3001213D4 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F021B0903B3001213D4 /* MasterViewController.swift */; };
 		2ADB4F051B0927D6001213D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F041B0927D6001213D4 /* DetailViewController.swift */; };
-		2AF75DB41AC8575A0063DF90 /* HouschkaAltMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FB1AC8035200304550 /* HouschkaAltMedium.ttf */; };
-		2AF75DB51AC8575F0063DF90 /* HouschkaAltLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59FA1AC8035200304550 /* HouschkaAltLight.ttf */; };
-		2AF75DB61AC857630063DF90 /* HouschkaAltHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B59F91AC8035200304550 /* HouschkaAltHeavy.ttf */; };
 		CA02F42039623918F3DFFFE4 /* Pods_RamenCompass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D17A3B8AEAD6D3E86AC272 /* Pods_RamenCompass.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -47,13 +48,14 @@
 		2A015ED51AD22E9400C0DFA4 /* NSString+Japanese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Japanese.h"; path = "RamenCompass/NSString+Japanese.h"; sourceTree = SOURCE_ROOT; };
 		2A015ED61AD22E9400C0DFA4 /* NSString+Japanese.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Japanese.m"; path = "RamenCompass/NSString+Japanese.m"; sourceTree = SOURCE_ROOT; };
 		2A11B2931A9981CD0048B6B4 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		2A34BAF01B52A41C0071D640 /* Whitney-Bold-Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Bold-Pro.otf"; path = "RamenCompass/fonts/Whitney-Bold-Pro.otf"; sourceTree = SOURCE_ROOT; };
+		2A34BAF11B52A41C0071D640 /* Whitney-Book-Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Book-Pro.otf"; path = "RamenCompass/fonts/Whitney-Book-Pro.otf"; sourceTree = SOURCE_ROOT; };
+		2A34BAF21B52A41C0071D640 /* Whitney-Light-Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Light-Pro.otf"; path = "RamenCompass/fonts/Whitney-Light-Pro.otf"; sourceTree = SOURCE_ROOT; };
+		2A34BAF31B52A41C0071D640 /* Whitney-Medium-Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Medium-Pro.otf"; path = "RamenCompass/fonts/Whitney-Medium-Pro.otf"; sourceTree = SOURCE_ROOT; };
 		2A5748EE1ACFFBD9003C66EC /* RamenCompass-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RamenCompass-Bridging-Header.h"; path = "RamenCompass/RamenCompass-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		2A70FFE31AD529900032103B /* PopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopButton.swift; path = RamenCompass/PopButton.swift; sourceTree = SOURCE_ROOT; };
 		2A787BEE1A95CA420069C0B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		2A7B59F91AC8035200304550 /* HouschkaAltHeavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = HouschkaAltHeavy.ttf; path = RamenCompass/HouschkaAltHeavy.ttf; sourceTree = SOURCE_ROOT; };
-		2A7B59FA1AC8035200304550 /* HouschkaAltLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = HouschkaAltLight.ttf; path = RamenCompass/HouschkaAltLight.ttf; sourceTree = SOURCE_ROOT; };
-		2A7B59FB1AC8035200304550 /* HouschkaAltMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = HouschkaAltMedium.ttf; path = RamenCompass/HouschkaAltMedium.ttf; sourceTree = SOURCE_ROOT; };
 		2A7B59FC1AC8036A00304550 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ApiKeys.plist; path = RamenCompass/ApiKeys.plist; sourceTree = SOURCE_ROOT; };
 		2A7B5A021AC8039800304550 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApiKeys.swift; path = RamenCompass/ApiKeys.swift; sourceTree = SOURCE_ROOT; };
 		2A7B5A031AC8039800304550 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = RamenCompass/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
@@ -99,6 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A34BAEF1B52A40C0071D640 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2A34BAF01B52A41C0071D640 /* Whitney-Bold-Pro.otf */,
+				2A34BAF11B52A41C0071D640 /* Whitney-Book-Pro.otf */,
+				2A34BAF21B52A41C0071D640 /* Whitney-Light-Pro.otf */,
+				2A34BAF31B52A41C0071D640 /* Whitney-Medium-Pro.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		2A787BF21A95E67B0069C0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +160,8 @@
 				2A015ED31AD10F4600C0DFA4 /* ramcom.realm */,
 				2A015ED51AD22E9400C0DFA4 /* NSString+Japanese.h */,
 				2A015ED61AD22E9400C0DFA4 /* NSString+Japanese.m */,
+				2A34BAEF1B52A40C0071D640 /* Fonts */,
 				2A7B5A051AC8039800304550 /* Images.xcassets */,
-				2AB90D5C1A961B75005B51EC /* Fonts */,
 				2AB7CB171A95B8DE003EE308 /* Supporting Files */,
 			);
 			path = "Ramen Compass";
@@ -180,16 +193,6 @@
 				2AB7CB2E1A95B8DE003EE308 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2AB90D5C1A961B75005B51EC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2A7B59F91AC8035200304550 /* HouschkaAltHeavy.ttf */,
-				2A7B59FA1AC8035200304550 /* HouschkaAltLight.ttf */,
-				2A7B59FB1AC8035200304550 /* HouschkaAltMedium.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		BFD3D0354F3BC5777420829D /* Pods */ = {
@@ -285,14 +288,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A34BAF61B52A41C0071D640 /* Whitney-Light-Pro.otf in Resources */,
 				2A7B5A181AC8041800304550 /* LaunchScreen.xib in Resources */,
+				2A34BAF51B52A41C0071D640 /* Whitney-Book-Pro.otf in Resources */,
 				2A7B5A191AC8041800304550 /* Main.storyboard in Resources */,
 				2A015ED41AD10F4600C0DFA4 /* ramcom.realm in Resources */,
-				2AF75DB61AC857630063DF90 /* HouschkaAltHeavy.ttf in Resources */,
 				2A7B5A0E1AC8039800304550 /* Images.xcassets in Resources */,
-				2AF75DB51AC8575F0063DF90 /* HouschkaAltLight.ttf in Resources */,
+				2A34BAF41B52A41C0071D640 /* Whitney-Bold-Pro.otf in Resources */,
 				2A7B59FE1AC8036A00304550 /* ApiKeys.plist in Resources */,
-				2AF75DB41AC8575A0063DF90 /* HouschkaAltMedium.ttf in Resources */,
+				2A34BAF71B52A41C0071D640 /* Whitney-Medium-Pro.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

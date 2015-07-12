@@ -68,6 +68,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate{
         }
         else if (indexPath.row == leadingLabels.indexOfObject("ADDRESS")){
             cell.descriptionLabel.text = detailSelectedRamen?.location.formattedAddress
+            cell.descriptionLabel.tintColor = UIColor.blueColor()
+            cell.descriptionLabel.textColor = UIColor.blueColor()
         }
         else if (indexPath.row == leadingLabels.indexOfObject("HOURS")){
             cell.descriptionLabel.text = (detailSelectedRamen?.hours == "") ? "Shhh...No one knows. It's a secret. Show up sometime and maybe you'll get lucky." : detailSelectedRamen?.hours

@@ -137,16 +137,18 @@ class CompassViewController: UIViewController {
                 venueNameEN.text = selectedRamen.name
                 venueNameEN.center = CGPointMake(venueNameEN.center.x, (venueNameJP.center.y - 15))
                 venueNameJP.hidden = true
+                println(venueNameEN.font)
             }
             
-            let font = UIFont(name: "Georgia", size: 18.0) ?? UIFont.systemFontOfSize(18.0)
+            let font = UIFont(name: "Whitney-Light", size: 60.0) ?? UIFont.systemFontOfSize(18.0)
             let textFont = [NSFontAttributeName:font]
-            let distanceString = String(format: "%0.1f km", selectedRamen.location.distanceFrom(currentLocation).0)
+            let distanceString = String(format: "%0.1f", selectedRamen.location.distanceFrom(currentLocation).0)
             var attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
-            //attributedString.appendAttributedString( NSAttributedString(string: "km", attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 18.0)!]))
-            distanceLabel.text = distanceString ?? "WTF"
+            attributedString.appendAttributedString( NSAttributedString(string: " km", attributes: [NSFontAttributeName:UIFont(name: "Whitney-Bold", size: 15.0)!]))
+            //distanceLabel.text = distanceString ?? "WTF"
+            distanceLabel.attributedText = attributedString
             cityLabel.text = "in " + selectedRamen.location.city ?? "in Somewhere"
-            //println(attributedString)
+            println(attributedString)
 
             //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
@@ -175,6 +177,7 @@ class CompassViewController: UIViewController {
     
     @IBAction func refreshLocation(){
         locationFixAchieved = false
+        loadingChopsticksAnimation()
         
         if let
             masterVC = self.parentViewController as? MasterViewController,
@@ -346,7 +349,7 @@ extension CompassViewController: CLLocationManagerDelegate{
             
             UIView.animateWithDuration(0.2,
                 delay: 0.0,
-                options: .CurveEaseInOut | .BeginFromCurrentState,
+                options: .CurveEaseInOut,
                 animations: {
                     self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
                 },
