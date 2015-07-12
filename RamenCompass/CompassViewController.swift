@@ -55,6 +55,8 @@ class CompassViewController: UIViewController {
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
         loadingChopsticksAnimation()
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "bowlTapped:")
+        bowlView.addGestureRecognizer(tapRecognizer)
 
         
         locationManager.delegate = self
@@ -207,6 +209,20 @@ class CompassViewController: UIViewController {
 
             }, completion: nil)
 
+    }
+    
+    func bowlTapped(sender: UITapGestureRecognizer){
+        var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
+        bowlView.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
+        
+        var scaleAnimation1: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation1.velocity = NSValue(CGSize: CGSizeMake(3.0, 3.0))
+        scaleAnimation1.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
+        scaleAnimation1.springBounciness = 10.0
+        bowlView.layer.pop_addAnimation(scaleAnimation1, forKey: "layerScaleSpringAnimation")
+        
+        //delegate?.detailButtonPressed()
     }
     
     @IBAction func panBowl(sender: UIPanGestureRecognizer) {
@@ -406,6 +422,5 @@ extension CompassViewController: MapViewControllerDelegate{
         selectedRamenIndex = venueResults[venResSection].indexOf(venue)!
     }
 }
-
 
 

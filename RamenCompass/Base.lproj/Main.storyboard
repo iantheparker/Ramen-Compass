@@ -340,6 +340,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bowlView" destination="BYB-5i-7pF" id="pej-WT-crW"/>
                         <outlet property="chopsticksImage" destination="xsR-OU-8Ax" id="bmd-rU-dAr"/>
                         <outlet property="cityLabel" destination="OCK-5W-1en" id="WnF-qJ-liB"/>
                         <outlet property="distanceLabel" destination="su3-Ac-ibs" id="gIP-an-4tJ"/>
