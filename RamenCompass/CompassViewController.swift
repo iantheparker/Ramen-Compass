@@ -36,7 +36,6 @@ class CompassViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var RCTitle: UIImageView!
     @IBOutlet weak var chopsticksImage : UIImageView!
     @IBOutlet weak var bowlView: UIView!
     @IBOutlet weak var venueNameJP: UILabel!
@@ -55,6 +54,9 @@ class CompassViewController: UIViewController {
         
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
+        loadingChopsticksAnimation()
+
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
@@ -75,7 +77,7 @@ class CompassViewController: UIViewController {
             self.setupVenueResults()
             self.selectedRamenIndex = 0
         }
-        
+
 }
     
     func setupVenueResults(){
@@ -146,6 +148,7 @@ class CompassViewController: UIViewController {
 
             //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
+            stopChopsticksAnimation()
         }
         
     }
@@ -186,6 +189,25 @@ class CompassViewController: UIViewController {
     
     
     //MARK: - Chopstick Rotation and Animation Methods
+    
+    func loadingChopsticksAnimation(){
+        let fullRotation = CGFloat(M_PI)
+        println("load")
+        UIView.animateWithDuration(0.2, delay:0, options: .Repeat | .CurveLinear, animations: {
+            self.chopsticksImage.transform = CGAffineTransformMakeRotation(fullRotation)
+            return
+            }, completion: nil)
+    }
+    func stopChopsticksAnimation(){
+        
+        UIView.animateWithDuration(2.0, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .BeginFromCurrentState | .CurveEaseInOut,
+            animations: {
+                self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
+                return
+
+            }, completion: nil)
+
+    }
     
     @IBAction func panBowl(sender: UIPanGestureRecognizer) {
         //FIXME: need to offset origin of chopstick spin to center of bowl
@@ -308,7 +330,7 @@ extension CompassViewController: CLLocationManagerDelegate{
             
             UIView.animateWithDuration(0.2,
                 delay: 0.0,
-                options: .CurveEaseInOut,
+                options: .CurveEaseInOut | .BeginFromCurrentState,
                 animations: {
                     self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
                 },
