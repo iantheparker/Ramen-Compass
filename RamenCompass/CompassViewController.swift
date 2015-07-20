@@ -147,7 +147,7 @@ class CompassViewController: UIViewController {
             attributedString.appendAttributedString( NSAttributedString(string: " km", attributes: [NSFontAttributeName:UIFont(name: "Whitney-Bold", size: 15.0)!]))
             //distanceLabel.text = distanceString ?? "WTF"
             distanceLabel.attributedText = attributedString
-            cityLabel.text = "in " + selectedRamen.location.city ?? "in Somewhere"
+            cityLabel.text = "in " + (selectedRamen.location.city ?? "Somewhere")
             println(attributedString)
 
             //FIXME: updateheading may not be the best place for this
@@ -420,8 +420,10 @@ extension CompassViewController: DetailViewControllerDelegate{
 
 extension CompassViewController: MapViewControllerDelegate{
     
-    func ramenSelected(venue: Venue) {
-        delegate?.detailButtonPressed()
+    func ramenSelected(venue: Venue, animated: Bool) {
+        if animated{
+            delegate?.detailButtonPressed()
+        }
         selectedRamenIndex = venueResults[venResSection].indexOf(venue)!
     }
 }

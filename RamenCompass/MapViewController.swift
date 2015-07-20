@@ -14,7 +14,7 @@ let kDistanceMeters:CLLocationDistance = 2000
 
 
 protocol MapViewControllerDelegate{
-    func ramenSelected(venue: Venue)
+    func ramenSelected(venue: Venue, animated: Bool)
 }
 
 class MapViewController: UIViewController {
@@ -35,6 +35,32 @@ class MapViewController: UIViewController {
         
         mapView.userTrackingMode = MKUserTrackingMode.Follow
         populateMap()
+        
+        
+    }
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reload:", name: "selectedRamenChanged", object: nil)
+
+    }
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func reload( notification: NSNotification){
+        
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
+        
+        for annotation in mapView.annotations{
+            if let anno = (annotation as? RamenAnnotation),
+            venue = anno.venue
+            where venue == detailSelectedRamen
+            {
+                mapView.selectAnnotation(anno, animated: true)
+                break
+            }
+        }
+        println("detail reload notif ")
     }
     
     func populateMap() {
@@ -105,13 +131,20 @@ extension MapViewController: MKMapViewDelegate{
         return pinView
     }
     
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+        if let ramen = view.annotation as? RamenAnnotation {
+            println("ramen = \(ramen.venue.name)")
+            delegate?.ramenSelected(ramen.venue, animated: false)
+        }
+    }
+    
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         if control == view.rightCalloutAccessoryView {
             //println("Disclosure Pressed! \(view.annotation.subtitle)")
             
             if let ramen = view.annotation as? RamenAnnotation {
                 println("ramen = \(ramen.venue.name)")
-                delegate?.ramenSelected(ramen.venue)
+                delegate?.ramenSelected(ramen.venue, animated: true)
             }
         }
     }
