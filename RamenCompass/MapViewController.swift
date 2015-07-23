@@ -29,25 +29,26 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reload:", name: "selectedRamenChanged", object: nil)
+        
         let panRecognizer = UIPanGestureRecognizer(target: self, action: "mapPanned:")
         panRecognizer.delegate = self
         mapView.addGestureRecognizer(panRecognizer)
         
         mapView.userTrackingMode = MKUserTrackingMode.Follow
-        populateMap()
         
-        
+        notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
+            println("MapVC notif block")
+            self.populateMap()
+        }
     }
-    override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reload:", name: "selectedRamenChanged", object: nil)
-
-    }
+    
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func reload( notification: NSNotification){
-        
+        println("map reload notif ")
         let userInfo = notification.userInfo as! [String: AnyObject]
         let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         
@@ -57,23 +58,32 @@ class MapViewController: UIViewController {
             where venue == detailSelectedRamen
             {
                 mapView.selectAnnotation(anno, animated: true)
+                centerButton.selected = true
                 break
             }
         }
-        println("detail reload notif ")
     }
     
     func populateMap() {
+        println("populating map")
         mapView.removeAnnotations(mapView.annotations)
-        let venues = Realm().objects(Venue)  // 1
+        let venues = Realm().objects(Venue).sorted("name", ascending: true)
         
+        var firstPin = true
+        var annotation: RamenAnnotation?
         // Create annotations for each one
-        for venue in venues { // 2
+        for venue in venues {
             let aVenue = venue as Venue
             let coord = CLLocationCoordinate2D(latitude: aVenue.location.lat, longitude: aVenue.location.lng)
-            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.address, venue: aVenue) as RamenAnnotation
+            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.address, venue: aVenue)
             mapView.addAnnotation(venueAnno)
+            if firstPin{
+                //annotation = venueAnno
+                firstPin = false
+            }
         }
+        mapView.selectAnnotation(annotation, animated: true)
+        
     }
 
     @IBAction func centerToUsersLocation() {
@@ -100,7 +110,9 @@ extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         println("mapview got user lat \(userLocation.coordinate.latitude) and long \(userLocation.coordinate.longitude)")
-        centerToUsersLocation()
+        if centerButton.selected == true {
+            centerToUsersLocation()
+        }
         
     }
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -167,6 +179,6 @@ extension MapViewController: MKMapViewDelegate{
 extension MapViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(UIGestureRecognizer,
         shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
-            return true
+        return true
     }
 }

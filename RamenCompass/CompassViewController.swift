@@ -54,10 +54,9 @@ class CompassViewController: UIViewController {
         
         // Styling the UI
         self.title = "RAMEN COMPASS" // ラーメン　コンパス
-        loadingChopsticksAnimation()
+        //loadingChopsticksAnimation()
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "bowlTapped:")
         bowlView.addGestureRecognizer(tapRecognizer)
-
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -74,6 +73,7 @@ class CompassViewController: UIViewController {
             println("starting location manager")
         }
         
+        NSFileManager.defaultManager().removeItemAtPath(Realm().path, error: nil)
         notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
             println("CompassVC notif block")
             self.setupVenueResults()
@@ -148,7 +148,7 @@ class CompassViewController: UIViewController {
             //distanceLabel.text = distanceString ?? "WTF"
             distanceLabel.attributedText = attributedString
             cityLabel.text = "in " + (selectedRamen.location.city ?? "Somewhere")
-            println(attributedString)
+            //println(attributedString)
 
             //FIXME: updateheading may not be the best place for this
             locationManager.startUpdatingHeading()
@@ -165,9 +165,6 @@ class CompassViewController: UIViewController {
     
     @IBAction func rightObject(sender: AnyObject) {
         selectedRamenIndex += 1
-        
-        // TODO: move this to anytime user touches bowl or venue names
-        //delegate?.detailButtonPressed()
     }
     
     @IBAction func mapButtonPressed(sender: AnyObject) {
@@ -299,43 +296,7 @@ extension CompassViewController: CLLocationManagerDelegate{
         if (locationFixAchieved == false) {
             locationFixAchieved = true
             Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
-
-//            if (Int(venueResults[venResSection].count) > 0){
-//                println("In loc, using realm")
-//                selectedRamenIndex=0
-//            }
-//            else{
-//                println("In loc, building realm")
-//                //Foursquare.sharedInstance.searchVenues(currentLocation)
-//                Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
-//            }
-            if (locationCC == ""){
-                CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: { (placemarks, error) -> Void in
-                    if (error != nil)
-                    {
-                        println("Reverse geocoder failed with error" + error.localizedDescription)
-                        //pull location from map?
-                        return
-                    }
-                    
-                    if placemarks.count > 0
-                    {
-                        let pm = placemarks[0] as! CLPlacemark
-                        self.locationCC = (pm.country != nil) ? pm.country : ""
-                        if (self.locationCC == "Japan"){
-                            
-                        }
-                        else {
-                            Foursquare.sharedInstance.searchVenues(manager.location)
-                        }
-                    }
-                    else
-                    {
-                        println("Problem with the data received from geocoder")
-                    }
-                })
-            }
-            
+        
         }
     }
     
@@ -384,7 +345,7 @@ extension CompassViewController: DetailViewControllerDelegate{
         let googleAction = UIAlertAction(title: "Google Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             println("Open Google Maps")
-            //UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
+            UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
         })
         let appleAction = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in

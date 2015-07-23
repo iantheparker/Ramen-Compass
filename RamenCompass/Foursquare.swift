@@ -55,7 +55,7 @@ class Foursquare: NSObject {
                         res     = data["response"] as? [String: AnyObject],
                         venues  = res["venues"] as? [NSDictionary]
                     {
-                        println("Foursquare search returned \(venues)")
+                        //println("Foursquare search returned \(venues)")
                         completionHandler(venues, nil)
                     }
                 }
@@ -172,6 +172,9 @@ class Foursquare: NSObject {
                             println("\(detailVenue.id) = \(detailVenue.tips)")
                         }
                         completionHandler(detailVenue, nil)
+                        Realm().write{
+                            Realm().add(detailVenue, update: true)
+                        }
                     }
                 }
 
@@ -185,15 +188,15 @@ class Foursquare: NSObject {
             }else {
                 let venues = response as! [NSDictionary]
                 let realm = Realm()
-                for venue in venues {
-                    self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
-                        if (error == nil){
-                            println(" venuedeets \(venueDeets)")
-                            realm.write {
-                                realm.create(Venue.self, value: venueDeets!, update: true)
+                realm.write {
+                    for venue in venues {
+                        realm.create(Venue.self, value: venue, update: true)
+                        self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
+                            if (error == nil){
+                                //println(" venuedeets \(venueDeets)")
                             }
-                        }
-                    })
+                        })
+                    }
                 }
             }
         }

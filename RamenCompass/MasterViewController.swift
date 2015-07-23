@@ -28,16 +28,18 @@ class MasterViewController: UIViewController {
     }
     
     init(topViewcontroller: MapViewController, mainViewController: CompassViewController, bottomViewController: DetailViewController, overlap: CGFloat) {
-        self.topViewcontroller = topViewcontroller
         self.mainViewController = mainViewController
         self.bottomViewController = bottomViewController
+        self.topViewcontroller = topViewcontroller
+
         self.overlap = overlap
         
         super.init(nibName: nil, bundle: nil)
         
-        self.topViewcontroller.delegate = mainViewController
         self.bottomViewController.delegate = mainViewController
         self.mainViewController.delegate = self
+        self.topViewcontroller.delegate = mainViewController
+
         
         setupScrollView()
         setupViewControllers()
@@ -79,14 +81,13 @@ class MasterViewController: UIViewController {
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
         tapRecognizer.delegate = self
-        // FIXME: buttons on side views are unresponsive
         view.addGestureRecognizer(tapRecognizer)
     }
     
     func setupViewControllers() {
-        addViewController(topViewcontroller)
         addViewController(mainViewController)
         addViewController(bottomViewController)
+        addViewController(topViewcontroller)
         
         addShadowToView(mainViewController.view)
         
@@ -130,9 +131,9 @@ class MasterViewController: UIViewController {
     
     private func addShadowToView(destView: UIView) {
         destView.layer.shadowPath = UIBezierPath(rect: destView.bounds).CGPath
-        destView.layer.shadowRadius = 5.5
-        destView.layer.shadowOffset = CGSize(width: 0, height: 5)
-        destView.layer.shadowOpacity = 1.0
+        destView.layer.shadowRadius = 3.0
+        destView.layer.shadowOffset = CGSize(width: 0, height: 7)
+        destView.layer.shadowOpacity = 0.5
         destView.layer.shadowColor = UIColor.blackColor().CGColor
     }
     
