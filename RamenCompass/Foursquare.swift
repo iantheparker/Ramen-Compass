@@ -173,9 +173,9 @@ class Foursquare: NSObject {
                             println("\(detailVenue.id) = \(detailVenue.tips)")
                         }
                         completionHandler(detailVenue, nil)
-//                        Realm().write{
-//                            Realm().add(detailVenue, update: true)
-//                        }
+                        Realm().write{
+                            Realm().add(detailVenue, update: true)
+                        }
                     }
                 }
 

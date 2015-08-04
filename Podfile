@@ -7,7 +7,7 @@ target 'RamenCompass' do
     pod 'RealmSwift'
     pod 'SwiftyJSON'
     pod 'Alamofire'
-    pod 'SDWebImage', '~>3.7'
+    pod 'HanekeSwift'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'pop', '~> 1.0'
