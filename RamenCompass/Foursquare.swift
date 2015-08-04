@@ -37,8 +37,9 @@ class Foursquare: NSObject {
     func search(coord: CLLocation, radius: String?=nil, completionHandler: (NSArray?, NSError?) -> ()) -> (){
         
         let radius = radius ?? "200"
+        let limit = 10
         
-        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735", parameters: nil)
+        Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&limit=\(limit)", parameters: nil)
             .responseJSON { (req, res, json, error) in
                 
                 if(error != nil) {
@@ -172,9 +173,9 @@ class Foursquare: NSObject {
                             println("\(detailVenue.id) = \(detailVenue.tips)")
                         }
                         completionHandler(detailVenue, nil)
-                        Realm().write{
-                            Realm().add(detailVenue, update: true)
-                        }
+//                        Realm().write{
+//                            Realm().add(detailVenue, update: true)
+//                        }
                     }
                 }
 
@@ -188,16 +189,19 @@ class Foursquare: NSObject {
             }else {
                 let venues = response as! [NSDictionary]
                 let realm = Realm()
-                realm.write {
+                var poo = [Venue]()
+                realm.beginWrite()
                     for venue in venues {
                         realm.create(Venue.self, value: venue, update: true)
                         self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
                             if (error == nil){
+                                poo.append(venueDeets!)
                                 //println(" venuedeets \(venueDeets)")
+                                //realm.add(venueDeets!, update: true)//(Venue.self, value: venueDeets!, update: true)
                             }
                         })
                     }
-                }
+                realm.commitWrite()
             }
         }
     }
@@ -277,7 +281,7 @@ class Foursquare: NSObject {
         }
         
         //FIXME: use the copy of this realm
-        //realm.writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", error: nil)
+        Realm().writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", encryptionKey: nil)
         
         //TODO: reset selectedRamen OR choose closest
         //FIXME: setting the index from here could recursively call updateDisplay when paired with the realmNotif block

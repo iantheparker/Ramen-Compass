@@ -4,9 +4,11 @@ use_frameworks!
 
 target 'RamenCompass' do
     pod 'GoogleMaps'
-    pod 'pop', '~> 1.0'
     pod 'RealmSwift'
     pod 'SwiftyJSON'
     pod 'Alamofire'
     pod 'SDWebImage', '~>3.7'
+    pod 'Fabric'
+    pod 'Crashlytics'
+    pod 'pop', '~> 1.0'
 end

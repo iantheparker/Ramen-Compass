@@ -42,6 +42,7 @@ class CompassViewController: UIViewController {
     @IBOutlet weak var venueNameEN: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var mapButton: PopButton!
     @IBOutlet weak var leftButton : PopButton!
     @IBOutlet weak var rightButton : PopButton!
@@ -62,7 +63,6 @@ class CompassViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
         locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.headingFilter = 2
         locationFixAchieved = false
         
         if (CLLocationManager.authorizationStatus() == .NotDetermined) {
@@ -79,14 +79,14 @@ class CompassViewController: UIViewController {
             self.setupVenueResults()
             self.selectedRamenIndex = 0
         }
-
-}
+    }
     
     func setupVenueResults(){
-        //let unsortedVenues = Realm().objects(Venue).filter(" ")
         venueResults.removeAll(keepCapacity: false)
         let sortedVenues = Realm().objects(Venue).sorted("name", ascending: true)
         venueResults.append(sortedVenues)
+        pageControl.numberOfPages = sortedVenues.count
+        //println(venueResults)
     }
     
     //MARK: - Update Display Methods
@@ -115,7 +115,11 @@ class CompassViewController: UIViewController {
                 leftButton.enabled = false
                 rightButton.enabled = false
             }
+            pageControl.currentPage = selectedRamenIndex
         }
+    }
+    @IBAction func pageTapped(sender: AnyObject) {
+        //selectedRamenIndex = pageControl.currentPage
     }
     func venueForIndexPath(indexPath: NSIndexPath) -> Venue? {
         //println("venueResults in venueForIndexPath = \(venueResults)")
@@ -222,7 +226,7 @@ class CompassViewController: UIViewController {
         scaleAnimation1.springBounciness = 10.0
         bowlView.layer.pop_addAnimation(scaleAnimation1, forKey: "layerScaleSpringAnimation")
         
-        //delegate?.detailButtonPressed()
+        delegate?.detailButtonPressed()
     }
     
     @IBAction func panBowl(sender: UIPanGestureRecognizer) {
@@ -253,7 +257,14 @@ class CompassViewController: UIViewController {
         let tLat = degToRad(toLoc.latitude)
         let tLng = degToRad(toLoc.longitude)
         
-        return (radToDeg(atan2(sin(tLng-fLng)*cos(tLat), cos(fLat)*sin(tLat)-sin(fLat)*cos(tLat)*cos(tLng-fLng))) % 360 )
+        var degrees = (radToDeg(atan2(sin(tLng-fLng)*cos(tLat), cos(fLat)*sin(tLat)-sin(fLat)*cos(tLat)*cos(tLng-fLng))) % 360 )
+        
+        if(degrees<0){
+            degrees = -degrees
+        } else {
+            degrees = 360 - degrees
+        }
+        return degrees
     }
     
 
@@ -302,20 +313,22 @@ extension CompassViewController: CLLocationManagerDelegate{
     
     func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
         var radians = newHeading.trueHeading * (M_PI/180.0)
-        println("radians = \(radians), Updated heading to \(newHeading)")
+        //println("radians = \(radians), Updated heading to \(newHeading)")
         if (selectedRamen != nil){
             var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
             var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
             println("course = \(course)")
             
-            UIView.animateWithDuration(0.2,
-                delay: 0.0,
-                options: .CurveEaseInOut,
-                animations: {
-                    self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(self.degToRad(course)-radians))
-                },
-                completion: { finished in
-            })
+            self.chopsticksImage.layer.anchorPoint = CGPointMake(0.5, 0.5)
+            var transform = CATransform3DIdentity
+            transform.m34 = -1.0/1000.0
+            let tilt = CATransform3DMakeRotation(CGFloat(degToRad(25)), 1, 0, 0)
+            //transform = CATransform3DMakeTranslation(0, 60, 0)
+            let rotation = CATransform3DMakeRotation(CGFloat(self.degToRad(course)-radians), 0, 0, 1)
+            transform = CATransform3DConcat(tilt, rotation)
+            self.chopsticksImage.layer.transform = transform
+            self.chopsticksImage.layer.zPosition = 500
+
         }
         
         

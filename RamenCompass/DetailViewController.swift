@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
 
 protocol DetailViewControllerDelegate {
     func addressDirectionButtonPressed()
@@ -42,11 +43,29 @@ class DetailViewController: UIViewController {
         detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         //println("detail reload notif \(detailSelectedRamen)")
         tableview.reloadData()
-        pictureIV.sd_setImageWithURL(NSURL(string: self.detailSelectedRamen!.photoUrl), placeholderImage: UIImage(named: "ramenImg"))
+        //pictureIV.sd_setImageWithURL(NSURL(string: self.detailSelectedRamen!.photoUrl), placeholderImage: UIImage(named: "ramenImg"))
+        let ao = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        pictureIV.addSubview(ao)
+        ao.center = pictureIV.center
+        ao.startAnimating()
+        Alamofire.request(.GET, self.detailSelectedRamen!.photoUrl)
+            .response { (request, response, data, error) in
+                ao.stopAnimating()
+                ao.removeFromSuperview()
+                if data == nil
+                {
+                    //completionHandler(imageURLResult, nil)
+                    return
+                }
+                self.pictureIV?.image = UIImage(data: data! as NSData)
+                //completionHandler(imageURLResult, nil)
+        }
     }
     
     @IBAction func addressButtonPressed(sender: AnyObject) {
         delegate?.addressDirectionButtonPressed()
+        Realm().writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", encryptionKey: nil)
+
     }
     
 }

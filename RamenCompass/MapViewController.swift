@@ -24,7 +24,7 @@ class MapViewController: UIViewController {
 
     var userLocated:Bool = false
     var delegate : MapViewControllerDelegate?
-    
+    var mapPopulated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class MapViewController: UIViewController {
         
         notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
             println("MapVC notif block")
-            self.populateMap()
+            self.mapPopulated = false
         }
     }
     
@@ -48,6 +48,12 @@ class MapViewController: UIViewController {
     }
     
     func reload( notification: NSNotification){
+        
+        if !mapPopulated{
+            populateMap()
+            mapPopulated = true
+        }
+        
         println("map reload notif ")
         let userInfo = notification.userInfo as! [String: AnyObject]
         let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
@@ -69,20 +75,13 @@ class MapViewController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         let venues = Realm().objects(Venue).sorted("name", ascending: true)
         
-        var firstPin = true
-        var annotation: RamenAnnotation?
         // Create annotations for each one
         for venue in venues {
             let aVenue = venue as Venue
             let coord = CLLocationCoordinate2D(latitude: aVenue.location.lat, longitude: aVenue.location.lng)
             let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.address, venue: aVenue)
             mapView.addAnnotation(venueAnno)
-            if firstPin{
-                //annotation = venueAnno
-                firstPin = false
-            }
         }
-        mapView.selectAnnotation(annotation, animated: true)
         
     }
 
@@ -108,13 +107,6 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate{
     
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        println("mapview got user lat \(userLocation.coordinate.latitude) and long \(userLocation.coordinate.longitude)")
-        if centerButton.selected == true {
-            centerToUsersLocation()
-        }
-        
-    }
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         
         if annotation is MKUserLocation {

@@ -90,8 +90,7 @@ class MasterViewController: UIViewController {
         addViewController(topViewcontroller)
         
         addShadowToView(mainViewController.view)
-        
-        //scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -overlap, right: 0)
+        addGradientToView(mainViewController.view)
         
         let views = ["top": topViewcontroller.view, "main": mainViewController.view, "bottom": bottomViewController.view, "outer": view]
         
@@ -115,11 +114,10 @@ class MasterViewController: UIViewController {
             "V:|[top][main(==outer)][bottom]|", options: .AlignAllLeft | .AlignAllRight, metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [topHeightConstraint, bottomHeightConstraint])
         
-        //view.addGestureRecognizer(scrollView.panGestureRecognizer)
-        
         page1pos = 0
         page2pos = CGRectGetHeight(self.view.frame) - overlap
         page3pos = page2pos * 2
+    
     }
     
     private func addViewController(viewController: UIViewController) {
@@ -130,11 +128,23 @@ class MasterViewController: UIViewController {
     }
     
     private func addShadowToView(destView: UIView) {
+        destView.layer.masksToBounds = false
         destView.layer.shadowPath = UIBezierPath(rect: destView.bounds).CGPath
-        destView.layer.shadowRadius = 3.0
-        destView.layer.shadowOffset = CGSize(width: 0, height: 7)
+        destView.layer.shadowRadius = 4.0
+        destView.layer.shadowOffset = CGSize(width: 0, height: -50)
         destView.layer.shadowOpacity = 0.5
         destView.layer.shadowColor = UIColor.blackColor().CGColor
+    }
+    
+    private func addGradientToView( destView: UIView) {
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRectMake(0, page1pos, destView.frame.width, destView.frame.height * 2)
+        gradientLayer.colors = [UIColor(rgba: "#FEF5CC").CGColor as CGColorRef,
+            UIColor(rgba: "#F2C86A").CGColor as CGColorRef]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        destView.layer.insertSublayer(gradientLayer, atIndex: 0)
     }
     
     func closeTopAnimated(animated: Bool) {
@@ -204,6 +214,14 @@ extension MasterViewController: UIGestureRecognizerDelegate {
 extension MasterViewController: UIScrollViewDelegate{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        var layerNow: CALayer
+        layerNow = self.mainViewController.view.layer.sublayers[0] as! CALayer
+        var offset = scrollView.contentOffset.y - page2pos
+        if (offset <= 0 ) {
+            offset = 0
+        }
+        //layerNow.position = CGPointMake(layerNow.position.x, offset * 1.3)
+        
         if (scrollView.contentOffset.y == page1pos){
             UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
                 self.mainViewController.mapButton.selected = true
@@ -252,20 +270,24 @@ extension MasterViewController: UIScrollViewDelegate{
                 scrollOffset = page3pos
             }
         }
-        //targetContentOffset.memory.y = scrollOffset
 
-        if (velocity.y == 0){
+        
+        if (velocity.y > 2 && scrollOffset < page3pos) {
+            targetContentOffset.memory.y = scrollOffset + page2pos
+        }else if (velocity.y < -2 && scrollOffset > page1pos) {
+            targetContentOffset.memory.y = scrollOffset - page2pos
+        }else{
             targetContentOffset.memory.y = scrollOffset
-
-        }else if (velocity.y > 0){
-
-        }else if (velocity.y < 0){
-            
         }
+            
         
         
 
         println("#2 \(scrollOffset)")
+        
+    }
+    
+    func whichPage(){
         
     }
     
