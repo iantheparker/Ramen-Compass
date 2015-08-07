@@ -4,10 +4,10 @@ use_frameworks!
 
 target 'RamenCompass' do
     pod 'GoogleMaps'
-    pod 'RealmSwift'
-    pod 'SwiftyJSON'
-    pod 'Alamofire'
-    pod 'HanekeSwift'
+    pod 'Realm', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swift-2.0'
+    pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swift-2.0'
+    pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :branch => 'swift-2.0'
+    pod 'Haneke'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'pop', '~> 1.0'

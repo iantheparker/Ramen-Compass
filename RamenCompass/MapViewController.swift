@@ -37,8 +37,8 @@ class MapViewController: UIViewController {
         
         mapView.userTrackingMode = MKUserTrackingMode.Follow
         
-        notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
-            println("MapVC notif block")
+        notificationToken = try! Realm().addNotificationBlock { [unowned self] note, realm in
+            print("MapVC notif block")
             self.mapPopulated = false
         }
     }
@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
             mapPopulated = true
         }
         
-        println("map reload notif ")
+        print("map reload notif ", appendNewline: false)
         let userInfo = notification.userInfo as! [String: AnyObject]
         let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         
@@ -71,9 +71,9 @@ class MapViewController: UIViewController {
     }
     
     func populateMap() {
-        println("populating map")
+        print("populating map", appendNewline: false)
         mapView.removeAnnotations(mapView.annotations)
-        let venues = Realm().objects(Venue).sorted("name", ascending: true)
+        let venues = try! Realm().objects(Venue).sorted("name", ascending: true)
         
         // Create annotations for each one
         for venue in venues {
@@ -86,10 +86,9 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func centerToUsersLocation() {
-        var mapCenter = mapView.userLocation.coordinate
-        println("real mapCenter: \(mapCenter.latitude), \(mapCenter.longitude)")
-        var zoomRegion : MKCoordinateRegion!
-        zoomRegion = MKCoordinateRegionMakeWithDistance(mapCenter, kDistanceMeters, kDistanceMeters)
+        let mapCenter = mapView.userLocation.coordinate
+        print("real mapCenter: \(mapCenter.latitude), \(mapCenter.longitude)", appendNewline: false)
+        let zoomRegion = MKCoordinateRegionMakeWithDistance(mapCenter, kDistanceMeters, kDistanceMeters)
         mapView.setRegion(zoomRegion, animated: true)
         
         centerButton.selected = false
@@ -107,7 +106,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate{
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
@@ -122,12 +121,12 @@ extension MapViewController: MKMapViewDelegate{
             pinView!.canShowCallout = true
             pinView!.animatesDrop = true
             pinView!.pinColor = .Red
-            var detailDisclosure = UIButton.buttonWithType(UIButtonType.InfoLight) as! UIButton
-            var imageview = UIImageView(frame: CGRectMake(0, 0, 50, 55))
+            let detailDisclosure = UIButton(type: UIButtonType.InfoLight)
+            let imageview = UIImageView(frame: CGRectMake(0, 0, 50, 55))
             imageview.image = UIImage(named: "darkIcon")
             pinView!.leftCalloutAccessoryView = imageview
             pinView!.rightCalloutAccessoryView = detailDisclosure
-            pinView!.rightCalloutAccessoryView.tintColor = UIColor.redColor()
+            pinView!.rightCalloutAccessoryView?.tintColor = UIColor.redColor()
         }
         else {
             pinView!.annotation = annotation
@@ -135,27 +134,27 @@ extension MapViewController: MKMapViewDelegate{
         return pinView
     }
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let ramen = view.annotation as? RamenAnnotation {
-            println("ramen = \(ramen.venue.name)")
+            print("ramen = \(ramen.venue.name)", appendNewline: false)
             delegate?.ramenSelected(ramen.venue, animated: false)
         }
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             //println("Disclosure Pressed! \(view.annotation.subtitle)")
             
             if let ramen = view.annotation as? RamenAnnotation {
-                println("ramen = \(ramen.venue.name)")
+                print("ramen = \(ramen.venue.name)", appendNewline: false)
                 delegate?.ramenSelected(ramen.venue, animated: true)
             }
         }
     }
     
-    func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!) {
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
         
-        for annotationView in views as! [MKAnnotationView] {
+        for annotationView in views {
             if (annotationView.annotation is RamenAnnotation) {
                 annotationView.transform = CGAffineTransformMakeTranslation(0, -500)
                 UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveLinear, animations: {
@@ -169,7 +168,7 @@ extension MapViewController: MKMapViewDelegate{
 }
 
 extension MapViewController: UIGestureRecognizerDelegate{
-    func gestureRecognizer(UIGestureRecognizer,
+    func gestureRecognizer(_: UIGestureRecognizer,
         shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
         return true
     }

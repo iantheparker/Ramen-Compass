@@ -49,8 +49,6 @@ class DetailViewController: UIViewController {
     
     @IBAction func addressButtonPressed(sender: AnyObject) {
         delegate?.addressDirectionButtonPressed()
-        Realm().writeCopyToPath("/Users/ianparker/Documents/code/RamenCompass/ramcom_new.realm", encryptionKey: nil)
-
     }
     
 }
@@ -121,7 +119,7 @@ extension Array {
     
     func indexOfObject<T:Equatable>(object: T) -> Int {
         var searchIndex = NSNotFound
-        for (counter, item) in enumerate(self) {
+        for (counter, item) in self.enumerate() {
             if item as! T == object {
                 searchIndex = counter
                 break
@@ -131,7 +129,7 @@ extension Array {
     }
     
     mutating func removeObject<T:Equatable>(object: T) -> T {
-        for (counter, item) in enumerate(self) {
+        for (counter, item) in self.enumerate() {
             if item as! T == object {
                 self.removeAtIndex(counter)
             }

@@ -11,8 +11,8 @@ import MapKit
 
 class RamenAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
-    var title: String
-    var subtitle: String
+    var title: String?
+    var subtitle: String?
     var venue: Venue!
     
     init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, venue : Venue? = nil) {

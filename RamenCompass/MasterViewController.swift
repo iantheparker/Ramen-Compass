@@ -21,8 +21,7 @@ class MasterViewController: UIViewController {
     var page3pos : CGFloat = 0
 
     
-    
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         assert(false, "Use init(leftViewController:mainViewController:overlap:)")
         super.init(coder: aDecoder)
     }
@@ -57,7 +56,7 @@ class MasterViewController: UIViewController {
     
     func setupScrollView() {
         scrollView = UIScrollView()
-        scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.pagingEnabled = false
         scrollView.decelerationRate = UIScrollViewDecelerationRateFast
         scrollView.bounces = false
@@ -68,15 +67,15 @@ class MasterViewController: UIViewController {
         scrollView.delegate = self
         view.addSubview(scrollView)
         
-        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: nil, metrics: nil, views: ["scrollView": scrollView])
-        let scrollHeightConstraint = NSLayoutConstraint(
-            item: scrollView,
-            attribute: .Height,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Height,
-            multiplier: 1.0, constant: -overlap)
-        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: nil, metrics: nil, views: ["scrollView": scrollView])
+        let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView])
+//        let scrollHeightConstraint = NSLayoutConstraint(
+//            item: scrollView,
+//            attribute: .Height,
+//            relatedBy: .Equal,
+//            toItem: view,
+//            attribute: .Height,
+//            multiplier: 1.0, constant: -overlap)
+        let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: [], metrics: nil, views: ["scrollView": scrollView])
         NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints) // [] had scrollHeightConstrant
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "viewTapped:")
@@ -95,7 +94,7 @@ class MasterViewController: UIViewController {
         let views = ["top": topViewcontroller.view, "main": mainViewController.view, "bottom": bottomViewController.view, "outer": view]
         
         let horizontalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "|[main(==outer)]|", options: nil , metrics: nil, views: views)
+            "|[main(==outer)]|", options: [] , metrics: nil, views: views)
         let topHeightConstraint = NSLayoutConstraint(
             item: topViewcontroller.view,
             attribute: .Height,
@@ -111,7 +110,7 @@ class MasterViewController: UIViewController {
             attribute: .Height,
             multiplier: 1.0, constant: -overlap)
         let verticalConstraints = NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[top][main(==outer)][bottom]|", options: .AlignAllLeft | .AlignAllRight, metrics: nil, views: views)
+            "V:|[top][main(==outer)][bottom]|", options: [.AlignAllLeft, .AlignAllRight], metrics: nil, views: views)
         NSLayoutConstraint.activateConstraints(horizontalConstraints + verticalConstraints + [topHeightConstraint, bottomHeightConstraint])
         
         page1pos = 0
@@ -121,7 +120,7 @@ class MasterViewController: UIViewController {
     }
     
     private func addViewController(viewController: UIViewController) {
-        viewController.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(viewController.view)
         addChildViewController(viewController)
         viewController.didMoveToParentViewController(self)
@@ -214,13 +213,7 @@ extension MasterViewController: UIGestureRecognizerDelegate {
 extension MasterViewController: UIScrollViewDelegate{
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        var layerNow: CALayer
-        layerNow = self.mainViewController.view.layer.sublayers[0] as! CALayer
-        var offset = scrollView.contentOffset.y - page2pos
-        if (offset <= 0 ) {
-            offset = 0
-        }
-        //layerNow.position = CGPointMake(layerNow.position.x, offset * 1.3)
+
         
         if (scrollView.contentOffset.y == page1pos){
             UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
@@ -254,7 +247,7 @@ extension MasterViewController: UIScrollViewDelegate{
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         var scrollOffset = targetContentOffset.memory.y
-        println("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)")
+        print("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)", appendNewline: false)
         
         if ((scrollOffset >= page1pos) && (scrollOffset < page2pos)){
             if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
@@ -283,7 +276,7 @@ extension MasterViewController: UIScrollViewDelegate{
         
         
 
-        println("#2 \(scrollOffset)")
+        print("#2 \(scrollOffset)", appendNewline: false)
         
     }
     

@@ -13,5 +13,4 @@
 #endif
 
 #import "NSString+Japanese.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "POP/POP.h"
+//#import "POP/POP.h"

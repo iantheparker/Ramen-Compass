@@ -1,6 +1,0 @@
-framework module Haneke {
-  umbrella header "Pods-RamenCompass-HanekeSwift-umbrella.h"
-
-  export *
-  module * { export * }
-}

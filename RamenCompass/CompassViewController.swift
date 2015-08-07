@@ -32,7 +32,7 @@ class CompassViewController: UIViewController {
     var selectedRamen: Venue! {
         didSet{
             NSNotificationCenter.defaultCenter().postNotificationName("selectedRamenChanged", object: self, userInfo: ["selectedRamen":selectedRamen])
-            println("set notif for selectedRamen")
+            print("set notif for selectedRamen")
         }
     }
 
@@ -67,15 +67,15 @@ class CompassViewController: UIViewController {
         
         if (CLLocationManager.authorizationStatus() == .NotDetermined) {
             locationManager.requestWhenInUseAuthorization()
-            println("Requesting Authorization")
+            print("Requesting Authorization")
         } else {
             locationManager.startUpdatingLocation()
-            println("starting location manager")
+            print("starting location manager")
         }
         
-        NSFileManager.defaultManager().removeItemAtPath(Realm().path, error: nil)
-        notificationToken = Realm().addNotificationBlock { [unowned self] note, realm in
-            println("CompassVC notif block")
+        try! NSFileManager.defaultManager().removeItemAtPath(((try! Realm()).path))
+        notificationToken = try! Realm().addNotificationBlock { [unowned self] note, realm in
+            print("CompassVC notif block")
             self.setupVenueResults()
             self.selectedRamenIndex = 0
         }
@@ -83,7 +83,7 @@ class CompassViewController: UIViewController {
     
     func setupVenueResults(){
         venueResults.removeAll(keepCapacity: false)
-        let sortedVenues = Realm().objects(Venue).sorted("name", ascending: true)
+        let sortedVenues = try! Realm().objects(Venue).sorted("name", ascending: true)
         venueResults.append(sortedVenues)
         pageControl.numberOfPages = sortedVenues.count
         //println(venueResults)
@@ -131,7 +131,7 @@ class CompassViewController: UIViewController {
         if let selectedRamenTest = venueForIndexPath(NSIndexPath(forRow: selectedRamenIndex, inSection: venResSection)){
             
             selectedRamen = selectedRamenTest
-            println("selectedRamen.description at \(selectedRamenIndex) = \(selectedRamen.name)")
+            print("selectedRamen.description at \(selectedRamenIndex) = \(selectedRamen.name)")
             
             if (NSString.stringContainsJapaneseText((selectedRamen.name as NSString) as String)){
                 venueNameJP.text = selectedRamen.name.uppercaseString
@@ -141,13 +141,13 @@ class CompassViewController: UIViewController {
                 venueNameEN.text = selectedRamen.name
                 venueNameEN.center = CGPointMake(venueNameEN.center.x, (venueNameJP.center.y - 15))
                 venueNameJP.hidden = true
-                println(venueNameEN.font)
+                print(venueNameEN.font)
             }
             
             let font = UIFont(name: "Whitney-Light", size: 60.0) ?? UIFont.systemFontOfSize(18.0)
             let textFont = [NSFontAttributeName:font]
             let distanceString = String(format: "%0.1f", selectedRamen.location.distanceFrom(currentLocation).0)
-            var attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
+            let attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
             attributedString.appendAttributedString( NSAttributedString(string: " km", attributes: [NSFontAttributeName:UIFont(name: "Whitney-Bold", size: 15.0)!]))
             //distanceLabel.text = distanceString ?? "WTF"
             distanceLabel.attributedText = attributedString
@@ -173,7 +173,7 @@ class CompassViewController: UIViewController {
     
     @IBAction func mapButtonPressed(sender: AnyObject) {
         delegate?.mapButtonPressed()
-        println("map button pressed")
+        print("map button pressed")
     }
     
     @IBAction func refreshLocation(){
@@ -185,7 +185,7 @@ class CompassViewController: UIViewController {
             mapVC = masterVC.childViewControllers[0] as? MapViewController
             where masterVC.topVCIsOpen()
         {
-            println("top is open")
+            print("top is open")
             Foursquare.sharedInstance.searchWithDetails(mapVC.getMapCenterCoord(), radius: nil)
         }else{
             locationManager.startUpdatingLocation()
@@ -198,15 +198,15 @@ class CompassViewController: UIViewController {
     
     func loadingChopsticksAnimation(){
         let fullRotation = CGFloat(M_PI)
-        println("load")
-        UIView.animateWithDuration(0.2, delay:0, options: .Repeat | .CurveLinear, animations: {
+        print("load")
+        UIView.animateWithDuration(0.2, delay:0, options: UIViewAnimationOptions.Repeat , animations: {
             self.chopsticksImage.transform = CGAffineTransformMakeRotation(fullRotation)
             return
             }, completion: nil)
     }
     func stopChopsticksAnimation(){
         
-        UIView.animateWithDuration(2.0, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .BeginFromCurrentState | .CurveEaseInOut,
+        UIView.animateWithDuration(2.0, delay: 0.3, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut,
             animations: {
                 self.chopsticksImage.transform = CGAffineTransformMakeRotation(CGFloat(0))
                 return
@@ -216,29 +216,19 @@ class CompassViewController: UIViewController {
     }
     
     func bowlTapped(sender: UITapGestureRecognizer){
-        var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
-        bowlView.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
-        
-        var scaleAnimation1: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnimation1.velocity = NSValue(CGSize: CGSizeMake(3.0, 3.0))
-        scaleAnimation1.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
-        scaleAnimation1.springBounciness = 10.0
-        bowlView.layer.pop_addAnimation(scaleAnimation1, forKey: "layerScaleSpringAnimation")
-        
+//        var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
+//        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
+//        bowlView.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
+//        
+//        var scaleAnimation1: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+//        scaleAnimation1.velocity = NSValue(CGSize: CGSizeMake(3.0, 3.0))
+//        scaleAnimation1.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
+//        scaleAnimation1.springBounciness = 10.0
+//        bowlView.layer.pop_addAnimation(scaleAnimation1, forKey: "layerScaleSpringAnimation")
+//        
         delegate?.detailButtonPressed()
     }
     
-    @IBAction func panBowl(sender: UIPanGestureRecognizer) {
-        //FIXME: need to offset origin of chopstick spin to center of bowl
-        println("bowlpan = \(sender.translationInView(bowlView)) in vcview \(sender.translationInView(self.view))")
-        var angle = atan2f(Float(sender.translationInView(self.view).x), Float(sender.translationInView(self.view).y))
-        
-        var initialRotation: Float
-        
-        initialRotation = atan2f(Float(sender.view!.transform.b), Float(sender.view!.transform.a))
-        self.bowlView.transform = CGAffineTransformMakeRotation(CGFloat(-angle))
-    }
     
     func degToRad(degrees: Double) -> Double
     {
@@ -272,11 +262,11 @@ class CompassViewController: UIViewController {
 
 extension CompassViewController: CLLocationManagerDelegate{
     //MARK: - LocationManager
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         switch status {
         case .AuthorizedAlways, .AuthorizedWhenInUse:
-            println("Authorized")
+            print("Authorized")
             locationManager.startUpdatingLocation()
         case .NotDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -300,24 +290,24 @@ extension CompassViewController: CLLocationManagerDelegate{
         }
         
     }
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        var locationArray = locations as NSArray
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locationArray = locations as NSArray
         currentLocation = locationArray.lastObject as! CLLocation
-        println("my current location \(currentLocation)")
+        print("my current location \(currentLocation)")
         if (locationFixAchieved == false) {
             locationFixAchieved = true
             Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
-        
+            
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        var radians = newHeading.trueHeading * (M_PI/180.0)
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        let radians = newHeading.trueHeading * (M_PI/180.0)
         //println("radians = \(radians), Updated heading to \(newHeading)")
         if (selectedRamen != nil){
-            var venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
-            var course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
-            println("course = \(course)")
+            let venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+            let course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
+            print("course = \(course)")
             
             self.chopsticksImage.layer.anchorPoint = CGPointMake(0.5, 0.5)
             var transform = CATransform3DIdentity
@@ -334,9 +324,9 @@ extension CompassViewController: CLLocationManagerDelegate{
         
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("i'm on loc error")
-        println(error.localizedDescription)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("i'm on loc error")
+        print(error.localizedDescription)
         locationManager.stopUpdatingLocation()
         venueNameJP.text = error.localizedDescription
     }
@@ -349,7 +339,7 @@ extension CompassViewController: DetailViewControllerDelegate{
         if (UIApplication.sharedApplication().canOpenURL(
             NSURL(string: "comgooglemaps://")!) == false){
                 openAppleMapDirections()
-                println("no google maps")
+                print("no google maps")
                 return
         }
         
@@ -357,19 +347,19 @@ extension CompassViewController: DetailViewControllerDelegate{
         
         let googleAction = UIAlertAction(title: "Google Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            println("Open Google Maps")
+            print("Open Google Maps")
             UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
         })
         let appleAction = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            println("Open Apple Maps")
+            print("Open Apple Maps")
             self.openAppleMapDirections()
             
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
-            println("Cancelled")
+            print("Cancelled")
         })
         
         optionMenu.addAction(googleAction)
@@ -380,13 +370,13 @@ extension CompassViewController: DetailViewControllerDelegate{
     }
     
     func openAppleMapDirections(){
-        println("openAppleMapDirections pressed")
+        print("openAppleMapDirections pressed")
         if selectedRamen == nil {return}
         
-        var coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
-        var options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-        var placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
-        var mapItem = MKMapItem(placemark: placemark)
+        let coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+        let options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+        let placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = "\(selectedRamen.name)"
         mapItem.openInMapsWithLaunchOptions(options)
     }
