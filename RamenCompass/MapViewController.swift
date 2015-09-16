@@ -54,7 +54,7 @@ class MapViewController: UIViewController {
             mapPopulated = true
         }
         
-        print("map reload notif ", appendNewline: false)
+        print("map reload notif ")
         let userInfo = notification.userInfo as! [String: AnyObject]
         let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         
@@ -71,15 +71,15 @@ class MapViewController: UIViewController {
     }
     
     func populateMap() {
-        print("populating map", appendNewline: false)
+        print("populating map")
         mapView.removeAnnotations(mapView.annotations)
         let venues = try! Realm().objects(Venue).sorted("name", ascending: true)
         
         // Create annotations for each one
         for venue in venues {
             let aVenue = venue as Venue
-            let coord = CLLocationCoordinate2D(latitude: aVenue.location.lat, longitude: aVenue.location.lng)
-            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location.address, venue: aVenue)
+            let coord = CLLocationCoordinate2D(latitude: aVenue.location!.lat, longitude: aVenue.location!.lng)
+            let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location!.address, venue: aVenue)
             mapView.addAnnotation(venueAnno)
         }
         
@@ -87,7 +87,7 @@ class MapViewController: UIViewController {
 
     @IBAction func centerToUsersLocation() {
         let mapCenter = mapView.userLocation.coordinate
-        print("real mapCenter: \(mapCenter.latitude), \(mapCenter.longitude)", appendNewline: false)
+        print("real mapCenter: \(mapCenter.latitude), \(mapCenter.longitude)")
         let zoomRegion = MKCoordinateRegionMakeWithDistance(mapCenter, kDistanceMeters, kDistanceMeters)
         mapView.setRegion(zoomRegion, animated: true)
         
@@ -136,7 +136,7 @@ extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let ramen = view.annotation as? RamenAnnotation {
-            print("ramen = \(ramen.venue.name)", appendNewline: false)
+            print("ramen = \(ramen.venue.name)")
             delegate?.ramenSelected(ramen.venue, animated: false)
         }
     }
@@ -146,7 +146,7 @@ extension MapViewController: MKMapViewDelegate{
             //println("Disclosure Pressed! \(view.annotation.subtitle)")
             
             if let ramen = view.annotation as? RamenAnnotation {
-                print("ramen = \(ramen.venue.name)", appendNewline: false)
+                print("ramen = \(ramen.venue.name)")
                 delegate?.ramenSelected(ramen.venue, animated: true)
             }
         }

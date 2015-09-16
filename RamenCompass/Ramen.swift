@@ -38,7 +38,7 @@ class Venue: Object {
     var nameJPTransliterated: String {
         return ((name as NSString).stringByTransliteratingJapaneseToRomajiWithWordSeperator(" ") as String).capitalizedString
     }
-    dynamic var location = Location()
+    dynamic var location : Location?
     
     dynamic var hours = ""
     dynamic var tips = ""

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import pop
 
 class PopButton: UIButton {
     //
@@ -28,31 +28,31 @@ class PopButton: UIButton {
     }
     
     func scaleToSmall(){
-//        var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
-//        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
-//        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
+        let scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(0.90, 0.90))
+        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSmallAnimation")
     }
     
     func scaleAnimation(){
-//        var scaleAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-//        scaleAnimation.velocity = NSValue(CGSize: CGSizeMake(5.0, 5.0))
-//        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
-//        scaleAnimation.springBounciness = 25.0
-//        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSpringAnimation")
-//        
-//        if (self.tag == 100){ //Buttons tagged with 1 are rotation as well
-//            var spinAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
-//            spinAnimation.velocity = 20
-//            spinAnimation.toValue = 2*M_PI
-//            spinAnimation.springBounciness = 10.0
-//            self.layer.pop_addAnimation(spinAnimation, forKey: "layerSpinSpringAnimation")
-//        }
+        let scaleAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation.velocity = NSValue(CGSize: CGSizeMake(5.0, 5.0))
+        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
+        scaleAnimation.springBounciness = 25.0
+        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleSpringAnimation")
+        
+        if (self.tag == 100){ //Buttons tagged with 1 are rotation as well
+            let spinAnimation: POPSpringAnimation = POPSpringAnimation(propertyNamed: kPOPLayerRotation)
+            spinAnimation.velocity = 20
+            spinAnimation.toValue = 2*M_PI
+            spinAnimation.springBounciness = 10.0
+            self.layer.pop_addAnimation(spinAnimation, forKey: "layerSpinSpringAnimation")
+        }
     }
     
     func scaleToDefault(){
-//        var scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
-//        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
-//        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleDefaultAnimation")
+        let scaleAnimation: POPBasicAnimation = POPBasicAnimation(propertyNamed: kPOPLayerScaleXY)
+        scaleAnimation.toValue = NSValue(CGSize: CGSizeMake(1.0, 1.0))
+        self.layer.pop_addAnimation(scaleAnimation, forKey: "layerScaleDefaultAnimation")
     }
 
 }

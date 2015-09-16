@@ -247,7 +247,7 @@ extension MasterViewController: UIScrollViewDelegate{
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         var scrollOffset = targetContentOffset.memory.y
-        print("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)", appendNewline: false)
+        print("#1 \(scrollOffset) page2 \(page2pos) page3 \(page3pos) velocity \(velocity)", terminator: "")
         
         if ((scrollOffset >= page1pos) && (scrollOffset < page2pos)){
             if (fabs(scrollOffset - page1pos) < fabs(scrollOffset - page2pos)){
@@ -276,7 +276,7 @@ extension MasterViewController: UIScrollViewDelegate{
         
         
 
-        print("#2 \(scrollOffset)", appendNewline: false)
+        print("#2 \(scrollOffset)", terminator: "")
         
     }
     

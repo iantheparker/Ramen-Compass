@@ -146,12 +146,12 @@ class CompassViewController: UIViewController {
             
             let font = UIFont(name: "Whitney-Light", size: 60.0) ?? UIFont.systemFontOfSize(18.0)
             let textFont = [NSFontAttributeName:font]
-            let distanceString = String(format: "%0.1f", selectedRamen.location.distanceFrom(currentLocation).0)
+            let distanceString = String(format: "%0.1f", selectedRamen.location!.distanceFrom(currentLocation).0)
             let attributedString = NSMutableAttributedString(string: distanceString, attributes: textFont)
             attributedString.appendAttributedString( NSAttributedString(string: " km", attributes: [NSFontAttributeName:UIFont(name: "Whitney-Bold", size: 15.0)!]))
             //distanceLabel.text = distanceString ?? "WTF"
             distanceLabel.attributedText = attributedString
-            cityLabel.text = "in " + (selectedRamen.location.city ?? "Somewhere")
+            cityLabel.text = "in " + (selectedRamen.location?.city ?? "Somewhere")
             //println(attributedString)
 
             //FIXME: updateheading may not be the best place for this
@@ -305,7 +305,7 @@ extension CompassViewController: CLLocationManagerDelegate{
         let radians = newHeading.trueHeading * (M_PI/180.0)
         //println("radians = \(radians), Updated heading to \(newHeading)")
         if (selectedRamen != nil){
-            let venueLoc = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+            let venueLoc = CLLocationCoordinate2DMake(selectedRamen.location!.lat, selectedRamen.location!.lng)
             let course = getHeadingForDirection(currentLocation.coordinate, toLoc: venueLoc)
             print("course = \(course)")
             
@@ -348,7 +348,7 @@ extension CompassViewController: DetailViewControllerDelegate{
         let googleAction = UIAlertAction(title: "Google Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("Open Google Maps")
-            UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location.lat),\(self.selectedRamen.location.lng)&directionsmode=walking")!)
+            UIApplication.sharedApplication().openURL(NSURL(string:"comgooglemaps://?saddr=\(self.currentLocation.coordinate.latitude),\(self.currentLocation.coordinate.longitude)&daddr=\(self.selectedRamen.location!.lat),\(self.selectedRamen.location!.lng)&directionsmode=walking")!)
         })
         let appleAction = UIAlertAction(title: "Apple Maps", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -373,7 +373,7 @@ extension CompassViewController: DetailViewControllerDelegate{
         print("openAppleMapDirections pressed")
         if selectedRamen == nil {return}
         
-        let coordinates = CLLocationCoordinate2DMake(selectedRamen.location.lat, selectedRamen.location.lng)
+        let coordinates = CLLocationCoordinate2DMake(selectedRamen.location!.lat, selectedRamen.location!.lng)
         let options = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
         let placemark =  MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)

@@ -55,6 +55,9 @@ public final class Realm {
     /// The Schema used by this realm.
     public var schema: Schema { return Schema(rlmRealm.schema) }
 
+    /// Returns a `Configuration` that can be used to create this `Realm` instance.
+    public var configuration: Configuration { return Configuration.fromRLMRealmConfiguration(rlmRealm.configuration) }
+
     /**
     The location of the default Realm as a string. Can be overridden.
 
@@ -64,28 +67,41 @@ public final class Realm {
 
     - returns: Location of the default Realm.
     */
+    @available(*, deprecated=1, message="Use Realm.Configuration.defaultConfiguration")
     public class var defaultPath: String {
         get {
-            return RLMRealm.defaultRealmPath()
+            return Configuration.defaultConfiguration.path ?? RLMRealmConfiguration.defaultRealmPath()
         }
         set {
-            RLMRealm.setDefaultRealmPath(newValue)
+            RLMRealmConfiguration.setDefaultPath(newValue)
         }
     }
 
     // MARK: Initializers
 
     /**
-    Obtains a Realm instance persisted at the specified file path. Defaults to
-    `Realm.defaultPath`
+    Obtains a Realm instance with the given configuration. Defaults to the default Realm configuration,
+    which can be changed by setting `Realm.Configuration.defaultConfiguration`.
+
+    - parameter configuration: The configuration to use when creating the Realm instance.
+    */
+    public convenience init(configuration: Configuration = Configuration.defaultConfiguration) throws {
+        let rlmConfiguration = configuration.rlmConfiguration
+        RLMRealmAddPathSettingsToConfiguration(rlmConfiguration)
+        let rlmRealm = try RLMRealm(configuration: rlmConfiguration)
+        self.init(rlmRealm)
+    }
+
+    /**
+    Obtains a Realm instance persisted at the specified file path.
 
     - parameter path: Path to the realm file.
     */
-    public convenience init(path: String = Realm.defaultPath) throws {
+    public convenience init(path: String) throws {
         let rlmRealm = try RLMRealm(path: path, key: nil, readOnly: false, inMemory: false, dynamic: false, schema: nil)
         self.init(rlmRealm)
     }
-    
+
     /**
     Obtains a `Realm` instance with persistence to a specific file path with
     options.
@@ -103,6 +119,7 @@ public final class Realm {
     - parameter readOnly:      Bool indicating if this Realm is read-only (must use for read-only files).
     - parameter encryptionKey: 64-byte key to use to encrypt the data.
     */
+    @available(*, deprecated=1, message="Use Realm(configuration:)")
     public convenience init(path: String, readOnly: Bool, encryptionKey: NSData? = nil) throws {
         let rlmRealm = try RLMRealm(path: path, key: encryptionKey, readOnly: readOnly, inMemory: false, dynamic: false, schema: nil)
         self.init(rlmRealm)
@@ -123,8 +140,10 @@ public final class Realm {
 
     - parameter identifier: A string used to identify a particular in-memory Realm.
     */
-    public convenience init(inMemoryIdentifier: String) {
-        self.init(RLMRealm.inMemoryRealmWithIdentifier(inMemoryIdentifier))
+    @available(*, deprecated=1, message="Use Realm(configuration:)")
+    public convenience init(inMemoryIdentifier: String) throws {
+        let configuration = Configuration(inMemoryIdentifier: inMemoryIdentifier)
+        try self.init(configuration: configuration)
     }
 
     // MARK: Transactions
@@ -134,8 +153,8 @@ public final class Realm {
 
     - parameter block: The block to be executed inside a write transaction.
     */
-    public func write(block: (() -> Void)) {
-        rlmRealm.transactionWithBlock(block)
+    public func write(block: (() -> Void)) throws {
+        try rlmRealm.transactionWithBlock(block)
     }
 
     /**
@@ -168,8 +187,8 @@ public final class Realm {
 
     Calling this when not in a write transaction will throw an exception.
     */
-    public func commitWrite() {
-        rlmRealm.commitWriteTransaction()
+    public func commitWrite() throws {
+        try rlmRealm.commitWriteTransaction()
     }
 
     /**
@@ -262,9 +281,9 @@ public final class Realm {
 
     Creates or updates an instance of this object and adds it to the `Realm` populating
     the object with the given value.
-    
+
     When 'update' is 'true', the object must have a primary key. If no objects exist in
-    the Realm instance with the same primary key value, the object is inserted. Otherwise, 
+    the Realm instance with the same primary key value, the object is inserted. Otherwise,
     the existing object is updated with any changed values.
 
     - parameter type:   The object type to create.
@@ -280,11 +299,44 @@ public final class Realm {
     */
     public func create<T: Object>(type: T.Type, value: AnyObject = [:], update: Bool = false) -> T {
         // FIXME: use T.className()
-        let className = (T.self as Object.Type).className()
+        let className = (type as Object.Type).className()
         if update && schema[className]?.primaryKeyProperty == nil {
           throwRealmException("'\(className)' does not have a primary key and can not be updated")
         }
         return unsafeBitCast(RLMCreateObjectInRealmWithValue(rlmRealm, className, value, update), T.self)
+    }
+
+    /**
+    This method is useful only in specialized circumstances, for example, when building
+    components that integrate with Realm. If you are simply building an app on Realm, it is
+    recommended to use the typed method `create(type:value:update:)`.
+
+    Creates or updates an object with the given class name and adds it to the `Realm` populating
+    the object with the given value.
+
+    When 'update' is 'true', the object must have a primary key. If no objects exist in
+    the Realm instance with the same primary key value, the object is inserted. Otherwise,
+    the existing object is updated with any changed values.
+
+    - parameter className:  The class name of the object to create.
+    - parameter value:      The value used to populate the object. This can be any key/value coding compliant
+    object, or a JSON dictionary such as those returned from the methods in `NSJSONSerialization`,
+    or an `Array` with one object for each persisted property. An exception will be
+    thrown if any required properties are not present and no default is set.
+
+    When passing in an `Array`, all properties must be present,
+    valid and in the same order as the properties defined in the model.
+    - parameter update:     If true will try to update existing objects with the same primary key.
+
+    - returns: The created object.
+
+    :nodoc:
+    */
+    public func dynamicCreate(className: String, value: AnyObject = [:], update: Bool = false) -> DynamicObject {
+        if update && schema[className]?.primaryKeyProperty == nil {
+            throwRealmException("'\(className)' does not have a primary key and can not be updated")
+        }
+        return unsafeBitCast(RLMCreateObjectInRealmWithValue(rlmRealm, className, value, update), DynamicObject.self)
     }
 
     // MARK: Deleting objects
@@ -301,8 +353,8 @@ public final class Realm {
     /**
     Deletes the given objects from this Realm.
 
-    - parameter object: The objects to be deleted. This can be a `List<Object>`, `Results<Object>`,
-                        or any other enumerable SequenceType which generates Object.
+    - parameter objects: The objects to be deleted. This can be a `List<Object>`, `Results<Object>`,
+                         or any other enumerable SequenceType which generates Object.
     */
     public func delete<S: SequenceType where S.Generator.Element: Object>(objects: S) {
         for obj in objects {
@@ -313,9 +365,8 @@ public final class Realm {
     /**
     Deletes the given objects from this Realm.
 
-    - parameter object: The objects to be deleted. This can be a `List<Object>`, `Results<Object>`,
-                        or any other enumerable SequenceType which generates Object.
-    
+    - parameter objects: The objects to be deleted. Must be `List<Object>`.
+
     :nodoc:
     */
     public func delete<T: Object>(objects: List<T>) {
@@ -325,9 +376,8 @@ public final class Realm {
     /**
     Deletes the given objects from this Realm.
 
-    - parameter object: The objects to be deleted. This can be a `List<Object>`, `Results<Object>`,
-                        or any other enumerable SequenceType which generates Object.
-    
+    - parameter objects: The objects to be deleted. Must be `Results<Object>`.
+
     :nodoc:
     */
     public func delete<T: Object>(objects: Results<T>) {
@@ -352,7 +402,26 @@ public final class Realm {
     */
     public func objects<T: Object>(type: T.Type) -> Results<T> {
         // FIXME: use T.className()
-        return Results<T>(RLMGetObjects(rlmRealm, (T.self as Object.Type).className(), nil))
+        return Results<T>(RLMGetObjects(rlmRealm, (type as Object.Type).className(), nil))
+    }
+
+    /**
+    This method is useful only in specialized circumstances, for example, when building
+    components that integrate with Realm. If you are simply building an app on Realm, it is
+    recommended to use the typed method `objects(type:)`.
+
+    Returns all objects for a given class name in the Realm.
+
+    - warning: This method is useful only in specialized circumstances.
+
+    - parameter className: The class name of the objects to be returned.
+
+    - returns: All objects for the given class name as dynamic objects
+
+    :nodoc:
+    */
+    public func dynamicObjects(className: String) -> Results<DynamicObject> {
+        return Results<DynamicObject>(RLMGetObjects(rlmRealm, className, nil))
     }
 
     /**
@@ -371,9 +440,34 @@ public final class Realm {
     */
     public func objectForPrimaryKey<T: Object>(type: T.Type, key: AnyObject) -> T? {
         // FIXME: use T.className()
-        return unsafeBitCast(RLMGetObject(rlmRealm, (T.self as Object.Type).className(), key), Optional<T>.self)
+        return unsafeBitCast(RLMGetObject(rlmRealm, (type as Object.Type).className(), key), Optional<T>.self)
     }
 
+    /**
+    This method is useful only in specialized circumstances, for example, when building
+    components that integrate with Realm. If you are simply building an app on Realm, it is
+    recommended to use the typed method `objectForPrimaryKey(type:key:)`.
+
+    Get a dynamic object with the given class name and primary key.
+
+    Returns `nil` if no object exists with the given class name and primary key.
+
+    This method requires that `primaryKey()` be overridden on the given subclass.
+
+    - see: Object.primaryKey()
+
+    - warning: This method is useful only in specialized circumstances.
+
+    - parameter className:  The class name of the object to be returned.
+    - parameter key:        The primary key of the desired object.
+
+    - returns: An object of type `DynamicObject` or `nil` if an object with the given primary key does not exist.
+
+    :nodoc:
+    */
+    public func dynamicObjectForPrimaryKey(className: String, key: AnyObject) -> DynamicObject? {
+        return unsafeBitCast(RLMGetObject(rlmRealm, className, key), Optional<DynamicObject>.self)
+    }
 
     // MARK: Notifications
 
@@ -515,9 +609,10 @@ public final class Realm {
 
     - parameter encryptionKey: 64-byte encryption key to use, or `nil` to unset.
     - parameter path:          Realm path to set the encryption key for.
-    +*/
-    public class func setEncryptionKey(encryptionKey: NSData?, forPath: String = Realm.defaultPath) {
-        RLMRealm.setEncryptionKey(encryptionKey, forRealmsAtPath: forPath)
+    */
+    @available(*, deprecated=1, message="Use Realm(configuration:)")
+    public class func setEncryptionKey(encryptionKey: NSData?, forPath path: String = Realm.defaultPath) {
+        RLMRealmSetEncryptionKeyForPath(encryptionKey, path)
     }
 
     // MARK: Internal

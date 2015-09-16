@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Complication - RamComWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>Glance - RamComWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Notification - RamComWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>RamComWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>Ramen Compass.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +32,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2A7971ED1B7506440091A497</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2A7971F91B7506440091A497</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2AB7CB131A95B8DE003EE308</key>
 		<dict>
 			<key>primary</key>

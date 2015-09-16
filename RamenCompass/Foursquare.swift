@@ -40,7 +40,7 @@ class Foursquare: NSObject {
         let limit = 10
         
         Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&limit=\(limit)", parameters: nil)
-            .responseJSON { _,_, result in
+            .responseJSON { ( request, response, result) in
                 
                 if let
                     data    = result.value as? NSDictionary,
@@ -49,7 +49,7 @@ class Foursquare: NSObject {
                 {
                     completionHandler(venues, nil)
                 }else{
-                    self.showAlert(result.error!)
+                    //self.showAlert(result.error!)
                 }
         }
     }
@@ -68,7 +68,7 @@ class Foursquare: NSObject {
                 {
                     completionHandler(venue, nil)
                 }else{
-                    self.showAlert(result.error!)
+                    //self.showAlert(result.error!)
                 }
         }
     }
@@ -175,7 +175,7 @@ class Foursquare: NSObject {
                             }
                         })
                     }
-                realm.commitWrite()
+                try! realm.commitWrite()
             }
         }
     }
@@ -205,7 +205,7 @@ class Foursquare: NSObject {
                     venues      = listItems["items"] as? [NSDictionary]
                 {
                     let realm = try! Realm()
-                    realm.write {
+                    try! realm.write {
                         for venue in venues {
                             realm.create(Venue.self, value: venue["venue"]!, update: true)
                         }
@@ -253,7 +253,7 @@ class Foursquare: NSObject {
     func setUpAutoRealm(type: String , venues: [NSDictionary]) {
         
         let realm = try! Realm()
-        realm.write {
+        try! realm.write {
             // Save one Venue object (and dependents) for each element of the array
             for venue in venues {
                 if (type == "list"){
