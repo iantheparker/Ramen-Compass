@@ -10,5 +10,5 @@ target 'RamenCompass' do
     pod 'Haneke'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'pop', '~> 1.0'
+    pod 'pop', '~> 1.0.7'
 end
