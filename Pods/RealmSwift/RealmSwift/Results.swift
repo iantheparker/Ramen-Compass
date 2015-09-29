@@ -78,16 +78,10 @@ Results cannot be created directly.
 */
 public final class Results<T: Object>: ResultsBase {
 
-    /// Element type contained in this collection.
-    public typealias Element = T
-
     // MARK: Properties
 
     /// Returns the Realm these results are associated with.
-    /// Despite returning an `Optional<Realm>` in order to conform to
-    /// `RealmCollectionType`, it will always return `.Some()` since a `Results`
-    /// cannot exist independently from a `Realm`.
-    public var realm: Realm? { return Realm(rlmResults.realm) }
+    public var realm: Realm { return Realm(rlmResults.realm) }
 
     /// Returns the number of objects in these results.
     public var count: Int { return Int(rlmResults.count) }
@@ -286,7 +280,23 @@ public final class Results<T: Object>: ResultsBase {
     }
 }
 
-extension Results: RealmCollectionType {
+public class RLMGenerator<T: Object>: AnyGenerator<T> {
+    private let generatorBase: NSFastGenerator
+
+    init(collection: RLMCollection) {
+        generatorBase = NSFastGenerator(collection)
+    }
+
+    public override func next() -> Element? {
+        let accessor = generatorBase.next() as! Element?
+        if let accessor = accessor {
+            RLMInitializeSwiftListAccessor(accessor)
+        }
+        return accessor
+    }
+}
+
+extension Results: CollectionType {
     // MARK: Sequence Support
 
     /// Returns a `GeneratorOf<T>` that yields successive elements in the results.

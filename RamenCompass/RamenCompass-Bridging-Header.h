@@ -10,7 +10,6 @@
 #define RamenCompass_RamenCompass_Bridging_Header_h
 
 #import "NSString+Japanese.h"
-#import "pop/POP.h"
 
 #endif
 

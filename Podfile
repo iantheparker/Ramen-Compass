@@ -4,11 +4,10 @@ use_frameworks!
 
 target 'RamenCompass' do
     pod 'GoogleMaps'
-    pod 'Realm', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swift-2.0'
-    pod 'RealmSwift', :git => 'https://github.com/realm/realm-cocoa.git', :branch => 'swift-2.0'
+    pod 'RealmSwift'
     pod 'Alamofire', '~> 2.0'
-    pod 'Haneke'
+    pod 'AlamofireImage', '~> 1.0'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'pop', '~> 1.0.7'
+    pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 end

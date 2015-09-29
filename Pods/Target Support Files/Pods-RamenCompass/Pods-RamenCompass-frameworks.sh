@@ -53,15 +53,15 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-RamenCompass/Alamofire.framework'
-  install_framework 'Pods-RamenCompass/Haneke.framework'
+  install_framework 'Pods-RamenCompass/AlamofireImage.framework'
   install_framework 'Pods-RamenCompass/Realm.framework'
   install_framework 'Pods-RamenCompass/RealmSwift.framework'
-  install_framework 'Pods-RamenCompass/pop.framework'
+  install_framework 'Pods-RamenCompass/Spring.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-RamenCompass/Alamofire.framework'
-  install_framework 'Pods-RamenCompass/Haneke.framework'
+  install_framework 'Pods-RamenCompass/AlamofireImage.framework'
   install_framework 'Pods-RamenCompass/Realm.framework'
   install_framework 'Pods-RamenCompass/RealmSwift.framework'
-  install_framework 'Pods-RamenCompass/pop.framework'
+  install_framework 'Pods-RamenCompass/Spring.framework'
 fi

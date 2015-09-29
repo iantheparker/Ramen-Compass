@@ -43,10 +43,10 @@ class CompassViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var mapButton: PopButton!
-    @IBOutlet weak var leftButton : PopButton!
-    @IBOutlet weak var rightButton : PopButton!
-    @IBOutlet weak var refreshButton: PopButton!
+    @IBOutlet weak var mapButton: UIButton!
+    @IBOutlet weak var leftButton : UIButton!
+    @IBOutlet weak var rightButton : UIButton!
+    @IBOutlet weak var refreshButton: UIButton!
     
     var delegate: CompassViewControllerDelegate?
     

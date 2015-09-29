@@ -15,7 +15,6 @@
 		2A34BAF61B52A41C0071D640 /* Whitney-Light-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF21B52A41C0071D640 /* Whitney-Light-Pro.otf */; };
 		2A34BAF71B52A41C0071D640 /* Whitney-Medium-Pro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2A34BAF31B52A41C0071D640 /* Whitney-Medium-Pro.otf */; };
 		2A5733361B65BBC900DC51EB /* UIColor-Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5733351B65BBC900DC51EB /* UIColor-Hex.swift */; };
-		2A70FFE41AD529900032103B /* PopButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A70FFE31AD529900032103B /* PopButton.swift */; };
 		2A787BEF1A95CA420069C0B1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BEE1A95CA420069C0B1 /* MapKit.framework */; };
 		2A787BF11A95CA4A0069C0B1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */; };
 		2A7971F21B7506440091A497 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A7971F01B7506440091A497 /* Interface.storyboard */; };
@@ -104,7 +103,6 @@
 		2A34BAF31B52A41C0071D640 /* Whitney-Medium-Pro.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Whitney-Medium-Pro.otf"; path = "RamenCompass/fonts/Whitney-Medium-Pro.otf"; sourceTree = SOURCE_ROOT; };
 		2A5733351B65BBC900DC51EB /* UIColor-Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor-Hex.swift"; path = "RamenCompass/UIColor-Hex.swift"; sourceTree = SOURCE_ROOT; };
 		2A5748EE1ACFFBD9003C66EC /* RamenCompass-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "RamenCompass-Bridging-Header.h"; path = "RamenCompass/RamenCompass-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		2A70FFE31AD529900032103B /* PopButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopButton.swift; path = RamenCompass/PopButton.swift; sourceTree = SOURCE_ROOT; };
 		2A787BEE1A95CA420069C0B1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2A787BF01A95CA4A0069C0B1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2A7971EE1B7506440091A497 /* RamComWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RamComWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,8 +184,8 @@
 		2A731A761B69D6220078A160 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2A015ED51AD22E9400C0DFA4 /* NSString+Japanese.h */,
 				2A5733351B65BBC900DC51EB /* UIColor-Hex.swift */,
+				2A015ED51AD22E9400C0DFA4 /* NSString+Japanese.h */,
 				2A015ED61AD22E9400C0DFA4 /* NSString+Japanese.m */,
 			);
 			name = Helpers;
@@ -272,7 +270,6 @@
 				2A7B5A041AC8039800304550 /* CompassViewController.swift */,
 				2ADB4F041B0927D6001213D4 /* DetailViewController.swift */,
 				2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */,
-				2A70FFE31AD529900032103B /* PopButton.swift */,
 				2A7B5A071AC8039800304550 /* Ramen.swift */,
 				2A7B5A081AC8039800304550 /* RamenAnnotation.swift */,
 				2A015ED31AD10F4600C0DFA4 /* ramcom.realm */,
@@ -578,7 +575,6 @@
 				2A015ED71AD22E9400C0DFA4 /* NSString+Japanese.m in Sources */,
 				2A7B5A111AC8039800304550 /* RamenAnnotation.swift in Sources */,
 				2A7B5A0F1AC8039800304550 /* MapViewController.swift in Sources */,
-				2A70FFE41AD529900032103B /* PopButton.swift in Sources */,
 				2A7B5A101AC8039800304550 /* Ramen.swift in Sources */,
 				2A7B5A0C1AC8039800304550 /* AppDelegate.swift in Sources */,
 				2A5733361B65BBC900DC51EB /* UIColor-Hex.swift in Sources */,
@@ -808,7 +804,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -833,7 +829,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

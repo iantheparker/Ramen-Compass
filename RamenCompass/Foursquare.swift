@@ -175,7 +175,7 @@ class Foursquare: NSObject {
                             }
                         })
                     }
-                try! realm.commitWrite()
+                realm.commitWrite()
             }
         }
     }
@@ -205,7 +205,7 @@ class Foursquare: NSObject {
                     venues      = listItems["items"] as? [NSDictionary]
                 {
                     let realm = try! Realm()
-                    try! realm.write {
+                    realm.write {
                         for venue in venues {
                             realm.create(Venue.self, value: venue["venue"]!, update: true)
                         }
@@ -253,7 +253,7 @@ class Foursquare: NSObject {
     func setUpAutoRealm(type: String , venues: [NSDictionary]) {
         
         let realm = try! Realm()
-        try! realm.write {
+        realm.write {
             // Save one Venue object (and dependents) for each element of the array
             for venue in venues {
                 if (type == "list"){

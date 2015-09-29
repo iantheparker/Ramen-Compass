@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import Alamofire
-import Haneke
+import AlamofireImage
 
 protocol DetailViewControllerDelegate {
     func addressDirectionButtonPressed()
@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
         detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
         //println("detail reload notif \(detailSelectedRamen)")
         tableview.reloadData()
-        pictureIV.hnk_setImageFromURL(NSURL(string: detailSelectedRamen!.photoUrl)!)
+        pictureIV.af_setImageWithURL(NSURL(string: detailSelectedRamen!.photoUrl)!)
     }
     
     @IBAction func addressButtonPressed(sender: AnyObject) {

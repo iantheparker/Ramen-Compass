@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -240,7 +240,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" image="RCTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Hnm-Pb-g7m">
                                 <rect key="frame" x="182" y="30" width="236" height="75"/>
                             </imageView>
-                            <button opaque="NO" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-KR-0te" userLabel="MapButton" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                            <button opaque="NO" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-KR-0te" userLabel="MapButton">
                                 <rect key="frame" x="131" y="39" width="36" height="38"/>
                                 <state key="normal" image="mapButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -250,7 +250,7 @@
                                     <action selector="mapButtonPressed:" destination="9ej-6d-bFx" eventType="touchUpInside" id="KZA-0V-0ZT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="100" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-Rs-WW5" userLabel="RefreshButton" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                            <button opaque="NO" tag="100" contentMode="center" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecs-Rs-WW5" userLabel="RefreshButton">
                                 <rect key="frame" x="556" y="43" width="29" height="30"/>
                                 <state key="normal" image="refreshButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -354,7 +354,7 @@
                                         <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egX-Li-Efp" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egX-Li-Efp">
                                         <rect key="frame" x="0.0" y="8" width="31" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ejs-a3-d9D"/>
@@ -367,7 +367,7 @@
                                             <action selector="leftObject:" destination="9ej-6d-bFx" eventType="touchUpInside" id="6b1-nf-dhY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLa-HU-Bah" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLa-HU-Bah">
                                         <rect key="frame" x="539" y="8" width="31" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="RhD-VN-d2k"/>
@@ -501,13 +501,16 @@
                                     <outlet property="delegate" destination="PMc-ZR-mhw" id="676-3K-9Nt"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-hi-PvE" customClass="PopButton" customModule="RamenCompass" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Nz-hi-PvE" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="546" y="536" width="44" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="mapCenterOn">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="mapCenterOff"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animation" value="pop"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="centerToUsersLocation" destination="PMc-ZR-mhw" eventType="touchUpInside" id="bSE-Jm-Eap"/>
                                 </connections>
