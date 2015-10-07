@@ -25,6 +25,8 @@ class MapViewController: UIViewController {
     var userLocated:Bool = false
     var delegate : MapViewControllerDelegate?
     var mapPopulated = false
+    var notificationToken: NotificationToken?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,9 @@ class MapViewController: UIViewController {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        if (notificationToken != nil) {
+            try! Realm().removeNotification(notificationToken!)
+        }
     }
     
     func reload( notification: NSNotification){

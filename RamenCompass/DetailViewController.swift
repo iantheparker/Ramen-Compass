@@ -45,6 +45,7 @@ class DetailViewController: UIViewController {
         //println("detail reload notif \(detailSelectedRamen)")
         tableview.reloadData()
         pictureIV.af_setImageWithURL(NSURL(string: detailSelectedRamen!.photoUrl)!)
+        
     }
     
     @IBAction func addressButtonPressed(sender: AnyObject) {

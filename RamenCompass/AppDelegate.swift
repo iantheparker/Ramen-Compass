@@ -16,27 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var masterVC: MasterViewController!
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics()])
-
         
-        // Override point for customization after application launch.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let topMap = storyboard.instantiateViewControllerWithIdentifier("Map") as! MapViewController
-
-        let mainCompass = storyboard.instantiateViewControllerWithIdentifier("Compass") as! CompassViewController
-        
-        let bottomVC = storyboard.instantiateViewControllerWithIdentifier("Detail") as! DetailViewController
-        
-        masterVC = MasterViewController(topViewcontroller: topMap, mainViewController: mainCompass, bottomViewController: bottomVC, overlap: 80)
+        let containerViewController = ContainerViewController()
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.whiteColor()
-        window?.rootViewController = masterVC
+        window!.rootViewController = containerViewController
         window?.makeKeyAndVisible()
         
         return true

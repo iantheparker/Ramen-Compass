@@ -11,10 +11,13 @@ import CoreLocation
 import RealmSwift
 import MapKit
 
-
+@objc
 protocol CompassViewControllerDelegate {
-    func mapButtonPressed()
-    func detailButtonPressed()
+    optional func mapButtonPressed()
+    optional func detailButtonPressed()
+    func toggleTopPanel()
+    func toggleBottomPanel()
+    func collapseSidePanels()
 }
 
 
@@ -58,7 +61,7 @@ class CompassViewController: UIViewController {
         //loadingChopsticksAnimation()
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "bowlTapped:")
         bowlView.addGestureRecognizer(tapRecognizer)
-        
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = 100
@@ -172,7 +175,8 @@ class CompassViewController: UIViewController {
     }
     
     @IBAction func mapButtonPressed(sender: AnyObject) {
-        delegate?.mapButtonPressed()
+        //delegate?.mapButtonPressed!()
+        delegate?.toggleTopPanel()
         print("map button pressed")
     }
     
@@ -226,7 +230,7 @@ class CompassViewController: UIViewController {
 //        scaleAnimation1.springBounciness = 10.0
 //        bowlView.layer.pop_addAnimation(scaleAnimation1, forKey: "layerScaleSpringAnimation")
 //        
-        delegate?.detailButtonPressed()
+        //delegate?.detailButtonPressed()
     }
     
     
@@ -386,7 +390,7 @@ extension CompassViewController: MapViewControllerDelegate{
     
     func ramenSelected(venue: Venue, animated: Bool) {
         if animated{
-            delegate?.detailButtonPressed()
+            //delegate?.detailButtonPressed()
         }
         selectedRamenIndex = venueResults[venResSection].indexOf(venue)!
     }
