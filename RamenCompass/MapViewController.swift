@@ -43,6 +43,8 @@ class MapViewController: UIViewController {
             print("MapVC notif block")
             self.mapPopulated = false
         }
+        self.populateMap()
+
     }
     
     deinit {
@@ -54,31 +56,18 @@ class MapViewController: UIViewController {
     
     func reload( notification: NSNotification){
         
-        if !mapPopulated{
-            populateMap()
-            mapPopulated = true
-        }
-        
         print("map reload notif ")
         let userInfo = notification.userInfo as! [String: AnyObject]
-        let detailSelectedRamen = userInfo["selectedRamen"] as! Venue?
+        let selectedRamen = userInfo["selectedRamen"] as! Venue?
         
-        for annotation in mapView.annotations{
-            if let anno = (annotation as? RamenAnnotation),
-            venue = anno.venue
-            where venue == detailSelectedRamen
-            {
-                mapView.selectAnnotation(anno, animated: true)
-                centerButton.selected = true
-                break
-            }
-        }
+        selectMapAnnotation(selectedRamen!)
     }
     
     func populateMap() {
         print("populating map")
         mapView.removeAnnotations(mapView.annotations)
         let venues = try! Realm().objects(Venue).sorted("name", ascending: true)
+        guard venues.count > 0 else { return }
         
         // Create annotations for each one
         for venue in venues {
@@ -87,7 +76,24 @@ class MapViewController: UIViewController {
             let venueAnno = RamenAnnotation(coordinate: coord, title: aVenue.name, subtitle: aVenue.location!.address, venue: aVenue)
             mapView.addAnnotation(venueAnno)
         }
+        if (mapPopulated == false){
+            selectMapAnnotation(venues.first!)
+        }
+        mapPopulated = true
         
+    }
+    
+    func selectMapAnnotation(v : Venue) {
+        for annotation in mapView.annotations{
+            if let anno = (annotation as? RamenAnnotation),
+                venue = anno.venue
+                where venue == v
+            {
+                mapView.selectAnnotation(anno, animated: true)
+                centerButton.selected = true
+                break
+            }
+        }
     }
 
     @IBAction func centerToUsersLocation() {
@@ -152,7 +158,7 @@ extension MapViewController: MKMapViewDelegate{
             
             if let ramen = view.annotation as? RamenAnnotation {
                 print("ramen = \(ramen.venue.name)")
-                delegate?.ramenSelected(ramen.venue, animated: true)
+                //delegate?.ramenSelected(ramen.venue, animated: true)
             }
         }
     }

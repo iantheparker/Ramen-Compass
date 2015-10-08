@@ -11,11 +11,9 @@ import RealmSwift
 import CoreLocation
 import Alamofire
 
-let versionDate = "20150515"
+let versionDate = "20151005"
 private let clientId = valueForAPIKey(keyname:  "clientId")
 private let clientSecret = valueForAPIKey(keyname:  "clientSecret")
-
-var notificationToken: NotificationToken?
 
 class Foursquare: NSObject {
     

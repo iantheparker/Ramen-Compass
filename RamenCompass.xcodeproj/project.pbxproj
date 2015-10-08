@@ -37,6 +37,7 @@
 		2A7B5A111AC8039800304550 /* RamenAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7B5A081AC8039800304550 /* RamenAnnotation.swift */; };
 		2A7B5A181AC8041800304550 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B5A141AC8041800304550 /* LaunchScreen.xib */; };
 		2A7B5A191AC8041800304550 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A7B5A161AC8041800304550 /* Main.storyboard */; };
+		2A9C81691BC6062D0010F736 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9C81681BC6062D0010F736 /* ContainerViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		2AAEAF8D1AD6BAF400267F26 /* Foursquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */; };
 		2ADB4F031B0903B3001213D4 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F021B0903B3001213D4 /* MasterViewController.swift */; };
 		2ADB4F051B0927D6001213D4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADB4F041B0927D6001213D4 /* DetailViewController.swift */; };
@@ -129,6 +130,7 @@
 		2A7B5A151AC8041800304550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = RamenCompass/Base.lproj/LaunchScreen.xib; sourceTree = SOURCE_ROOT; };
 		2A7B5A171AC8041800304550 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = RamenCompass/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		2A7B5A1A1AC804D900304550 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RamenCompass/Info.plist; sourceTree = SOURCE_ROOT; };
+		2A9C81681BC6062D0010F736 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContainerViewController.swift; path = RamenCompass/ContainerViewController.swift; sourceTree = SOURCE_ROOT; };
 		2AAEAF8C1AD6BAF400267F26 /* Foursquare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Foursquare.swift; path = RamenCompass/Foursquare.swift; sourceTree = SOURCE_ROOT; };
 		2AB7CB141A95B8DE003EE308 /* RamenCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RamenCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB7CB291A95B8DE003EE308 /* RamenCompassTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RamenCompassTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,6 +267,7 @@
 				2A7B5A141AC8041800304550 /* LaunchScreen.xib */,
 				2A7B5A161AC8041800304550 /* Main.storyboard */,
 				2A7B5A031AC8039800304550 /* AppDelegate.swift */,
+				2A9C81681BC6062D0010F736 /* ContainerViewController.swift */,
 				2ADB4F021B0903B3001213D4 /* MasterViewController.swift */,
 				2A7B5A061AC8039800304550 /* MapViewController.swift */,
 				2A7B5A041AC8039800304550 /* CompassViewController.swift */,
@@ -577,6 +580,7 @@
 				2A7B5A0F1AC8039800304550 /* MapViewController.swift in Sources */,
 				2A7B5A101AC8039800304550 /* Ramen.swift in Sources */,
 				2A7B5A0C1AC8039800304550 /* AppDelegate.swift in Sources */,
+				2A9C81691BC6062D0010F736 /* ContainerViewController.swift in Sources */,
 				2A5733361B65BBC900DC51EB /* UIColor-Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
