@@ -38,10 +38,10 @@ class Foursquare: NSObject {
         let limit = 10
         
         Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/search?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)&ll=\(coord.coordinate.latitude),\(coord.coordinate.longitude)&categoryId=4bf58dd8d48988d1d1941735&limit=\(limit)", parameters: nil)
-            .responseJSON { ( request, response, result) in
+            .responseJSON {  result in
                 
                 if let
-                    data    = result.value as? NSDictionary,
+                    data    = result.result.value as? NSDictionary,
                     res     = data["response"] as? [String: AnyObject],
                     venues   = res["venues"] as? [NSDictionary]
                 {
@@ -57,10 +57,10 @@ class Foursquare: NSObject {
         
         
         Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/\(id)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)", parameters: nil)
-            .responseJSON { _, _, result in
+            .responseJSON { result in
                 
                 if let
-                    data    = result.value as? NSDictionary,
+                    data    = result.result.value as? NSDictionary,
                     res     = data["response"] as? [String: AnyObject],
                     venue   = res["venue"] as? NSDictionary
                 {
@@ -73,10 +73,10 @@ class Foursquare: NSObject {
     
     func getVenueDetailsFull(id: String, completionHandler: (Venue?, NSError?) -> ()) -> (){
         Alamofire.request(.GET,  "https://api.foursquare.com/v2/venues/\(id)?client_id=\(clientId)&client_secret=\(clientSecret)&v=\(versionDate)", parameters: nil)
-            .responseJSON { _, _, result in
+            .responseJSON { result in
                 
             if let
-                    data    = result.value as? NSDictionary,
+                    data    = result.result.value as? NSDictionary,
                     res     = data["response"] as? [String: AnyObject],
                     venue   = res["venue"] as? NSDictionary
                 {
@@ -145,9 +145,9 @@ class Foursquare: NSObject {
                         print("\(detailVenue.id) = \(detailVenue.tips)")
                     }
                     completionHandler(detailVenue, nil)
-                    try! Realm().write{
-                        try! Realm().add(detailVenue, update: true)
-                    }
+//                    try! Realm().write{
+//                        try! Realm().add(detailVenue, update: true)
+//                    }
                 }
             }
 
@@ -161,19 +161,26 @@ class Foursquare: NSObject {
             }else {
                 let venues = response as! [NSDictionary]
                 let realm = try! Realm()
-                var poo = [Venue]()
-                realm.beginWrite()
+                try! realm.write{
                     for venue in venues {
                         realm.create(Venue.self, value: venue, update: true)
-                        self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
-                            if (error == nil){
-                                poo.append(venueDeets!)
-                                //println(" venuedeets \(venueDeets)")
-                                //realm.add(venueDeets!, update: true)//(Venue.self, value: venueDeets!, update: true)
-                            }
-                        })
                     }
-                realm.commitWrite()
+                }
+                
+//                    for venue in venues {
+//                        realm.write{
+//                        self.getVenueDetailsFull((venue["id"] as? String)!, completionHandler: { (venueDeets, error) -> () in
+//                            if (venueDeets != nil){
+//                                //poo.append(venueDeets!)
+//                                realm.create(Venue.self, value: venueDeets!, update: true)
+//
+//                                //println(" venuedeets \(venueDeets)")
+//                                //realm.add(venueDeets!, update: true)//(Venue.self, value: venueDeets!, update: true)
+//                            }
+//                        })
+//                        }
+//
+//                    }
             }
         }
     }
@@ -203,7 +210,7 @@ class Foursquare: NSObject {
                     venues      = listItems["items"] as? [NSDictionary]
                 {
                     let realm = try! Realm()
-                    realm.write {
+                    try! realm.write {
                         for venue in venues {
                             realm.create(Venue.self, value: venue["venue"]!, update: true)
                         }
@@ -251,7 +258,7 @@ class Foursquare: NSObject {
     func setUpAutoRealm(type: String , venues: [NSDictionary]) {
         
         let realm = try! Realm()
-        realm.write {
+        try! realm.write {
             // Save one Venue object (and dependents) for each element of the array
             for venue in venues {
                 if (type == "list"){

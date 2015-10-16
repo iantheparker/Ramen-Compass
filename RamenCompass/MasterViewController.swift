@@ -195,7 +195,7 @@ extension MasterViewController: UIGestureRecognizerDelegate {
         
         if ((tapWasInBottomOverlapArea && topVCIsOpen()) || (tapWasInTopOverlapArea && (!topVCIsOpen() && !bottomVCIsOpen()))){
             if (tapLocation.x >= CGRectGetWidth(view.bounds)/6 && tapLocation.x <= CGRectGetWidth(view.bounds) * 5/6) {
-                mainViewController.mapButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
+                //mainViewController.mapButton.sendActionsForControlEvents(UIControlEvents.TouchUpInside)
             }
             else {return true}
         } else if ((tapWasInBottomOverlapArea && !bottomVCIsOpen()) || (tapWasInTopOverlapArea && bottomVCIsOpen())){
@@ -216,9 +216,9 @@ extension MasterViewController: UIScrollViewDelegate{
 
         
         if (scrollView.contentOffset.y == page1pos){
-            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
-                self.mainViewController.mapButton.selected = true
-                }, completion: nil)
+//            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { () -> Void in
+//                self.mainViewController.mapButton.selected = true
+//                }, completion: nil)
         }
         if (scrollView.contentOffset.y == page2pos){
             if (hideStatusBar){
@@ -228,9 +228,9 @@ extension MasterViewController: UIScrollViewDelegate{
                     self.mainViewController.view.bounds = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
                     }, completion: { (Bool) -> Void in})
             }
-            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { () -> Void in
-                self.mainViewController.mapButton.selected = false
-            }, completion: nil)
+//            UIView.transitionWithView(mainViewController.mapButton, duration: 0.2, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { () -> Void in
+//                self.mainViewController.mapButton.selected = false
+//            }, completion: nil)
             
         }
         else {

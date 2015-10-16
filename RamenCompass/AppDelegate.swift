@@ -20,14 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics()])
-        
-        let containerViewController = ContainerViewController()
-        
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.backgroundColor = UIColor.whiteColor()
-        window!.rootViewController = containerViewController
-        window?.makeKeyAndVisible()
-        
+                
         return true
     }
 

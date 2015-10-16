@@ -5,8 +5,8 @@ use_frameworks!
 target 'RamenCompass' do
     pod 'GoogleMaps'
     pod 'RealmSwift'
-    pod 'Alamofire', '~> 2.0'
-    pod 'AlamofireImage', '~> 1.0'
+    pod 'Alamofire', '~> 3.0'
+    #pod 'AlamofireImage', '~> 2.0'
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'

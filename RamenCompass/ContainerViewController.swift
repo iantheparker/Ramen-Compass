@@ -9,17 +9,26 @@
 
 import UIKit
 import QuartzCore
+import CoreLocation
+import RealmSwift
 
 enum SlideOutState {
     case BothCollapsed
     case TopPanelExpanded
     case BottomPanelExpanded
 }
+public var currentLocation : CLLocation!
+
 
 class ContainerViewController: UIViewController {
     
+    lazy var locationManager = CLLocationManager()
+    var locationFixAchieved : Bool = false
+    var locationCC: String = ""
+    
+    
     var compassNavigationController: UINavigationController!
-    var compassViewController: CompassViewController!
+    @IBOutlet weak var compassViewController: PagedCompassViewController!
     
     var currentState: SlideOutState = .BothCollapsed {
         didSet {
@@ -39,26 +48,41 @@ class ContainerViewController: UIViewController {
                 }, completion: { (Bool) -> Void in self.setNeedsStatusBarAppearanceUpdate()})
         }
     }
-    
+    var notificationToken: NotificationToken?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        compassViewController = UIStoryboard.centerViewController()
-        compassViewController.delegate = self
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 100
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationFixAchieved = false
         
-        // wrap the centerViewController in a navigation controller, so we can push views to it
-        // and display bar button items in the navigation bar
-        compassNavigationController = UINavigationController(rootViewController: compassViewController)
-        view.addSubview(compassNavigationController.view)
-        addChildViewController(compassNavigationController)
-        compassNavigationController.didMoveToParentViewController(self)
-        compassNavigationController.navigationBarHidden = true
+        if (CLLocationManager.authorizationStatus() == .NotDetermined) {
+            locationManager.requestWhenInUseAuthorization()
+            print("Requesting Authorization")
+        } else if (CLLocationManager.authorizationStatus() == .Denied || CLLocationManager.authorizationStatus() == .Restricted){
+            // TODO: handle case and turn this into a loading screen or sad empty bowl state.
+            // wrap didChangeAuth into a method to handle all this and call it all here
+        }
+        else {
+            locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
+            print("starting location manager")
+        }
         
-        addGradientToView(compassViewController.view)
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
-        compassNavigationController.view.addGestureRecognizer(panGestureRecognizer)
+        
+        //let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePanGesture:")
+        //compassNavigationController.view.addGestureRecognizer(panGestureRecognizer)
+        notificationToken = try! Realm().addNotificationBlock { [unowned self] note, realm in
+            print("CompassVC notif block")
+            self.setupVenueResults()
+            print(try! Realm().objects(Venue))
+        }
+
     }
     
     private func addGradientToView( destView: UIView) {
@@ -72,6 +96,46 @@ class ContainerViewController: UIViewController {
         destView.layer.insertSublayer(gradientLayer, atIndex: 0)
     }
     
+    func setupVenueResults(){
+        compassViewController = self.childViewControllers.last as? PagedCompassViewController
+        compassViewController.delegatec = self
+        
+        // wrap the centerViewController in a navigation controller, so we can push views to it
+        // and display bar button items in the navigation bar
+        compassNavigationController = UINavigationController(rootViewController: compassViewController)
+        view.addSubview(compassNavigationController.view)
+        addChildViewController(compassNavigationController)
+        compassNavigationController.didMoveToParentViewController(self)
+        compassNavigationController.navigationBarHidden = true
+        
+        addGradientToView(compassViewController.view)
+        
+        compassViewController.reset()
+    }
+    
+    @IBAction func mapButtonPressed(sender: AnyObject) {
+        //delegate?.mapButtonPressed!()
+        //delegate?.toggleTopPanel()
+        print("map button pressed")
+    }
+    
+    @IBAction func refreshLocation(){
+        //        locationFixAchieved = false
+        //        //loadingChopsticksAnimation()
+        //
+        //        if let
+        //            masterVC = self.parentViewController as? MasterViewController,
+        //            mapVC = masterVC.childViewControllers[0] as? MapViewController
+        //            where masterVC.topVCIsOpen()
+        //        {
+        //            print("top is open")
+        //            Foursquare.sharedInstance.searchWithDetails(mapVC.getMapCenterCoord(), radius: nil)
+        //        }else{
+        //            locationManager.startUpdatingLocation()
+        //        }
+        
+    }
+
 }
 
 extension ContainerViewController: CompassViewControllerDelegate {
@@ -111,8 +175,7 @@ extension ContainerViewController: CompassViewControllerDelegate {
     func addTopPanelViewController() {
         if (topViewController == nil) {
             topViewController = UIStoryboard.topViewController()
-            //leftViewController!.animals = Animal.allCats()
-            topViewController!.delegate = compassViewController
+            //topViewController!.delegate = compassViewController
             view.insertSubview(topViewController!.view, atIndex: 0)
             addChildViewController(topViewController!)
             topViewController!.didMoveToParentViewController(self)
@@ -122,9 +185,8 @@ extension ContainerViewController: CompassViewControllerDelegate {
     func addBottomPanelViewController() {
         if (bottomViewController == nil) {
             bottomViewController = UIStoryboard.bottomViewController()
-            //rightViewController!.animals = Animal.allDogs()
             
-            bottomViewController!.delegate = compassViewController
+            //bottomViewController!.delegate = compassViewController
             view.insertSubview(bottomViewController!.view, atIndex: 0)
             addChildViewController(bottomViewController!)
             bottomViewController!.didMoveToParentViewController(self)        }
@@ -176,6 +238,59 @@ extension ContainerViewController: CompassViewControllerDelegate {
     
 }
 
+extension ContainerViewController: CLLocationManagerDelegate{
+    //MARK: - LocationManager
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+        switch status {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            print("Authorized")
+            locationManager.startUpdatingLocation()
+            locationManager.startUpdatingHeading()
+        case .NotDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .Restricted, .Denied:
+            let alertController = UIAlertController(
+                title: "Location Access Disabled",
+                message: "In order to find delicious bowls of ramen near you, please open this app's settings and set location access to 'When In Use'.",
+                preferredStyle: .Alert)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let openAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+                if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+            }
+            alertController.addAction(openAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locationArray = locations as NSArray
+        currentLocation = locationArray.lastObject as! CLLocation
+        print("my current location \(currentLocation)")
+        if (locationFixAchieved == false) {
+            locationFixAchieved = true
+            Foursquare.sharedInstance.searchWithDetails(currentLocation, radius: nil)
+            
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        // TODO: post notifs to each compassVC
+        
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("i'm on loc error")
+        print(error.localizedDescription)
+        locationManager.stopUpdatingLocation()
+    }
+}
 
 extension ContainerViewController: UIGestureRecognizerDelegate {
     // MARK: Gesture recognizer
@@ -226,7 +341,7 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     
 }
 
-private extension UIStoryboard {
+extension UIStoryboard {
     class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
     
     class func topViewController() -> MapViewController? {
@@ -240,5 +355,7 @@ private extension UIStoryboard {
     class func centerViewController() -> CompassViewController? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("Compass") as? CompassViewController
     }
-    
+    class func pagedViewController() -> PagedCompassViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("Page") as? PagedCompassViewController
+    }
 }

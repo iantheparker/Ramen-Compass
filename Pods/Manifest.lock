@@ -1,22 +1,19 @@
 PODS:
-  - Alamofire (2.0.2)
-  - AlamofireImage (1.1.2):
-    - Alamofire (~> 2.0)
+  - Alamofire (3.0.0)
   - Crashlytics (3.3.4)
   - Fabric (1.5.5):
     - Fabric/Base (= 1.5.5)
   - Fabric/Base (1.5.5)
-  - GoogleMaps (1.10.3)
-  - Realm (0.95.3):
-    - Realm/Headers (= 0.95.3)
-  - Realm/Headers (0.95.3)
-  - RealmSwift (0.95.3):
-    - Realm (= 0.95.3)
+  - GoogleMaps (1.10.4)
+  - Realm (0.96.0):
+    - Realm/Headers (= 0.96.0)
+  - Realm/Headers (0.96.0)
+  - RealmSwift (0.96.0):
+    - Realm (= 0.96.0)
   - Spring (1.0.3)
 
 DEPENDENCIES:
-  - Alamofire (~> 2.0)
-  - AlamofireImage (~> 1.0)
+  - Alamofire (~> 3.0)
   - Crashlytics
   - Fabric
   - GoogleMaps
@@ -34,13 +31,12 @@ CHECKOUT OPTIONS:
     :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
-  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
-  AlamofireImage: dc3d3de5d095fd9545b144ba8f6da5bfc539512a
+  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
   Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
   Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
-  GoogleMaps: 945e4ac3b74bcca3ddada51df256eb7beddb474d
-  Realm: 55885fa05865344994ad8b56da96669ffa39fbf1
-  RealmSwift: 586df4b5a6d01473d2653b16e9fe7debce4a87ed
+  GoogleMaps: 134bcf57e8d489efbc0c29d532ed421554fabdb2
+  Realm: d1b1eff5264cd6a3158b7a9b6c499d7f6ad3a860
+  RealmSwift: 40246e6f57a4e863bfdfc1ca1d7b967f0df607e2
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0
