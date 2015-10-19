@@ -13,6 +13,7 @@ import CoreLocation
 class Location: Object {
     dynamic var lat = 0.0  // latitude
     dynamic var lng = 0.0  // longitude
+    dynamic var distance = 0.0
     dynamic var address = ""
     dynamic var postalCode = ""
     dynamic var cc = ""

@@ -22,8 +22,15 @@ public var currentLocation : CLLocation!
 
 class ContainerViewController: UIViewController {
     
-    lazy var locationManager = CLLocationManager()
-    var locationFixAchieved : Bool = false
+    lazy var locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        manager.delegate = self
+        manager.distanceFilter = 100
+        manager.pausesLocationUpdatesAutomatically = true
+        return manager
+        }()
+    var locationFixAchieved = false
     var locationCC: String = ""
     
     
@@ -54,12 +61,6 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 100
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationFixAchieved = false
-        
         if (CLLocationManager.authorizationStatus() == .NotDetermined) {
             locationManager.requestWhenInUseAuthorization()
             print("Requesting Authorization")
@@ -80,7 +81,6 @@ class ContainerViewController: UIViewController {
         notificationToken = try! Realm().addNotificationBlock { [unowned self] note, realm in
             print("CompassVC notif block")
             self.setupVenueResults()
-            print(try! Realm().objects(Venue))
         }
 
     }
@@ -97,19 +97,20 @@ class ContainerViewController: UIViewController {
     }
     
     func setupVenueResults(){
-        compassViewController = self.childViewControllers.last as? PagedCompassViewController
-        compassViewController.delegatec = self
-        
-        // wrap the centerViewController in a navigation controller, so we can push views to it
-        // and display bar button items in the navigation bar
-        compassNavigationController = UINavigationController(rootViewController: compassViewController)
-        view.addSubview(compassNavigationController.view)
-        addChildViewController(compassNavigationController)
-        compassNavigationController.didMoveToParentViewController(self)
-        compassNavigationController.navigationBarHidden = true
-        
-        addGradientToView(compassViewController.view)
-        
+        if compassViewController == nil {
+            compassViewController = self.childViewControllers.last as? PagedCompassViewController
+            compassViewController.delegatec = self
+            
+            // wrap the centerViewController in a navigation controller, so we can push views to it
+            // and display bar button items in the navigation bar
+            compassNavigationController = UINavigationController(rootViewController: compassViewController)
+            view.addSubview(compassNavigationController.view)
+            addChildViewController(compassNavigationController)
+            compassNavigationController.didMoveToParentViewController(self)
+            compassNavigationController.navigationBarHidden = true
+            
+            addGradientToView(compassViewController.view)
+        }
         compassViewController.reset()
     }
     

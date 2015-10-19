@@ -5,9 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="HouschkaAltHeavy.ttf">
-            <string>HouschkaAltHeavy</string>
-        </mutableArray>
         <mutableArray key="Whitney-Book-Pro.otf">
             <string>Whitney-Book</string>
             <string>Whitney-Book</string>
@@ -309,92 +306,22 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n76-ap-xi7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1200"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="757" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="su3-Ac-ibs">
-                                        <rect key="frame" x="218" y="107" width="184" height="60"/>
-                                        <animations/>
-                                        <attributedString key="attributedText">
-                                            <fragment content="2.3 km">
-                                                <attributes>
-                                                    <color key="NSColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <font key="NSFont" size="26" name="Whitney-Light"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
-                                                </attributes>
-                                            </fragment>
-                                        </attributedString>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="60" y="79" width="197.5" height="35"/>
-                                        </variation>
-                                    </label>
-                                    <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BYB-5i-7pF" userLabel="Ramen + Chopsticks">
-                                        <rect key="frame" x="160" y="187" width="300" height="300"/>
+                                    <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BYB-5i-7pF" userLabel="Ramen + Chopsticks">
+                                        <rect key="frame" x="160" y="225" width="283" height="262"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bowlFull" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-nN-7O7">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="301"/>
-                                                <animations/>
-                                            </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chopsticks" translatesAutoresizingMaskIntoConstraints="NO" id="xsR-OU-8Ax">
-                                                <rect key="frame" x="249" y="122" width="61" height="560"/>
+                                                <rect key="frame" x="249" y="84" width="61" height="560"/>
                                                 <animations/>
                                                 <gestureRecognizers/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bowlFull" translatesAutoresizingMaskIntoConstraints="NO" id="1tr-nN-7O7">
+                                                <rect key="frame" x="-95" y="-93" width="300" height="301"/>
+                                                <animations/>
                                             </imageView>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
-                                    </view>
-                                    <view contentMode="scaleToFill" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U0F-Xu-oYZ" userLabel="carousel">
-                                        <rect key="frame" x="20" y="1120" width="580" height="65"/>
-                                        <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="767" ambiguous="YES" misplaced="YES" text="CLOSED NOW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GrN-2w-PfR">
-                                                <rect key="frame" x="228" y="-20" width="114" height="20"/>
-                                                <animations/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="NFv-sv-UzO"/>
-                                                    <constraint firstAttribute="height" constant="43" id="Ynn-RC-QC5"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="HouschkaAltHeavy" family="HouschkaAltHeavy" pointSize="17"/>
-                                                <color key="textColor" red="0.47748974119999998" green="0.1782348138" blue="0.44755231579999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="NFv-sv-UzO"/>
-                                                        <exclude reference="Ynn-RC-QC5"/>
-                                                    </mask>
-                                                </variation>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="409" placeholderIntrinsicHeight="28.5" text="ラーメン" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Awx-nI-VEd">
-                                                <rect key="frame" x="33" y="31" width="514" height="29"/>
-                                                <animations/>
-                                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="24"/>
-                                                <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egX-Li-Efp">
-                                                <rect key="frame" x="0.0" y="8" width="31" height="50"/>
-                                                <animations/>
-                                                <state key="normal" title="&lt;" image="arrow_leftButton">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLa-HU-Bah">
-                                                <rect key="frame" x="539" y="8" width="31" height="50"/>
-                                                <animations/>
-                                                <state key="normal" title="&gt;" image="arrow_rightButton">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="580" id="eoq-7c-mx9"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="eoq-7c-mx9"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXv-FM-oNx">
                                         <rect key="frame" x="0.0" y="371" width="495" height="100"/>
@@ -404,10 +331,10 @@
                                         </connections>
                                     </containerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" misplaced="YES" text="Venue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kQ8-Qk-xpD">
-                                        <rect key="frame" x="20" y="50" width="261.5" height="28"/>
+                                        <rect key="frame" x="114" y="41" width="93.5" height="28"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="fBt-On-KVr"/>
+                                            <constraint firstAttribute="height" constant="28" id="mZW-a7-eEY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Whitney-Medium" family="Whitney" pointSize="35"/>
                                         <color key="textColor" red="0.81960784310000001" green="0.0" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -416,10 +343,18 @@
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="leading" secondItem="n76-ap-xi7" secondAttribute="leading" constant="20" id="7Az-gc-GkS"/>
-                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="top" secondItem="n76-ap-xi7" secondAttribute="top" constant="50" id="Q3h-yg-vV7"/>
-                                    <constraint firstAttribute="trailing" secondItem="kQ8-Qk-xpD" secondAttribute="trailing" constant="20" id="kYs-7k-hx3"/>
+                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="top" secondItem="n76-ap-xi7" secondAttribute="top" constant="40" id="0Nt-gN-3ge"/>
+                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="leading" secondItem="n76-ap-xi7" secondAttribute="leading" constant="20" id="GBg-GD-PJJ"/>
+                                    <constraint firstItem="BYB-5i-7pF" firstAttribute="centerX" secondItem="n76-ap-xi7" secondAttribute="centerX" id="fUE-Hd-Bq2"/>
+                                    <constraint firstItem="kQ8-Qk-xpD" firstAttribute="centerX" secondItem="n76-ap-xi7" secondAttribute="centerX" id="gKi-G3-KkH"/>
+                                    <constraint firstAttribute="trailing" secondItem="kQ8-Qk-xpD" secondAttribute="trailing" constant="20" id="j3h-te-VBz"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GBg-GD-PJJ"/>
+                                        <exclude reference="j3h-te-VBz"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <animations/>
@@ -447,7 +382,6 @@
                     <connections>
                         <outlet property="bowlView" destination="BYB-5i-7pF" id="pej-WT-crW"/>
                         <outlet property="chopsticksImage" destination="xsR-OU-8Ax" id="bmd-rU-dAr"/>
-                        <outlet property="distanceLabel" destination="su3-Ac-ibs" id="gIP-an-4tJ"/>
                         <outlet property="venueNameEN" destination="kQ8-Qk-xpD" id="Ofc-rL-ZCj"/>
                     </connections>
                 </viewController>
@@ -520,11 +454,11 @@
                         <viewControllerLayoutGuide type="bottom" id="70x-dX-UW2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qc2-WJ-xbi">
-                        <rect key="frame" x="0.0" y="0.0" width="622" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="622" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6p-vh-Uhn">
-                                <rect key="frame" x="0.0" y="0.0" width="622" height="136"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6p-vh-Uhn">
+                                <rect key="frame" x="0.0" y="0.0" width="622" height="90"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ramenImg" translatesAutoresizingMaskIntoConstraints="NO" id="kEp-SG-wpb">
                                         <rect key="frame" x="0.0" y="20" width="72" height="72"/>
@@ -604,7 +538,7 @@
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="622" height="136"/>
+                    <size key="freeformSize" width="622" height="90"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ejz-7T-vTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -612,8 +546,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow_leftButton" width="31" height="50"/>
-        <image name="arrow_rightButton" width="31" height="50"/>
         <image name="bowlFull" width="268" height="271"/>
         <image name="chopsticks" width="61" height="288"/>
         <image name="mapButton" width="36" height="38"/>

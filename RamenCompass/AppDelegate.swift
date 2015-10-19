@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import RealmSwift
 
 
 @UIApplicationMain
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics()])
+        
+        testRealmFile()
                 
         return true
     }
@@ -49,3 +52,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+func testRealmFile(){
+    do {
+        try Realm().objects(Venue)
+    } catch {
+        print("can't access realm, migration needed")
+        deleteRealmFile()
+    }
+}
+func deleteRealmFile(){
+    if let path = Realm.Configuration.defaultConfiguration.path {
+        do{
+            try NSFileManager.defaultManager().removeItemAtPath(path)
+            print("realm file deleted")
+        } catch {
+            print("no realm file to delete")
+        }
+    }
+}

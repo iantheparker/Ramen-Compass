@@ -12,10 +12,17 @@ import RealmSwift
 
 class PagedCompassViewController: UIPageViewController {
     var pageControl: UIPageControl!
+    var pageCount = 0
     
     var delegatec: CompassViewControllerDelegate?
     
-    var pageCount = 5
+    var venueResults = try! Realm().objects(Venue.self).sorted("name", ascending: true) {
+        didSet{
+            setViewControllers([venueResultAtIndex(0)], direction: .Forward, animated: false, completion: nil)
+            pageCount = venueResults.count
+            print("reset venue results \(venueResults)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,98 +30,87 @@ class PagedCompassViewController: UIPageViewController {
         reset()
         
         dataSource = self
+        delegate = self
+
         
         let pageControlHeight: CGFloat = 50
         pageControl = UIPageControl(frame: CGRect(x: 0, y: CGRectGetHeight(view.frame) - pageControlHeight, width: CGRectGetWidth(view.frame), height: pageControlHeight))
         pageControl.numberOfPages = pageCount
         pageControl.currentPage = 0
         
-        // uber solution - connect the action
         pageControl.addTarget(self, action: "pageControlChanged:", forControlEvents: .ValueChanged)
         
         view.addSubview(pageControl)
         
-        delegate = self
     }
     
-//    // uber solution - action method
-//    func pageControlChanged(pageControl: UIPageControl) {
-//        // get the current and upcoming page numbers
-//        let currentTutorialPage = (viewControllers[0] as! TutorialStepViewController).page
-//        let upcomingTutorialPage = pageControl.currentPage
-//        
-//        // what direction are we moving in?
-//        let direction: UIPageViewControllerNavigationDirection = upcomingTutorialPage < currentTutorialPage ? .Reverse : .Forward
-//        
-//        // set the new page, animated!
-//        setViewControllers([tutorialStepForPage(upcomingTutorialPage)],
-//            direction: direction, animated: true, completion: nil)
-//    }
-    func reset () {
-        let poo = UIStoryboard.centerViewController()
-        poo!.selectedRamen = try! Realm().objects(Venue.self)[0]
-        setViewControllers([poo!], direction: .Forward, animated: false, completion: nil)
-        pageCount = try! Realm().objects(Venue.self).count
+    func pageControlChanged(pageControl: UIPageControl) {
+        // get the current and upcoming page numbers
+        let currentCompassVC = venueResults.indexOf((viewControllers?.first as! CompassViewController).selectedRamen)!
+        let upcomingCompassVC = pageControl.currentPage
         
+        // what direction are we moving in?
+        let direction: UIPageViewControllerNavigationDirection = upcomingCompassVC < currentCompassVC ? .Reverse : .Forward
+        
+        // set the new page, animated!
+        setViewControllers([venueResultAtIndex(upcomingCompassVC)],
+            direction: direction, animated: true, completion: nil)
+    }
+    func reset() {
+        venueResults = try! Realm().objects(Venue.self).sorted("name", ascending: true)
+    }
+    func venueResultAtIndex(index: Int) -> CompassViewController {
+        let compassVC = UIStoryboard.centerViewController()
+        compassVC!.selectedRamen = venueResults[index]
+        return compassVC!
     }
 }
 
 extension PagedCompassViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if let currentTutorialPage = viewController as? CompassViewController {
+        if let _ = viewController as? CompassViewController {
             
             if pageControl.currentPage < pageCount - 1 {
-                pageControl.currentPage++
-                let poo = UIStoryboard.centerViewController()
-                poo!.selectedRamen = try! Realm().objects(Venue.self)[pageControl.currentPage]
-                return poo
+                return venueResultAtIndex(pageControl.currentPage+1)
             } else {
-                pageControl.currentPage=0
-                let poo = UIStoryboard.centerViewController()
-                poo!.selectedRamen = try! Realm().objects(Venue.self)[pageControl.currentPage]
-                return poo
+                return venueResultAtIndex(0)
             }
         }
         return nil
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if let currentTutorialPage = viewController as? CompassViewController {
+        if let _ = viewController as? CompassViewController {
             
             if pageControl.currentPage > 0 {
-                pageControl.currentPage--
-                let poo = UIStoryboard.centerViewController()
-                poo!.selectedRamen = try! Realm().objects(Venue.self)[pageControl.currentPage]
-                return poo
+                return venueResultAtIndex(pageControl.currentPage-1)
             } else {
-                pageControl.currentPage = pageCount-1
-                let poo = UIStoryboard.centerViewController()
-                poo!.selectedRamen = try! Realm().objects(Venue.self)[pageControl.currentPage]
-                return poo
+                return venueResultAtIndex(pageCount-1)
             }
         }
         return nil
     }
     
-    /* Code to activate the built-in page control */
-    /*
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-    return pageCount
-    }
-    
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-    if let currentTutorialPage = pageViewController.viewControllers[0] as? TutorialStepViewController {
-    return currentTutorialPage.page
-    }
-    return 0
-    }
-    */
+//    
+//    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+//        return pageCount
+//    }
+//    
+//    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+//        if let currentCompassVC = pageViewController.viewControllers?.first as? CompassViewController {
+//            return venueResults.indexOf(currentCompassVC.selectedRamen)!
+//        }
+//        return 0
+//    }
+
 }
 
 extension PagedCompassViewController: UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if let currentTutorialPage = pageViewController.viewControllers?.first as? CompassViewController {
-            //pageControl.currentPage = currentTutorialPage.page
+        if let currentCompassVC = pageViewController.viewControllers?.first as? CompassViewController {
+            pageControl.currentPage = venueResults.indexOf(currentCompassVC.selectedRamen)!
+            print(pageCount)
+            print(pageControl.currentPage)
         }
     }
 }
